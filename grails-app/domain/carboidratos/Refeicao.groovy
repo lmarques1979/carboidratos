@@ -1,0 +1,33 @@
+package carboidratos
+
+import java.util.Date;
+import seguranca.Usuario
+
+
+class Refeicao {
+
+	String descricao
+	Integer ordemrefeicao
+	Usuario usuario
+	Date dateCreated
+	Date lastUpdated
+	
+    static constraints = {
+		descricao(nullable: false, blank: false)
+		ordemrefeicao(nullable: false, blank: false)
+		usuario(nullable: false, blank: false)
+	}
+	
+	static mapping = {
+		sort ordemrefeicao:"asc" // or "asc"
+		autoTimestamp true
+	}
+	
+	static def refeicaoUsuario(def usuariologado){
+		
+		def resultado = Refeicao.createCriteria().list () {
+			eq("usuario",usuariologado)
+		}
+		return resultado
+	}
+}
