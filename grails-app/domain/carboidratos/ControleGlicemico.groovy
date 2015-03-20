@@ -10,7 +10,6 @@ class ControleGlicemico implements Serializable{
 	Integer dia
 	Integer mes
 	Integer ano
-	String observacao
 	Usuario usuario
 	Date dateCreated
 	Date lastUpdated
@@ -21,7 +20,7 @@ class ControleGlicemico implements Serializable{
 		 mes(nullable: false , blank: false)
 		 ano(nullable: false, blank: false)
 		 dia(unique: ['usuario','mes', 'ano'])
-		 observacao(nullable: true, blank: true)		
+				
     }
 	
 	static mapping = {

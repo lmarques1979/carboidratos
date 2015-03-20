@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 @Secured('isAuthenticated()')
 class ItensControleGlicemicoController extends BaseController{
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "GET"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def index(Integer max) {
         Calendar cal = Calendar.getInstance()
@@ -33,7 +33,7 @@ class ItensControleGlicemicoController extends BaseController{
 			eq("controleglicemico.mes" , mes)
 			eq("controleglicemico.ano" ,ano)
 			eq("controleglicemico.usuario" ,usuarioLogado)
-			order("controleglicemico.mes", "asc")
+			order("controleglicemico.dia", "asc")
 			order("controleglicemico.mes", "asc")
 			order("controleglicemico.ano", "asc")
 			order("refeicao.ordemrefeicao", "asc")
@@ -53,6 +53,7 @@ class ItensControleGlicemicoController extends BaseController{
 
     @Transactional
     def save(ItensControleGlicemico itensControleGlicemicoInstance) {
+		
 		if (itensControleGlicemicoInstance == null) {
 			notFound()
 			return
@@ -73,11 +74,10 @@ class ItensControleGlicemicoController extends BaseController{
 			controleGlicemicoInstance.dia=params.int('dia')
 			controleGlicemicoInstance.mes=params.int('mes')
 			controleGlicemicoInstance.ano=params.int('ano')
-			controleGlicemicoInstance.observacao=params.observacao
 			controleGlicemicoInstance.usuario=usuarioLogado
 			controleGlicemicoInstance.save flush:true
 			if (controleGlicemicoInstance.hasErrors()) {
-				respond controleGlicemicoInstance.errors, view:'index'
+				respond controleGlicemicoInstance.errors, view:'index' 
 				return
 			}
 		}
@@ -90,7 +90,7 @@ class ItensControleGlicemicoController extends BaseController{
 		itensControleGlicemicoInstance.valorglicemiapos=params.int('valorglicemiapos')
 		itensControleGlicemicoInstance.qtdinsulinarapidapos=params.int('qtdinsulinarapidapos')
 		itensControleGlicemicoInstance.refeicao=Refeicao.get(params.int('refeicao.id'))
-		
+		itensControleGlicemicoInstance.observacao=params.observacao
 		itensControleGlicemicoInstance.save flush:true
 
 		if (itensControleGlicemicoInstance.hasErrors()) {
@@ -101,7 +101,7 @@ class ItensControleGlicemicoController extends BaseController{
 		request.withFormat {
 			form multipartForm {
 			flash.message = message(code: 'default.created.message', args: [message(code: 'controleGlicemico.label', default: 'ControleGlicemico'), controleGlicemicoInstance.id])
-			redirect action:"index", params:[mes: controleGlicemicoInstance.mes,ano:controleGlicemicoInstance.ano ]
+			redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano')]
 			}
 			'*' { respond itensControleGlicemicoInstance, [status: CREATED] }
 		}
@@ -112,27 +112,75 @@ class ItensControleGlicemicoController extends BaseController{
     }
 
     @Transactional
-    def update(ItensControleGlicemico itensControleGlicemicoInstance) {
-        if (itensControleGlicemicoInstance == null) {
-            notFound()
-            return
-        }
-
-        if (itensControleGlicemicoInstance.hasErrors()) {
-            respond itensControleGlicemicoInstance.errors, view:'edit'
-            return
-        }
-
-        itensControleGlicemicoInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'ItensControleGlicemico.label', default: 'ItensControleGlicemico'), itensControleGlicemicoInstance.id])
-                redirect itensControleGlicemicoInstance
-            }
-            '*'{ respond itensControleGlicemicoInstance, [status: OK] }
-        }
-    }
+    def update() {
+		
+		def idcontrole=params.id
+		def controleanterior , controleatual , icontrole=0
+		controleanterior=null
+		def erros = []
+		for(int index=0 ; index < idcontrole.size() ; index++){
+		
+			
+				def itensControleGlicemicoInstance = ItensControleGlicemico.get(idcontrole[index])
+				def qtdinsulinelenta , valorglicemiapre , qtdinsulinarapidapre
+				def qtdcarboidrato, valorglicemiapos , qtdinsulinarapidapos , idrefeicao
+				def diatela
+				
+				controleatual=itensControleGlicemicoInstance.controleglicemico.id				
+				if(controleanterior!=controleatual){
+					diatela=params.dia[icontrole].toInteger()
+					icontrole++
+				}
+				
+				qtdinsulinelenta 		= (params.qtdinsulinelenta[index] ? params.qtdinsulinelenta[index].toInteger() : null)
+				valorglicemiapre 		= (params.valorglicemiapre[index] ? params.valorglicemiapre[index].toInteger() : null)
+				qtdinsulinarapidapre 	= (params.qtdinsulinarapidapre[index] ? params.qtdinsulinarapidapre[index].toInteger() : null)
+				qtdcarboidrato 			= (params.qtdcarboidrato[index] ? params.qtdcarboidrato[index].toInteger() : null)
+				valorglicemiapos 		= (params.valorglicemiapos[index] ? params.valorglicemiapos[index].toInteger() : null)
+				qtdinsulinarapidapos 	= (params.qtdinsulinarapidapos[index] ? params.qtdinsulinarapidapos[index].toInteger() : null)
+				idrefeicao				= params.refeicao.id[index].toInteger()		
+				
+				itensControleGlicemicoInstance.qtdinsulinelenta=qtdinsulinelenta
+				itensControleGlicemicoInstance.valorglicemiapre=valorglicemiapre
+				itensControleGlicemicoInstance.qtdinsulinarapidapre=qtdinsulinarapidapre
+				itensControleGlicemicoInstance.qtdcarboidrato=qtdcarboidrato
+				itensControleGlicemicoInstance.valorglicemiapos=valorglicemiapos
+				itensControleGlicemicoInstance.qtdinsulinarapidapos=qtdinsulinarapidapos
+				itensControleGlicemicoInstance.refeicao=Refeicao.get(idrefeicao)
+				itensControleGlicemicoInstance.observacao=params.observacao[index]
+				itensControleGlicemicoInstance.save flush:true
+				
+				if (itensControleGlicemicoInstance.hasErrors()) {
+					respond itensControleGlicemicoInstance.errors, view:'index'
+					return
+				}
+				
+				controleanterior=controleatual
+				def controleGlicemicoInstance = itensControleGlicemicoInstance.controleglicemico
+				controleGlicemicoInstance.dia=diatela
+			
+				if (controleGlicemicoInstance.validate()) {
+					controleGlicemicoInstance.save flush:true
+					if (controleGlicemicoInstance.hasErrors()) {
+						respond controleGlicemicoInstance.errors, view:'index'
+						return
+					}
+				}
+				else {
+					
+					controleGlicemicoInstance.errors.allErrors.each {
+						erros.add(it)  
+					}
+					flash.error=erros 
+					redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+					return
+				}
+				
+		}
+		
+		flash.message = message(code: 'default.created.message', args: [message(code: 'controleGlicemico.label', default: 'ControleGlicemico')])
+		redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+	}
 
     @Transactional
     def delete(ItensControleGlicemico itensControleGlicemicoInstance) {

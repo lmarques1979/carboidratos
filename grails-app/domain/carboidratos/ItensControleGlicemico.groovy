@@ -15,6 +15,7 @@ class ItensControleGlicemico {
 	Integer qtdinsulinarapidapos
 	ControleGlicemico controleglicemico
 	Refeicao refeicao
+	String observacao
 	Date dateCreated
 	Date lastUpdated
 	
@@ -27,6 +28,7 @@ class ItensControleGlicemico {
 		qtdinsulinarapidapos(nullable: true, blank: true)
 		controleglicemico(nullable:false)
 		refeicao(nullable:false)
+		observacao(nullable: true, blank: true)
     }
 	
 	static mapping = {
