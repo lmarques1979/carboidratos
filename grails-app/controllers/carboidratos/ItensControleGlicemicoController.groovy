@@ -147,7 +147,7 @@ class ItensControleGlicemicoController extends BaseController{
 		
         itensControleGlicemicoInstance.delete flush:true
 
-       	flash.message = message(code: 'default.deleted.message', args: [message(code: 'ItensControleGlicemico.label', default: 'ItensControleGlicemico'), itensControleGlicemicoInstance.id])
+       	flash.message = message(code: 'default.deleted.message', args: [message(code: 'controle.label'), itensControleGlicemicoInstance.id])
         redirect action:"index", params:[mes:mes,ano:ano ]
          
     }

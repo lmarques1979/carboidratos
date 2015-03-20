@@ -85,7 +85,7 @@ class ControleGlicemicoController extends BaseController{
 		def ano = controleGlicemicoInstance.ano
         controleGlicemicoInstance.delete flush:true
 
-       	flash.message = message(code: 'default.deleted.message', args: [message(code: 'ItensControleGlicemico.label')])
+       	flash.message = message(code: 'default.deleted.message', args: [message(code: 'controle.label')])
         redirect (controller:"ItensControleGlicemico",action:"index", params:[mes:mes,ano:ano ])
     }
 
