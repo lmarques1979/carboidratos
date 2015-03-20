@@ -13,6 +13,9 @@
 		<title><g:message code="controle.list.label" /></title>
 	</head>
 	<body>
+	
+		${ItensControleGlicemicoInstanceList}
+		
 		<a href="#list-controleGlicemico" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
 		<div id="list-controleGlicemico" class="content scaffold-list" role="main">
@@ -89,6 +92,70 @@
 						</tbody>
 					</table>
 			</g:form>
+			
+			<g:form class="formtable" url="[resource:controleGlicemicoInstance, action:'update']" > 
+				
+					<table>
+					<thead>
+							<tr>
+								<th colspan="9"><g:message code="controle.list.label" /></th>
+							</tr>
+							<tr>
+							
+								<th><g:message code="controle.dia.label"/></th>
+								<th><g:message code="controle.observacao.label"/></th>
+								<th><g:message code="controle.refeicao.label" /></th>
+								<th><g:message code="controle.qtdinsulinelenta.label" /></th>
+								<th><g:message code="controle.valorglicemiapre.label" /></th>
+								<th><g:message code="controle.qtdinsulinarapidapre.label" /></th>
+								<th><g:message code="controle.qtdcarboidrato.label" /></th>
+								<th><g:message code="controle.valorglicemiapos.label" /></th>
+								<th><g:message code="controle.qtdinsulinarapidapos.label" /></th>
+							</tr>
+						</thead>
+						<tbody>
+						
+						<g:each in="${controleGlicemicoInstanceList}" status="i" var="controleGlicemicoInstance">
+							
+							<g:hiddenField name="id" value="${controleGlicemicoInstance.id}" />
+							
+							<tr>
+							
+								<td><g:field class="dia" size="5" max="31" min="1" name="dia" value="${controleGlicemicoInstance.dia}" type="number" required=""/></td>
+								<td><g:textField name="observacao" class="obs"/></td>
+								<td colspan="7"></td>
+							</tr>
+							
+							<g:each in="${controleGlicemicoInstance.itens}" status="j" var="itensControleGlicemicoInstance">
+								<tr>
+									<td colspan="2"></td>
+									<td>
+										<g:select id="refeicao" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}" value="${itensControleGlicemicoInstance.refeicao.id}" optionValue="descricao" optionKey="id"/>
+									</td>
+									<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" value="${itensControleGlicemicoInstance.qtdinsulinelenta}"/></td>
+									<td><g:field class="qtd" size="4" name="valorglicemiapre" type="number" value="${itensControleGlicemicoInstance.valorglicemiapre}"/></td>
+									<td><g:field class="qtd" size="4" name="qtdinsulinarapidapre" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapre}"/></td>
+									<td><g:field class="qtd" size="4" name="qtdcarboidrato" type="number" value="${itensControleGlicemicoInstance.qtdcarboidrato}"/></td>
+									<td><g:field class="qtd" size="4" name="valorglicemiapos" type="number" value="${itensControleGlicemicoInstance.valorglicemiapos}"/></td>
+									<td><g:field class="qtd" size="4" name="qtdinsulinarapidapos" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapos}"/></td>
+																
+								</tr>
+							</g:each>
+						</g:each>
+					</tbody>	
+					
+					<tbody>	
+							<tr class="nohover">
+								<td colspan="9">
+									<fieldset class="buttons">
+										<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+									</fieldset>
+								</td>
+							</tr>
+					</tbody>
+					</table>
+			</g:form>
+			
 			<div class="pagination">
 				<g:paginate total="${controleGlicemicoInstanceCount ?: 0}" />
 			</div>

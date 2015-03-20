@@ -11,8 +11,15 @@ class RefeicaoController extends BaseController{
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
+		
         configuracaoParams
-        respond Refeicao.list(params), model:[refeicaoInstanceCount: Refeicao.count()]
+		
+		def resultado = Refeicao.createCriteria().list(params) {
+			eq("usuario" , usuarioLogado)
+			order("descricao", "asc")
+						
+		}
+        respond resultado, model:[refeicaoInstanceCount: resultado.totalCount]
     }
 
     def show(Refeicao refeicaoInstance) {

@@ -15,6 +15,7 @@ class ControleGlicemico implements Serializable{
 	Date dateCreated
 	Date lastUpdated
 	
+	static hasMany=[itens:ItensControleGlicemico]
     static constraints = {
 		 dia(nullable: false , blank: false)
 		 mes(nullable: false , blank: false)
@@ -27,6 +28,7 @@ class ControleGlicemico implements Serializable{
 		sort dia: "asc" // or "asc"
 		sort mes: "asc"
 		sort ano: "asc"		
+		itens cascade: 'all-delete-orphan'
 		autoTimestamp true
 	}
 }
