@@ -114,17 +114,18 @@ class ItensControleGlicemicoController extends BaseController{
     @Transactional
     def update() {
 		
-		def idcontrole=params.id
+		def idcontrole=params.list('id')
 		def controleanterior , controleatual , icontrole=0
 		controleanterior=null
 		def erros = []
 		for(int index=0 ; index < idcontrole.size() ; index++){
-		
-			
-				def itensControleGlicemicoInstance = ItensControleGlicemico.get(idcontrole[index])
+				
+				def itensControleGlicemicoInstance
+				
+				itensControleGlicemicoInstance = ItensControleGlicemico.get(idcontrole[index].toInteger())
 				def qtdinsulinelenta , valorglicemiapre , qtdinsulinarapidapre
 				def qtdcarboidrato, valorglicemiapos , qtdinsulinarapidapos , idrefeicao
-				def diatela
+				def diatela , obs
 				
 				controleatual=itensControleGlicemicoInstance.controleglicemico.id				
 				if(controleanterior!=controleatual){
@@ -132,14 +133,25 @@ class ItensControleGlicemicoController extends BaseController{
 					icontrole++
 				}
 				
-				qtdinsulinelenta 		= (params.qtdinsulinelenta[index] ? params.qtdinsulinelenta[index].toInteger() : null)
-				valorglicemiapre 		= (params.valorglicemiapre[index] ? params.valorglicemiapre[index].toInteger() : null)
-				qtdinsulinarapidapre 	= (params.qtdinsulinarapidapre[index] ? params.qtdinsulinarapidapre[index].toInteger() : null)
-				qtdcarboidrato 			= (params.qtdcarboidrato[index] ? params.qtdcarboidrato[index].toInteger() : null)
-				valorglicemiapos 		= (params.valorglicemiapos[index] ? params.valorglicemiapos[index].toInteger() : null)
-				qtdinsulinarapidapos 	= (params.qtdinsulinarapidapos[index] ? params.qtdinsulinarapidapos[index].toInteger() : null)
-				idrefeicao				= params.refeicao.id[index].toInteger()		
-				
+				if (idcontrole.size() > 1){
+					qtdinsulinelenta 		= (params.qtdinsulinelenta[index] ? params.qtdinsulinelenta[index].toInteger() : null)
+					valorglicemiapre 		= (params.valorglicemiapre[index] ? params.valorglicemiapre[index].toInteger() : null)
+					qtdinsulinarapidapre 	= (params.qtdinsulinarapidapre[index] ? params.qtdinsulinarapidapre[index].toInteger() : null)
+					qtdcarboidrato 			= (params.qtdcarboidrato[index] ? params.qtdcarboidrato[index].toInteger() : null)
+					valorglicemiapos 		= (params.valorglicemiapos[index] ? params.valorglicemiapos[index].toInteger() : null)
+					qtdinsulinarapidapos 	= (params.qtdinsulinarapidapos[index] ? params.qtdinsulinarapidapos[index].toInteger() : null)
+					idrefeicao				= params.refeicao.id[index].toInteger()	
+					obs 					= params.observacao[index]	
+				}else{
+					qtdinsulinelenta 		= (params.qtdinsulinelenta ? params.qtdinsulinelenta.toInteger() : null)
+					valorglicemiapre 		= (params.valorglicemiapre ? params.valorglicemiapre.toInteger() : null)
+					qtdinsulinarapidapre 	= (params.qtdinsulinarapidapre ? params.qtdinsulinarapidapre.toInteger() : null)
+					qtdcarboidrato 			= (params.qtdcarboidrato ? params.qtdcarboidrato.toInteger() : null)
+					valorglicemiapos 		= (params.valorglicemiapos ? params.valorglicemiapos.toInteger() : null)
+					qtdinsulinarapidapos 	= (params.qtdinsulinarapidapos ? params.qtdinsulinarapidapos.toInteger() : null)
+					idrefeicao				= params.refeicao.id.toInteger()
+					obs						= params.observacao
+				}
 				itensControleGlicemicoInstance.qtdinsulinelenta=qtdinsulinelenta
 				itensControleGlicemicoInstance.valorglicemiapre=valorglicemiapre
 				itensControleGlicemicoInstance.qtdinsulinarapidapre=qtdinsulinarapidapre
@@ -147,7 +159,7 @@ class ItensControleGlicemicoController extends BaseController{
 				itensControleGlicemicoInstance.valorglicemiapos=valorglicemiapos
 				itensControleGlicemicoInstance.qtdinsulinarapidapos=qtdinsulinarapidapos
 				itensControleGlicemicoInstance.refeicao=Refeicao.get(idrefeicao)
-				itensControleGlicemicoInstance.observacao=params.observacao[index]
+				itensControleGlicemicoInstance.observacao=obs
 				itensControleGlicemicoInstance.save flush:true
 				
 				if (itensControleGlicemicoInstance.hasErrors()) {
