@@ -208,9 +208,9 @@ class ItensControleGlicemicoController extends BaseController{
             return
         }
 
-		def id	= itensControleGlicemicoInstance.id
-		def mes = itensControleGlicemicoInstance.controleglicemico.mes
-		def ano = itensControleGlicemicoInstance.controleglicemico.ano
+		def ControleGlicemicoInstance=itensControleGlicemicoInstance.controleglicemico
+		def mes = ControleGlicemicoInstance.mes
+		def ano = ControleGlicemicoInstance.ano
 		
         itensControleGlicemicoInstance.delete flush:true
 		if (itensControleGlicemicoInstance.hasErrors()) {
@@ -218,10 +218,11 @@ class ItensControleGlicemicoController extends BaseController{
 			return
 		}else{
 		
-			def resultado = ItensControleGlicemico.findAllById(id)
+			def resultado = ItensControleGlicemico.findAllByControleglicemico(ControleGlicemicoInstance)
 			if(resultado.size()==0){
-				def ControleGlicemicoInstance = itensControleGlicemicoInstance.controleglicemico
+				
 				ControleGlicemicoInstance.delete flush:true
+				
 				if (ControleGlicemicoInstance.hasErrors()) {
 					respond ControleGlicemicoInstance.errors, view:'index'
 					return
