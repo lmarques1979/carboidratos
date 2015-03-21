@@ -115,8 +115,8 @@ class ItensControleGlicemicoController extends BaseController{
     def update() {
 		
 		def idcontrole=params.list('id')
-		def controleanterior , controleatual , icontrole=0
-		controleanterior=null
+		def diaanterior , diaatual , icontrole=0
+		diaanterior=null
 		def erros = []
 		for(int index=0 ; index < idcontrole.size() ; index++){
 				
@@ -125,12 +125,18 @@ class ItensControleGlicemicoController extends BaseController{
 				itensControleGlicemicoInstance = ItensControleGlicemico.get(idcontrole[index].toInteger())
 				def qtdinsulinelenta , valorglicemiapre , qtdinsulinarapidapre
 				def qtdcarboidrato, valorglicemiapos , qtdinsulinarapidapos , idrefeicao
-				def diatela , obs
+				def diatela , obs 
 				
-				controleatual=itensControleGlicemicoInstance.controleglicemico.id				
-				if(controleanterior!=controleatual){
-					diatela=params.dia[icontrole].toInteger()
-					icontrole++
+				diaatual=itensControleGlicemicoInstance.controleglicemico.dia				
+				if(diaanterior!=diaatual){
+					if(params.list('dia').size()>1){
+						diatela=params.dia[icontrole].toInteger()
+						icontrole++
+					}else{
+						diatela=params.dia.toInteger()
+					}
+				}else{
+					diatela=diaanterior
 				}
 				
 				if (idcontrole.size() > 1){
@@ -167,7 +173,7 @@ class ItensControleGlicemicoController extends BaseController{
 					return
 				}
 				
-				controleanterior=controleatual
+				diaanterior=diaatual
 				def controleGlicemicoInstance = itensControleGlicemicoInstance.controleglicemico
 				controleGlicemicoInstance.dia=diatela
 			
@@ -202,14 +208,31 @@ class ItensControleGlicemicoController extends BaseController{
             return
         }
 
+		def id	= itensControleGlicemicoInstance.id
 		def mes = itensControleGlicemicoInstance.controleglicemico.mes
 		def ano = itensControleGlicemicoInstance.controleglicemico.ano
 		
         itensControleGlicemicoInstance.delete flush:true
-
-       	flash.message = message(code: 'default.deleted.message', args: [message(code: 'controle.label'), itensControleGlicemicoInstance.id])
-        redirect action:"index", params:[mes:mes,ano:ano ]
-         
+		if (itensControleGlicemicoInstance.hasErrors()) {
+			respond itensControleGlicemicoInstance.errors, view:'index'
+			return
+		}else{
+		
+			def resultado = ItensControleGlicemico.findAllById(id)
+			if(resultado.size()==0){
+				def ControleGlicemicoInstance = itensControleGlicemicoInstance.controleglicemico
+				ControleGlicemicoInstance.delete flush:true
+				if (ControleGlicemicoInstance.hasErrors()) {
+					respond ControleGlicemicoInstance.errors, view:'index'
+					return
+				}
+				
+			}
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'controle.label'), itensControleGlicemicoInstance.id])
+			redirect action:"index", params:[mes:mes,ano:ano ]
+		}
+		
+                
     }
 
     protected void notFound() {
