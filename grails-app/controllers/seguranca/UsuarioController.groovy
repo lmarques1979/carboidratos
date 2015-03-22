@@ -10,7 +10,8 @@ import grails.plugin.springsecurity.annotation.Secured
 class UsuarioController extends BaseController{
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
-
+	def FileUploadService
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Usuario.list(params), model:[usuarioInstanceCount: Usuario.count()]
@@ -83,7 +84,7 @@ class UsuarioController extends BaseController{
     def show(Usuario usuarioInstance) {
 		
 		def erros=[]
-		if(usuarioInstance!=usuarioLogado){
+		if(usuarioInstance!=usuarioLogado && usuarioLogado.username!='admin'){
 			erros[0] = message(code: 'usuarionaopermitido.error')
 			flash.erros = erros
 			return
@@ -108,7 +109,7 @@ class UsuarioController extends BaseController{
 		def f = request.getFile('arquivo')
 		
 		if (!f.empty) {
-			def midia = FileUploadService.fileUpload(f , 'dicionariolmdcm' , 'assets/')
+			def midia = FileUploadService.fileUpload(f , 'carboidratoslmdcm' , 'assets/')
 			usuarioInstance.imagem = midia
 		}
 		

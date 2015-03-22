@@ -871,3 +871,11 @@ a.usuariologado:link, a.usuariologado:visited , a.usuariologado:hover, a.usuario
 .hide{
 	display:none;
 }
+
+.logousuario{
+	position:relative;
+	display:block;
+	float:right;
+	top:-20px;
+	right:31px;
+}

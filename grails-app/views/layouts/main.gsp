@@ -29,12 +29,10 @@
 					<g:link id="${params.id}" action="${params.action ? params.action : 'index'}" controller="${params.controller ? params.controller : 'index'}" params="[lang: 'pt_BR']"><asset:image class="internacionalizacao" src="bandeiras/24/Brazil.png" title="${message(code:'portuguesbrasil.label')}"/></g:link>
 					<g:link id="${params.id}" action="${params.action ? params.action : 'index'}" controller="${params.controller ? params.controller : 'index'}" params="[lang: 'en']"><asset:image class="internacionalizacao" src="bandeiras/24/britain.png" title="${message(code:'english.label')}"/></g:link>	
 					<g:link id="${params.id}" action="${params.action ? params.action : 'index'}" controller="${params.controller ? params.controller : 'index'}" params="[lang: 'es']"><asset:image class="internacionalizacao" src="bandeiras/24/spain.png" title="${message(code:'spain.label')}"/></g:link>
-				</div>
+				</div>				
 				
 			</div>
-			<sec:ifLoggedIn>
-				<g:link class="usuariologado" id="${usuarioInstance.id}" action="show" controller="Usuario">${usuarioInstance.buscaNome(usuarioInstance)} [${usuarioInstance.username}]</g:link>
-			</sec:ifLoggedIn>
+			
 			<div id="menu">
 				<ul>
 						
@@ -45,6 +43,7 @@
 					</sec:ifNotLoggedIn>
 					<sec:ifLoggedIn>
 						<g:if test="${sec.loggedInUserInfo(field: 'username') == 'admin'}">
+							<li><g:link class="${params.controller=='usuario' ? 'active' : '' }" controller="Usuario" action="index"><g:message code="usuario.list.label"/></g:link></li>
 							<li><g:link class="${params.controller=='alimento' ? 'active' : '' }" controller="Alimento" action="create"><g:message code="cadastroalimento.label"/></g:link></li>
 							<li><g:link class="${params.controller=='configuracoes' ? 'active' : '' }" controller="Configuracoes" action="index"><g:message code="configuracoes.label"/></g:link></li>
 						</g:if>
@@ -53,12 +52,25 @@
 							<li><g:link class="${params.controller=='refeicao' ? 'active' : '' }" controller="Refeicao" action="index"><g:message code="refeicao.label"/></g:link></li>
 							<li><g:link class="${params.controller=='alimento' ? 'active' : '' }" controller="Alimento" action="index"><g:message code="listaalimentos.label"/></g:link></li>
 							<li><g:link class="${params.controller=='itensControleGlicemico' ? 'active' : '' }" controller="ItensControleGlicemico" action="index"><g:message code="controle.label"/></g:link></li>
-							<li><g:link class="${params.controller=='contagemCarboidratos' && params.action=='index'? 'active' : '' }" controller="ContagemCarboidratos" action="index"><g:message code="contagem.label"/></g:link></li>
+							<li><g:link class="${params.controller=='itensContagemCarboidratos' && params.action=='index'? 'active' : '' }" controller="ItensContagemCarboidratos" action="index"><g:message code="contagem.label"/></g:link></li>
 							
 						</g:else>
 						<li><g:link controller="Logout" action="index"><g:message code="logout.label"/></g:link></li>
 					</sec:ifLoggedIn>
 				</ul>
+				
+				<sec:ifLoggedIn>
+					<div class="logousuario">
+						<g:if test="${usuarioInstance.imagem}">
+							<g:link controller="usuario" action="show" id="${usuarioInstance.id}">
+									<asset:image height="40" width="40" src="${usuarioInstance.imagem}" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
+							</g:link>
+						</g:if>	
+						<g:else>
+							<asset:image height="40" width="40" src="noimage.jpg" title="${usuarioInstance.buscaNome(usuarioInstance)}"/>
+						</g:else>
+					</div>
+				</sec:ifLoggedIn>
 			</div>
 		</div>
 		<g:layoutBody/>
