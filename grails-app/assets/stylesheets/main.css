@@ -879,3 +879,9 @@ a.usuariologado:link, a.usuariologado:visited , a.usuariologado:hover, a.usuario
 	top:-20px;
 	right:31px;
 }
+
+.logousuario img{
+	-moz-box-shadow: 0 0 0.3em #ffffff;
+	-webkit-box-shadow: 0 0 0.3em #ffffff;
+	box-shadow: 0 0 0.3em #ffffff;
+}

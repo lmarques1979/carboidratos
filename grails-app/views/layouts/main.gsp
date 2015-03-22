@@ -68,7 +68,7 @@
 							</g:link>
 						</g:if>	
 						<g:else>
-							<asset:image height="40" width="40" src="noimage.jpg" title="${usuarioInstance.buscaNome(usuarioInstance)}"/>
+							<asset:image height="40" width="40" src="noimage.jpg" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
 						</g:else>
 					</div>
 				</sec:ifLoggedIn>
