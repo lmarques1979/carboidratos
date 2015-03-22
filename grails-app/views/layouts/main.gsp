@@ -44,7 +44,8 @@
 					<sec:ifLoggedIn>
 						<g:if test="${sec.loggedInUserInfo(field: 'username') == 'admin'}">
 							<li><g:link class="${params.controller=='usuario' ? 'active' : '' }" controller="Usuario" action="index"><g:message code="usuario.list.label"/></g:link></li>
-							<li><g:link class="${params.controller=='alimento' ? 'active' : '' }" controller="Alimento" action="create"><g:message code="cadastroalimento.label"/></g:link></li>
+							<li><g:link class="${params.controller=='alimento'  && params.action!='create' ? 'active' : '' }" controller="Alimento" action="index"><g:message code="listaalimentos.label"/></g:link></li>
+							<li><g:link class="${params.controller=='alimento'  && params.action=='create' ? 'active' : '' }" controller="Alimento" action="create"><g:message code="cadastroalimento.label"/></g:link></li>
 							<li><g:link class="${params.controller=='configuracoes' ? 'active' : '' }" controller="Configuracoes" action="index"><g:message code="configuracoes.label"/></g:link></li>
 						</g:if>
 						<g:else>

@@ -12,7 +12,7 @@ class MyAuthenticationSuccessHandler extends AjaxAwareAuthenticationSuccessHandl
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
-
+		
 		redirectStrategy.sendRedirect(request, response, '/alimento/index');
 		
 	}
