@@ -10,23 +10,20 @@ class ItensContagemCarboidratos {
 	Integer qtdalimento
 	Integer qtdcarboidrato
 	String  alimentoforalista
-	ContagemCarboidratos contagemcarboidratos
+	Alimento alimento
+	RefeicoesContagemCarboidratos refeicoescontagemcarboidratos
 	Date dateCreated
 	Date lastUpdated
-	
-	static hasMany=[alimentos:Alimento]
 	
     static constraints = {
 		 qtdalimento(nullable: false , blank: false)
 		 qtdcarboidrato(nullable: true)
 		 alimentoforalista(nullable: true , blank: true)
-		 contagemcarboidratos(nullable: false)
+		 alimento(nullable:true)
+		 refeicoescontagemcarboidratos(nullable:false) 
 	}
 	
 	static mapping = {
-		sort dia: "asc" // or "asc"
-		sort mes: "asc"
-		sort ano: "asc"		
 		autoTimestamp true
 	}
 }

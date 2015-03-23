@@ -10,12 +10,11 @@ class ContagemCarboidratos {
 	Integer dia
 	Integer mes
 	Integer ano
-	Refeicao refeicao
 	Usuario usuario
 	Date dateCreated
 	Date lastUpdated
 	
-	static hasMany=[itens:ItensContagemCarboidratos]
+	static hasMany=[refeicoes:RefeicoesContagemCarboidratos]
 	
     static constraints = {
 		 dia(nullable: false , blank: false)
@@ -28,7 +27,7 @@ class ContagemCarboidratos {
 		sort dia: "asc" // or "asc"
 		sort mes: "asc"
 		sort ano: "asc"		
-		itens cascade: 'all-delete-orphan'
+		refeicoes cascade: 'all-delete-orphan' 
 		autoTimestamp true
 	}
 }

@@ -5,9 +5,9 @@ package carboidratos
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(AlimentosController)
-@Mock(Alimentos)
-class AlimentosControllerSpec extends Specification {
+@TestFor(RefeicoesContagemCarboidratosController)
+@Mock(RefeicoesContagemCarboidratos)
+class RefeicoesContagemCarboidratosControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -21,8 +21,8 @@ class AlimentosControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.alimentosInstanceList
-            model.alimentosInstanceCount == 0
+            !model.refeicoesContagemCarboidratosInstanceList
+            model.refeicoesContagemCarboidratosInstanceCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -30,7 +30,7 @@ class AlimentosControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.alimentosInstance!= null
+            model.refeicoesContagemCarboidratosInstance!= null
     }
 
     void "Test the save action correctly persists an instance"() {
@@ -38,25 +38,25 @@ class AlimentosControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
-            def alimentos = new Alimentos()
-            alimentos.validate()
-            controller.save(alimentos)
+            def refeicoesContagemCarboidratos = new RefeicoesContagemCarboidratos()
+            refeicoesContagemCarboidratos.validate()
+            controller.save(refeicoesContagemCarboidratos)
 
         then:"The create view is rendered again with the correct model"
-            model.alimentosInstance!= null
+            model.refeicoesContagemCarboidratosInstance!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            alimentos = new Alimentos(params)
+            refeicoesContagemCarboidratos = new RefeicoesContagemCarboidratos(params)
 
-            controller.save(alimentos)
+            controller.save(refeicoesContagemCarboidratos)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/alimentos/show/1'
+            response.redirectedUrl == '/refeicoesContagemCarboidratos/show/1'
             controller.flash.message != null
-            Alimentos.count() == 1
+            RefeicoesContagemCarboidratos.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -68,11 +68,11 @@ class AlimentosControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def alimentos = new Alimentos(params)
-            controller.show(alimentos)
+            def refeicoesContagemCarboidratos = new RefeicoesContagemCarboidratos(params)
+            controller.show(refeicoesContagemCarboidratos)
 
         then:"A model is populated containing the domain instance"
-            model.alimentosInstance == alimentos
+            model.refeicoesContagemCarboidratosInstance == refeicoesContagemCarboidratos
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -84,11 +84,11 @@ class AlimentosControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def alimentos = new Alimentos(params)
-            controller.edit(alimentos)
+            def refeicoesContagemCarboidratos = new RefeicoesContagemCarboidratos(params)
+            controller.edit(refeicoesContagemCarboidratos)
 
         then:"A model is populated containing the domain instance"
-            model.alimentosInstance == alimentos
+            model.refeicoesContagemCarboidratosInstance == refeicoesContagemCarboidratos
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -98,28 +98,28 @@ class AlimentosControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/alimentos/index'
+            response.redirectedUrl == '/refeicoesContagemCarboidratos/index'
             flash.message != null
 
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def alimentos = new Alimentos()
-            alimentos.validate()
-            controller.update(alimentos)
+            def refeicoesContagemCarboidratos = new RefeicoesContagemCarboidratos()
+            refeicoesContagemCarboidratos.validate()
+            controller.update(refeicoesContagemCarboidratos)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.alimentosInstance == alimentos
+            model.refeicoesContagemCarboidratosInstance == refeicoesContagemCarboidratos
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            alimentos = new Alimentos(params).save(flush: true)
-            controller.update(alimentos)
+            refeicoesContagemCarboidratos = new RefeicoesContagemCarboidratos(params).save(flush: true)
+            controller.update(refeicoesContagemCarboidratos)
 
         then:"A redirect is issues to the show action"
-            response.redirectedUrl == "/alimentos/show/$alimentos.id"
+            response.redirectedUrl == "/refeicoesContagemCarboidratos/show/$refeicoesContagemCarboidratos.id"
             flash.message != null
     }
 
@@ -130,23 +130,23 @@ class AlimentosControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/alimentos/index'
+            response.redirectedUrl == '/refeicoesContagemCarboidratos/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def alimentos = new Alimentos(params).save(flush: true)
+            def refeicoesContagemCarboidratos = new RefeicoesContagemCarboidratos(params).save(flush: true)
 
         then:"It exists"
-            Alimentos.count() == 1
+            RefeicoesContagemCarboidratos.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(alimentos)
+            controller.delete(refeicoesContagemCarboidratos)
 
         then:"The instance is deleted"
-            Alimentos.count() == 0
-            response.redirectedUrl == '/alimentos/index'
+            RefeicoesContagemCarboidratos.count() == 0
+            response.redirectedUrl == '/refeicoesContagemCarboidratos/index'
             flash.message != null
     }
 }

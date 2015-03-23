@@ -133,7 +133,7 @@
 									<tr>
 										<td><g:field class="dia" size="5" max="31" min="1" name="dia" value="${itensControleGlicemicoInstance.controleglicemico.dia}" type="number" required=""/></td>
 										<td>
-											<g:link onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.controleglicemico.id}" action="delete" controller="ControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
+											<g:link onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.controleglicemico.id}" action="delete" controller="ControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
 										</td>
 									</tr>
 								</g:if>
@@ -151,7 +151,7 @@
 									<td><g:field class="qtd" size="4" name="qtdinsulinarapidapos" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapos}"/></td>
 									<td><g:textField name="observacao" class="obs" value="${itensControleGlicemicoInstance.observacao}"/></td>
 									<td>
-										<g:link onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.id}" action="delete" controller="ItensControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
+										<g:link onclick="return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.id}" action="delete" controller="ItensControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
 									</td>							
 								</tr>
 								<g:set var="diaanterior" value="${diaatual}" />

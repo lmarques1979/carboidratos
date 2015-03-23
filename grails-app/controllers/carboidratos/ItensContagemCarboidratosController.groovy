@@ -1,5 +1,6 @@
 package carboidratos
 
+import org.hibernate.criterion.CriteriaSpecification
 import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -29,8 +30,10 @@ class ItensContagemCarboidratosController extends BaseController{
 		}
 		
 		def resultado = ItensContagemCarboidratos.createCriteria().list() {
-			createAlias("contagemcarboidratos", "contagemcarboidratos")
-			createAlias("contagemcarboidratos.refeicao", "refeicao")
+			createAlias("refeicoescontagemcarboidratos", "refeicoescontagemcarboidratos")
+			createAlias("refeicoescontagemcarboidratos.contagemcarboidratos", "contagemcarboidratos")
+			createAlias("refeicoescontagemcarboidratos.refeicao", "refeicao")
+			createAlias("alimento", "alimento",CriteriaSpecification.LEFT_JOIN)
 			eq("contagemcarboidratos.mes" , mes)
 			eq("contagemcarboidratos.ano" ,ano)
 			eq("contagemcarboidratos.usuario" ,usuarioLogado)
@@ -38,7 +41,7 @@ class ItensContagemCarboidratosController extends BaseController{
 			order("contagemcarboidratos.mes", "asc")
 			order("contagemcarboidratos.ano", "asc")
 			order("refeicao.ordemrefeicao", "asc")
-			
+			order("alimento.nome" , "asc")
 		}
 		
 		respond resultado, model:[ItensContagemCarboidratosInstanceCount: resultado.size , mes:mes , ano:ano]
@@ -54,22 +57,88 @@ class ItensContagemCarboidratosController extends BaseController{
 
     @Transactional
     def save(ItensContagemCarboidratos itensContagemCarboidratosInstance) {
+		
         if (itensContagemCarboidratosInstance == null) {
             notFound()
             return
         }
 
-        if (itensContagemCarboidratosInstance.hasErrors()) {
-            respond itensContagemCarboidratosInstance.errors, view:'create'
-            return
-        }
+		def ContagemCarboidratosInstance , RefeicoesContagemCarboidratosInstance
+		def erros=[]
+		def resultado= ContagemCarboidratos.executeQuery("select c.id from ContagemCarboidratos as c where c.dia=:dia and c.mes=:mes and c.ano=:ano and c.usuario=:usuario", [dia: params.int('dia') , mes: params.int('mes') , ano: params.int('ano') , usuario:usuarioLogado])
+		
+		if (resultado.size()>0){
+			resultado.each{ it ->
+				ContagemCarboidratosInstance=ContagemCarboidratos.get(it)
+			}
+		}else{
+		
+				ContagemCarboidratosInstance= new ContagemCarboidratos()
+				
+				ContagemCarboidratosInstance.dia=params.int('dia')
+				ContagemCarboidratosInstance.mes=params.int('mes')
+				ContagemCarboidratosInstance.ano=params.int('ano')
+				ContagemCarboidratosInstance.usuario=usuarioLogado
+			
+				ContagemCarboidratosInstance.save flush:true
+				
+				if (ContagemCarboidratosInstance.hasErrors()) {
+					respond ContagemCarboidratosInstance.errors, view:'index'
+					return
+				}
+			}
+		
+			def resultado2= RefeicoesContagemCarboidratos.executeQuery("select rcc.id from RefeicoesContagemCarboidratos as rcc where rcc.contagemcarboidratos=:contagem and rcc.refeicao=:refeicao", [contagem:ContagemCarboidratosInstance, refeicao:Refeicao.get(params.int('refeicao.id'))])
+			
+			if (resultado2.size()>0){
+				resultado2.each{ it ->
+					RefeicoesContagemCarboidratosInstance=RefeicoesContagemCarboidratos.get(it)
+				}
+			}else{
+					
+					RefeicoesContagemCarboidratosInstance = new RefeicoesContagemCarboidratos()
+					
+					RefeicoesContagemCarboidratosInstance.refeicao=Refeicao.get(params.int('refeicao.id'))
+					RefeicoesContagemCarboidratosInstance.contagemcarboidratos=ContagemCarboidratosInstance
+					
+					RefeicoesContagemCarboidratosInstance.save flush:true
+					
+					if (RefeicoesContagemCarboidratosInstance.hasErrors()) {
+						respond RefeicoesContagemCarboidratosInstance.errors, view:'index'
+						return
+			}
+		}
 
-        itensContagemCarboidratosInstance.save flush:true
-
+		def alimentoid=params.int('alimento.id')
+		def alimento
+		
+		if(alimentoid==-1){
+			alimento=null
+		}else{
+			alimento=Alimento.get(alimentoid)		
+		}	
+		
+		itensContagemCarboidratosInstance.refeicoescontagemcarboidratos=RefeicoesContagemCarboidratosInstance
+		itensContagemCarboidratosInstance.qtdalimento=params.int('qtdalimento')
+		itensContagemCarboidratosInstance.qtdcarboidrato=params.int('qtdcarboidrato')
+		itensContagemCarboidratosInstance.alimentoforalista=params.alimentoforalista
+		itensContagemCarboidratosInstance.alimento=alimento
+		
+		itensContagemCarboidratosInstance.save flush:true
+		
+		if (itensContagemCarboidratosInstance.hasErrors()) {
+			itensContagemCarboidratosInstance.errors.allErrors.each {
+					erros.add(it)  
+			}
+			flash.error=erros 
+			redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+			return
+		}
+		
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'itensContagemCarboidratos.label', default: 'ItensContagemCarboidratos'), itensContagemCarboidratosInstance.id])
-                redirect itensContagemCarboidratosInstance
+                redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano')]
             }
             '*' { respond itensContagemCarboidratosInstance, [status: CREATED] }
         }

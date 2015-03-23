@@ -64,11 +64,13 @@
 					<div class="logousuario">
 						<g:if test="${usuarioInstance.imagem}">
 							<g:link controller="usuario" action="show" id="${usuarioInstance.id}">
-									<asset:image height="40" width="40" src="${usuarioInstance.imagem}" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
+								<asset:image height="40" width="40" src="${usuarioInstance.imagem}" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
 							</g:link>
 						</g:if>	
 						<g:else>
-							<asset:image height="40" width="40" src="noimage.jpg" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
+							<g:link class="usuario" controller="Usuario" action="show" id="${sec.loggedInUserInfo(field:"id")}">
+								<asset:image height="40" width="40" src="noimage.jpg" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
+							</g:link>
 						</g:else>
 					</div>
 				</sec:ifLoggedIn>
