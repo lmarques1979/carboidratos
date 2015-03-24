@@ -127,7 +127,7 @@ class ItensControleGlicemicoController extends BaseController{
 				def qtdcarboidrato, valorglicemiapos , qtdinsulinarapidapos , idrefeicao
 				def diatela , obs 
 				
-				diaatual=itensControleGlicemicoInstance.controleglicemico.dia				
+				/*diaatual=itensControleGlicemicoInstance.controleglicemico.dia				
 				if(diaanterior!=diaatual){
 					if(params.list('dia').size()>1){
 						diatela=params.dia[icontrole].toInteger()
@@ -137,7 +137,7 @@ class ItensControleGlicemicoController extends BaseController{
 					}
 				}else{
 					diatela=diaanterior
-				}
+				}*/
 				
 				if (idcontrole.size() > 1){
 					qtdinsulinelenta 		= (params.qtdinsulinelenta[index] ? params.qtdinsulinelenta[index].toInteger() : null)
@@ -173,7 +173,7 @@ class ItensControleGlicemicoController extends BaseController{
 					return
 				}
 				
-				diaanterior=diaatual
+				/*diaanterior=diaatual
 				def controleGlicemicoInstance = itensControleGlicemicoInstance.controleglicemico
 				controleGlicemicoInstance.dia=diatela
 			
@@ -192,7 +192,7 @@ class ItensControleGlicemicoController extends BaseController{
 					flash.error=erros 
 					redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
 					return
-				}
+				}*/
 				
 		}
 		

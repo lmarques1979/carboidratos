@@ -19,7 +19,7 @@ class Refeicao {
 	}
 	
 	static mapping = {
-		sort ordemrefeicao:"asc" // or "asc"
+		sort ordemrefeicao:"asc" // or "asc" 
 		autoTimestamp true
 	}
 	

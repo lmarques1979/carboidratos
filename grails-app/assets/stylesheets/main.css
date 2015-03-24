@@ -528,7 +528,7 @@ th:hover, tr:hover {
 
 tr:hover.nohover{
 	background:transparent;
-	color:#fff;
+	color:#000;
 }
 
 tr:hover {
@@ -889,3 +889,4 @@ a.usuariologado:link, a.usuariologado:visited , a.usuariologado:hover, a.usuario
 .total{
 	width:100%;
 }
+

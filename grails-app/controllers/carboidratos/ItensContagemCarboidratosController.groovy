@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 @Secured('isAuthenticated()')
 class ItensContagemCarboidratosController extends BaseController{
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 
     def index(Integer max) {
 		
@@ -131,14 +131,14 @@ class ItensContagemCarboidratosController extends BaseController{
 					erros.add(it)  
 			}
 			flash.error=erros 
-			redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+			redirect action:"index", params:[refeicaoid: params.int('refeicao.id'), mes:params.int('mes'),ano:params.int('ano') ]
 			return
 		}
 		
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'itensContagemCarboidratos.label', default: 'ItensContagemCarboidratos'), itensContagemCarboidratosInstance.id])
-                redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano')]
+                redirect action:"index", params:[refeicaoid: params.int('refeicao.id') , mes:params.int('mes'),ano:params.int('ano')]
             }
             '*' { respond itensContagemCarboidratosInstance, [status: CREATED] }
         }
@@ -149,26 +149,47 @@ class ItensContagemCarboidratosController extends BaseController{
     }
 
     @Transactional
-    def update(ItensContagemCarboidratos itensContagemCarboidratosInstance) {
-        if (itensContagemCarboidratosInstance == null) {
-            notFound()
-            return
-        }
-
-        if (itensContagemCarboidratosInstance.hasErrors()) {
-            respond itensContagemCarboidratosInstance.errors, view:'edit'
-            return
-        }
-
-        itensContagemCarboidratosInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'ItensContagemCarboidratos.label', default: 'ItensContagemCarboidratos'), itensContagemCarboidratosInstance.id])
-                redirect itensContagemCarboidratosInstance
-            }
-            '*'{ respond itensContagemCarboidratosInstance, [status: OK] }
-        }
+    def update() {
+        
+		def idcontagem=params.list('id')
+		def erros = []
+		
+		for(int index=0 ; index < idcontagem.size() ; index++){
+				
+				def itensContagemCarboidratosInstance
+				def ContagemCarboidratosInstance
+				def RefeicoesContagemCarboidratosInstance
+				def qtdalimento , qtdcarboidrato , alimentoforalista
+				def alimentoid
+				
+				itensContagemCarboidratosInstance=ItensContagemCarboidratos.get(idcontagem[index].toInteger())
+				
+				if (idcontagem.size() > 1){
+					qtdalimento 		= (params.qtdalimento[index] ? params.qtdalimento[index].toInteger() : null)
+					qtdcarboidrato 		= (params.qtdcarboidrato[index] ? params.qtdcarboidrato[index].toInteger() : null)
+					alimentoforalista 	= (params.alimentoforalista[index] ? params.alimentoforalista[index] : null)
+					alimentoid 			= (params.alimento.id[index] ? params.alimento.id[index].toInteger() : null)
+				}else{
+					qtdalimento 		= (params.qtdalimento ? params.qtdalimento.toInteger() : null)
+					qtdcarboidrato 		= (params.qtdcarboidrato ? params.qtdcarboidrato.toInteger() : null)
+					alimentoforalista 	= (params.alimentoforalista ? params.alimentoforalista : null)
+					alimentoid 			= params.alimento.id.toInteger() 
+				}
+				
+				itensContagemCarboidratosInstance.qtdalimento=qtdalimento
+				itensContagemCarboidratosInstance.qtdcarboidrato=qtdcarboidrato
+				itensContagemCarboidratosInstance.alimentoforalista=alimentoforalista
+				itensContagemCarboidratosInstance.alimento=Alimento.get(alimentoid)
+				
+				if (itensContagemCarboidratosInstance.hasErrors()) {
+					respond itensContagemCarboidratosInstance.errors, view:'index'
+					return
+				}
+				
+		}
+		
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'contagem.label', default: 'ControleGlicemico')])
+		redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
     }
 
     @Transactional
@@ -178,16 +199,58 @@ class ItensContagemCarboidratosController extends BaseController{
             notFound()
             return
         }
+		def erros=[]
+		def RefeicoesContagemCarboidratosInstance=itensContagemCarboidratosInstance.refeicoescontagemcarboidratos
+		
+		itensContagemCarboidratosInstance.delete flush:true
 
-        itensContagemCarboidratosInstance.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'ItensContagemCarboidratos.label', default: 'ItensContagemCarboidratos'), itensContagemCarboidratosInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+		if (itensContagemCarboidratosInstance.hasErrors()) {
+				itensContagemCarboidratosInstance.errors.allErrors.each {
+						erros.add(it)  
+				}
+				flash.error=erros 
+				redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+				return
+		}else{
+		
+			def resultado = ItensContagemCarboidratos.findAllByRefeicoescontagemcarboidratos(RefeicoesContagemCarboidratosInstance)
+			if(resultado.size()==0){
+				
+				def ContagemCarboidratosInstance=RefeicoesContagemCarboidratosInstance.contagemcarboidratos
+				
+				RefeicoesContagemCarboidratosInstance.delete flush:true
+				
+				if (RefeicoesContagemCarboidratosInstance.hasErrors()) {
+					
+						RefeicoesContagemCarboidratosInstance.errors.allErrors.each {
+							erros.add(it)  
+						}
+						flash.error=erros 
+						redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+						return
+				}else{
+				
+					def resultado2 = RefeicoesContagemCarboidratos.findAllByContagemcarboidratos(ContagemCarboidratosInstance)
+					if(resultado2.size()==0){
+						
+						ContagemCarboidratosInstance.delete flush:true
+						
+						if (ContagemCarboidratosInstance.hasErrors()) {
+							
+								ContagemCarboidratosInstance.errors.allErrors.each {
+									erros.add(it)
+								}
+								flash.error=erros
+								redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+								return
+						}
+					}
+				}
+			}
+			flash.message = message(code: 'default.deleted.message', args: [message(code: 'controle.label'), itensContagemCarboidratosInstance.id])
+			redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+		}
+       
     }
 
     protected void notFound() {

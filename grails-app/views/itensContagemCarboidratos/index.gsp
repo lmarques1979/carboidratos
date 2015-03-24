@@ -13,6 +13,7 @@
 		<asset:javascript src="funcoes.js"/>
 	</head>
 	<body>
+	
 		<a href="#list-itensContagemCarboidratos" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="list-itensContagemCarboidratos" class="content scaffold-list" role="main">
 			<g:if test="${flash.message}">
@@ -73,18 +74,18 @@
 								<td><g:field class="dia" size="5" max="31" min="1" name="dia" value="${formatDate(format:"dd" , date:new Date())}" type="number" required=""/></td>
 								
 								<td>
-									<g:select id="refeicao" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}"  optionValue="descricao" optionKey="id" value="${params.int('refeicao.id')}"/>
+									<g:select id="refeicao" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}"  optionValue="descricao" optionKey="id" value="${params.refeicaoid}"/>
 								</td>
 								
 								<td>
 									<g:select class="alimento" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${carboidratos.Alimento.list()}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
 								</td>
 								
-								<td><g:field class="qtd" size="4" name="qtdalimento" type="number" /></td>
+								<td><g:field min="0" class="qtd" size="4" name="qtdalimento" type="number" /></td>
 								
 								<td><g:textField id="alimentoforalista" name="alimentoforalista" class="obs"/></td>
 							
-								<td><g:field id="carboidratos" class="qtd" size="4" name="qtdcarboidrato" type="number" /></td>
+								<td><g:field min="0" id="carboidratos" class="qtd" size="4" name="qtdcarboidrato" type="number" /></td>
 							
 							</tr>
 						</tbody>
@@ -132,6 +133,7 @@
 						<tbody>
 						<g:set var="diaanterior" value="-1" />
 						<g:set var="refeicaoanterior" value="-1" />
+						<g:set var="totalrefeicao" value="0" />
 						<g:each in="${itensContagemCarboidratosInstanceList}" status="i" var="itensContagemCarboidratosInstance">
 							
 							<g:hiddenField name="id" value="${itensContagemCarboidratosInstance.id}"/>
@@ -139,25 +141,29 @@
 							<g:set var="refeicaoatual" value="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.refeicao.id}"/>
 							
 							<g:if test="${diaanterior!=diaatual}">
-								<tr>
-									<td><g:field class="dia" size="5" max="31" min="1" name="dia" value="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.contagemcarboidratos.dia}" type="number" required=""/></td>
+								<g:set var="refeicaoanterior" value="-1" />
+								<tr class="nohover">
+									<td><span>${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.contagemcarboidratos.dia}</span></td>
 									<td>
-										<g:link onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" id="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.contagemcarboidratos.id}" action="delete" controller="ContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
+										<g:link params="[mes:mes,ano:ano]" onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" id="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.contagemcarboidratos.id}" action="delete" controller="ContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}"/></g:link></li>
 									</td>
 								</tr>
 							</g:if>		
 							<g:if test="${refeicaoanterior!=refeicaoatual}">
-								<tr>
+								<tr class="nohover">
 									<td colspan="2"></td>
 									<td>
-										<g:select id="refeicao" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}"  optionValue="descricao" optionKey="id" value="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.refeicao.id}"/>
+										<span>${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.refeicao.descricao}</span>
 									</td>
 									<td>
-										<g:link onclick="return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');" id="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.id}" action="delete" controller="RefeicoesContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
+										<g:link params="[mes:mes,ano:ano]" onclick="return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');" id="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.id}" action="delete" controller="RefeicoesContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}"/></g:link></li>
 									</td>
+									
 								</tr>
-							</g:if>						
-							<tr>
+								
+							</g:if>		
+											
+							<tr class="nohover">
 							
 								<td colspan="4"></td>
 								
@@ -170,29 +176,33 @@
 									</g:else>
 								</td>
 															
-								<td><g:field value="${itensContagemCarboidratosInstance.qtdalimento}" class="qtd" size="4" name="qtdalimento" type="number" /></td>
+								<td><g:field min="0" value="${itensContagemCarboidratosInstance.qtdalimento}" class="qtd" size="4" name="qtdalimento" type="number" /></td>
 								
 								<td><g:textField value="${itensContagemCarboidratosInstance.alimentoforalista}" id="alimentoforalista" name="alimentoforalista" class="obs"/></td>
 							
-								<td><g:field id="carboidratos" value="${itensContagemCarboidratosInstance.qtdcarboidrato}" class="qtd" size="4" name="qtdcarboidrato" type="number" /></td>
+								<td><g:field min="0" id="carboidratos" value="${itensContagemCarboidratosInstance.qtdcarboidrato}" class="qtd" size="4" name="qtdcarboidrato" type="number" /></td>
 							
 								<g:if test="${itensContagemCarboidratosInstance.alimento}">
 									<td class="centro">
-										<g:formatNumber number="${itensContagemCarboidratosInstance.qtdalimento*itensContagemCarboidratosInstance.alimento.carboidratosg}" type="number" format="####.###" />
+										<g:set var="totaldia" value="${itensContagemCarboidratosInstance.qtdalimento*itensContagemCarboidratosInstance.alimento.carboidratosg}" />
+										<g:formatNumber number="${totaldia}" type="number" format="####.###" />
 									</td>
 								</g:if>
 								<g:else>
 									<td class="centro">
-										<g:formatNumber number="${itensContagemCarboidratosInstance.qtdalimento*itensContagemCarboidratosInstance.qtdcarboidrato}" type="number" format="####.###" />
+										<g:set var="totaldia" value="${itensContagemCarboidratosInstance.qtdalimento* (itensContagemCarboidratosInstance.qtdcarboidrato ? itensContagemCarboidratosInstance.qtdcarboidrato : 0)}" />
+										<g:formatNumber number="${totaldia}" type="number" format="####.###" />
 									</td>
 								</g:else>	
 								
 								<td>
-										<g:link onclick="return confirm('${message(code: 'excluiralimento.confirm.message', default: 'Are you sure?')}');" id="${itensContagemCarboidratosInstance.id}" action="delete" controller="ItensContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
+										<g:link params="[mes:mes,ano:ano]" onclick="return confirm('${message(code: 'excluiralimento.confirm.message', default: 'Are you sure?')}');" id="${itensContagemCarboidratosInstance.id}" action="delete" controller="ItensContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'excluiralimento.confirm.message')}"/></g:link></li>
 								</td>					
 							</tr>
 							<g:set var="diaanterior" value="${diaatual}"/>
 							<g:set var="refeicaoanterior" value="${refeicaoatual}"/>
+							
+							
 						</g:each>
 						</tbody>
 						<tbody>	

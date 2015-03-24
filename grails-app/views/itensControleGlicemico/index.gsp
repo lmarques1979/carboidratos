@@ -130,14 +130,14 @@
 								<g:set var="diaatual" value="${itensControleGlicemicoInstance.controleglicemico.dia}" />
 								
 								<g:if test="${diaanterior!=diaatual}">
-									<tr>
-										<td><g:field class="dia" size="5" max="31" min="1" name="dia" value="${itensControleGlicemicoInstance.controleglicemico.dia}" type="number" required=""/></td>
+									<tr class="nohover">
+										<td><span>${itensControleGlicemicoInstance.controleglicemico.dia}</span></td>
 										<td>
 											<g:link onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.controleglicemico.id}" action="delete" controller="ControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
 										</td>
 									</tr>
 								</g:if>
-								<tr>
+								<tr class="nohover">
 									
 									<td colspan="2"></td>
 									<td>
