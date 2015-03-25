@@ -464,7 +464,8 @@ tr>td:last-child, tr>th:last-child {
 
 td, th {
 	line-height: 1.5em;
-	padding: 0.5em 0.6em;
+	padding: 0.5em 0.6em; 
+	
 	text-align:center;
 	vertical-align: top;
 }
@@ -888,5 +889,6 @@ a.usuariologado:link, a.usuariologado:visited , a.usuariologado:hover, a.usuario
 
 .total{
 	width:100%;
+	margin:0;
+	padding:0
 }
-

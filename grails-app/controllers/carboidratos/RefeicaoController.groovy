@@ -49,7 +49,7 @@ class RefeicaoController extends BaseController{
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'refeicao.label', default: 'Refeicao'), refeicaoInstance.id])
-                redirect refeicaoInstance
+                redirect(action: "create")
             }
             '*' { respond refeicaoInstance, [status: CREATED] }
         }

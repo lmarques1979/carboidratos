@@ -74,30 +74,60 @@ class ContagemCarboidratosController extends BaseController{
     }
 
     @Transactional
-    def delete(ContagemCarboidratos contagemCarboidratosInstance) {
+    def delete() {
 
-        if (contagemCarboidratosInstance == null) {
-            notFound()
-            return
-        }
-		
+		def dia=params.int('dia')
+		def mes=params.int('mes')
+		def ano=params.int('ano')    
 		def erros=[]
-
-        contagemCarboidratosInstance.delete flush:true
 		
-		if (contagemCarboidratosInstance.hasErrors()) {
-			
-				contagemCarboidratosInstance.errors.allErrors.each {
-					erros.add(it)
-				}
-				flash.error=erros
-				redirect (controller: "itensContagemCarboidratos" , action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ])
-				return
+		def resultado = ContagemCarboidratos.createCriteria().list() {
+			eq("dia" , dia)
+			eq("mes" , mes)
+			eq("ano" ,ano)
+			eq("usuario" ,usuarioLogado)
 		}
 		
-        flash.message = message(code: 'default.deleted.message', args: [message(code: 'controle.label'), contagemCarboidratosInstance.id])
-		redirect (controller: "itensContagemCarboidratos" , action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ])
+		resultado.each{ it ->
+			
+				it.delete flush:true
+			
+				if (it.hasErrors()) {
+						it.errors.allErrors.each {
+							erros.add(it)
+						}
+						flash.error=erros
+						redirect (controller: "ContagemCarboidratosAlimento" , action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ])
+						return
+				}
+		}
+		
+		flash.message = message(code: 'default.deleted.message', args: [message(code: 'controle.label')])
+		redirect (controller: "ContagemCarboidratosAlimento" , action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ])
     }
+	
+	@Transactional
+	def deleterefeicaodia(ContagemCarboidratos contagemCarboidratosInstance) {
+		
+		def erros=[]
+		
+		def dia=contagemCarboidratosInstance.dia
+		def mes=contagemCarboidratosInstance.mes
+		def ano=contagemCarboidratosInstance.ano
+		
+		contagemCarboidratosInstance.delete flush:true 
+		
+		if (contagemCarboidratosInstance.hasErrors()) {
+				contagemCarboidratosInstance.errors.allErrors.each {
+					erros.add(it)
+			}
+			flash.error=erros
+			redirect (controller: "ContagemCarboidratosAlimento" , action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ])
+			return
+		}
+		flash.message = message(code: 'default.deleted.message', args: [message(code: 'controle.label'), contagemCarboidratosInstance.id])
+		redirect (controller: "ContagemCarboidratosAlimento" , action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ])
+	}
 
     protected void notFound() {
         request.withFormat {

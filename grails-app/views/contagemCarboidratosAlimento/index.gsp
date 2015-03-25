@@ -1,5 +1,5 @@
 
-<%@ page import="carboidratos.ItensContagemCarboidratos" %>
+<%@ page import="carboidratos.ContagemCarboidratosAlimento" %>
 <%@ page import="seguranca.Usuario" %>
 <sec:ifLoggedIn>
 	<g:set var="usuarioInstance" value="${Usuario.get(sec.loggedInUserInfo(field: 'id'))}" />
@@ -8,14 +8,13 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'itensContagemCarboidratos.label', default: 'ItensContagemCarboidratos')}" />
-		<title><g:message code="contagem.list.label"/></title>
-		<asset:javascript src="funcoes.js"/>
+		<g:set var="entityName" value="${message(code: 'contagemCarboidratosAlimento.label', default: 'ContagemCarboidratosAlimento')}" />
+		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-	
-		<a href="#list-itensContagemCarboidratos" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="list-itensContagemCarboidratos" class="content scaffold-list" role="main">
+		<a href="#list-contagemCarboidratosAlimento" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		
+		<div id="list-contagemCarboidratosAlimento" class="content scaffold-list" role="main">
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -43,7 +42,7 @@
 				</g:form>				
 			</div><div class="clearer"></div>
 			
-			<g:form class="formtable" url="[resource:itensContagemCarboidratosInstance, action:'save']" > 
+			<g:form class="formtable" url="[resource:ContagemCarboidratosAlimentoInstance, action:'save']" > 
 					<g:hiddenField name="mes" value="${mes}" />
 					<g:hiddenField name="ano" value="${ano}" />
 					<table>
@@ -134,18 +133,18 @@
 						<g:set var="diaanterior" value="-1" />
 						<g:set var="refeicaoanterior" value="-1" />
 						<g:set var="totalrefeicao" value="0" />
-						<g:each in="${itensContagemCarboidratosInstanceList}" status="i" var="itensContagemCarboidratosInstance">
-							
-							<g:hiddenField name="id" value="${itensContagemCarboidratosInstance.id}"/>
-							<g:set var="diaatual" value="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.contagemcarboidratos.dia}"/>
-							<g:set var="refeicaoatual" value="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.refeicao.id}"/>
+						<g:each in="${contagemCarboidratosAlimentoInstanceList}" status="i" var="contagemCarboidratosAlimentoInstance">
+									
+							<g:hiddenField name="id" value="${contagemCarboidratosAlimentoInstance.id}"/>
+							<g:set var="diaatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia}"/>
+							<g:set var="refeicaoatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.id}"/>
 							
 							<g:if test="${diaanterior!=diaatual}">
-								<g:set var="refeicaoanterior" value="-1" />
+								
 								<tr class="nohover">
-									<td><span>${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.contagemcarboidratos.dia}</span></td>
+									<td><span>${contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia}</span></td>
 									<td>
-										<g:link params="[mes:mes,ano:ano]" onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" id="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.contagemcarboidratos.id}" action="delete" controller="ContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}"/></g:link></li>
+										<g:link params="[dia:diaatual,mes:mes,ano:ano]" onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" action="delete" controller="ContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}"/></g:link></li>
 									</td>
 								</tr>
 							</g:if>		
@@ -153,10 +152,10 @@
 								<tr class="nohover">
 									<td colspan="2"></td>
 									<td>
-										<span>${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.refeicao.descricao}</span>
+										<span>${contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao}</span>
 									</td>
 									<td>
-										<g:link params="[mes:mes,ano:ano]" onclick="return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');" id="${itensContagemCarboidratosInstance.refeicoescontagemcarboidratos.id}" action="delete" controller="RefeicoesContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}"/></g:link></li>
+										<g:link onclick="return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');" id="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.id}" action="deleterefeicaodia" controller="ContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}"/></g:link></li>
 									</td>
 									
 								</tr>
@@ -168,35 +167,35 @@
 								<td colspan="4"></td>
 								
 								<td>
-									<g:if test="${itensContagemCarboidratosInstance.alimento}">
-										<g:select value="${itensContagemCarboidratosInstance.alimento.id}" class="total" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${carboidratos.Alimento.list()}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
+									<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
+										<g:select value="${contagemCarboidratosAlimentoInstance.alimento.id}" class="total" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${carboidratos.Alimento.list()}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
 									</g:if>
 									<g:else>
 										<g:select class="total" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${carboidratos.Alimento.list()}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
 									</g:else>
 								</td>
 															
-								<td><g:field min="0" value="${itensContagemCarboidratosInstance.qtdalimento}" class="qtd" size="4" name="qtdalimento" type="number" /></td>
+								<td><g:field min="0" value="${contagemCarboidratosAlimentoInstance.qtdalimento}" class="qtd" size="4" name="qtdalimento" type="number" /></td>
 								
-								<td><g:textField value="${itensContagemCarboidratosInstance.alimentoforalista}" id="alimentoforalista" name="alimentoforalista" class="obs"/></td>
+								<td><g:textField value="${contagemCarboidratosAlimentoInstance.alimentoforalista}" id="alimentoforalista" name="alimentoforalista" class="obs"/></td>
 							
-								<td><g:field min="0" id="carboidratos" value="${itensContagemCarboidratosInstance.qtdcarboidrato}" class="qtd" size="4" name="qtdcarboidrato" type="number" /></td>
+								<td><g:field min="0" id="carboidratos" value="${contagemCarboidratosAlimentoInstance.qtdcarboidrato}" class="qtd" size="4" name="qtdcarboidrato" type="number" /></td>
 							
-								<g:if test="${itensContagemCarboidratosInstance.alimento}">
+								<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
 									<td class="centro">
-										<g:set var="totaldia" value="${itensContagemCarboidratosInstance.qtdalimento*itensContagemCarboidratosInstance.alimento.carboidratosg}" />
+										<g:set var="totaldia" value="${contagemCarboidratosAlimentoInstance.qtdalimento*contagemCarboidratosAlimentoInstance.alimento.carboidratosg}" />
 										<g:formatNumber number="${totaldia}" type="number" format="####.###" />
 									</td>
 								</g:if>
 								<g:else>
 									<td class="centro">
-										<g:set var="totaldia" value="${itensContagemCarboidratosInstance.qtdalimento* (itensContagemCarboidratosInstance.qtdcarboidrato ? itensContagemCarboidratosInstance.qtdcarboidrato : 0)}" />
+										<g:set var="totaldia" value="${contagemCarboidratosAlimentoInstance.qtdalimento* (contagemCarboidratosAlimentoInstance.qtdcarboidrato ? contagemCarboidratosAlimentoInstance.qtdcarboidrato : 0)}" />
 										<g:formatNumber number="${totaldia}" type="number" format="####.###" />
 									</td>
 								</g:else>	
 								
 								<td>
-										<g:link params="[mes:mes,ano:ano]" onclick="return confirm('${message(code: 'excluiralimento.confirm.message', default: 'Are you sure?')}');" id="${itensContagemCarboidratosInstance.id}" action="delete" controller="ItensContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'excluiralimento.confirm.message')}"/></g:link></li>
+										<g:link params="[mes:mes,ano:ano]" onclick="return confirm('${message(code: 'excluiralimento.confirm.message', default: 'Are you sure?')}');" id="${contagemCarboidratosAlimentoInstance.id}" action="delete" controller="ContagemCarboidratosAlimento"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'excluiralimento.confirm.message')}"/></g:link></li>
 								</td>					
 							</tr>
 							<g:set var="diaanterior" value="${diaatual}"/>
@@ -216,8 +215,10 @@
 						</tbody>
 					</table>
 			</g:form>
+
+			
 			<div class="pagination">
-				<g:paginate total="${itensContagemCarboidratosInstanceCount ?: 0}" />
+				<g:paginate total="${contagemCarboidratosAlimentoInstanceCount ?: 0}" />
 			</div>
 		</div>
 	</body>

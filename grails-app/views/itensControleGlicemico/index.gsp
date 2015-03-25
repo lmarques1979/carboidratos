@@ -1,5 +1,4 @@
-
-<%@ page import="carboidratos.ControleGlicemico" %>
+<%@ page import="carboidratos.ItensControleGlicemico" %>
 <%@ page import="seguranca.Usuario" %>
 <sec:ifLoggedIn>
 	<g:set var="usuarioInstance" value="${Usuario.get(sec.loggedInUserInfo(field: 'id'))}" />
