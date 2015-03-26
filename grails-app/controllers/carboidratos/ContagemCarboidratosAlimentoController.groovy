@@ -11,7 +11,63 @@ import grails.transaction.Transactional
 class ContagemCarboidratosAlimentoController extends BaseController{
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
-
+	def pdfRenderingService
+	
+	def enviarpdfemail(){
+		
+		
+		def resultado = ContagemCarboidratosAlimento.createCriteria().list() {
+			createAlias("contagemcarboidratos", "contagemcarboidratos")
+			createAlias("contagemcarboidratos.refeicao", "refeicao")
+			createAlias("alimento", "alimento",CriteriaSpecification.LEFT_JOIN)
+			eq("contagemcarboidratos.mes" , params.int('mes'))
+			eq("contagemcarboidratos.ano" ,params.int('ano'))
+			eq("contagemcarboidratos.usuario" ,usuarioLogado)
+			order("contagemcarboidratos.dia", "asc")
+			order("contagemcarboidratos.mes", "asc")
+			order("contagemcarboidratos.ano", "asc")
+			order("refeicao.ordemrefeicao", "asc")
+			order("alimento.nome" , "asc")
+		}
+		
+		def nome_arquivo = params.mes + "_" +  params.ano + "_" + (new Date()).getTime() + ".pdf"
+		
+		ByteArrayOutputStream bytes = pdfRenderingService.render(template: "/contagemCarboidratosAlimento/gerarpdf",  model: [ContagemCarboidratosAlimentoInstanceList:resultado , mes: params.mes,ano:params.ano])
+		def anexo = bytes.toByteArray()
+		
+		def assunto = message(code:'assuntoemailcontagem.label' , args: [params.mes , params.ano] )  
+		def mensagem = message(code:'verificaranexo.label')
+		def destinatario = usuarioLogado.email
+		
+		//Envio E-mail
+		sendMail {
+			multipart true
+			to destinatario
+			subject assunto
+			html mensagem
+			attachBytes nome_arquivo,"application/pdf",anexo
+		}
+		
+		flash.message = message(code: 'pdfenviado.label' , args: [destinatario])
+		redirect action:"index", params:[mes: params.mes,ano:params.ano]
+	}
+	
+	def imprimir(){
+		def resultado = ContagemCarboidratosAlimento.createCriteria().list() {
+			createAlias("contagemcarboidratos", "contagemcarboidratos")
+			createAlias("contagemcarboidratos.refeicao", "refeicao")
+			createAlias("alimento", "alimento",CriteriaSpecification.LEFT_JOIN)
+			eq("contagemcarboidratos.mes" , params.int('mes'))
+			eq("contagemcarboidratos.ano" ,params.int('ano'))
+			eq("contagemcarboidratos.usuario" ,usuarioLogado)
+			order("contagemcarboidratos.dia", "asc")
+			order("contagemcarboidratos.mes", "asc")
+			order("contagemcarboidratos.ano", "asc")
+			order("refeicao.ordemrefeicao", "asc")
+			order("alimento.nome" , "asc")
+		}
+		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount: resultado.size , mes:params.int('mes') , ano:params.int('ano')]
+	}
     def index(Integer max) {
        
 		Calendar cal = Calendar.getInstance()
@@ -175,9 +231,10 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 					return
 				}
 				
+				flash.message = message(code: 'default.updated.message', args: [message(code: 'contagem.label', default: 'ControleGlicemico')])
+				
 		}
 		
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'contagem.label', default: 'ControleGlicemico')])
 		redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
     }
 

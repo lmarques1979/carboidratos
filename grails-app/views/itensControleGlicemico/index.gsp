@@ -98,6 +98,20 @@
 					</table>
 			</g:form>
 			
+			<div class="menuacoes">
+				
+					<g:link controller="ItensControleGlicemico" target="_blank" action="imprimir" params="${[mes:mes, ano:ano]}">
+						<asset:image src="skin/print.png" title="${message(code: 'imprimir.label')}"/>
+					</g:link>
+					
+					<g:link controller="ItensControleGlicemico" action="enviarpdfemail" params="${[mes:mes, ano:ano]}">
+						<asset:image src="skin/email.png" title="${message(code: 'email.label')}"/>
+					</g:link>
+					
+					<!--<asset:image id="grafico" src="skin/grafico.png" title="${message(code: 'horas.grafico.label')}"/>
+					-->
+								
+			</div><div class="clearer"></div>
 			<g:form class="formtable" url="[resource:itensControleGlicemicoInstance, action:'update']" > 
 				
 					<table>
@@ -123,6 +137,8 @@
 						<tbody>
 						
 						<g:set var="diaanterior" value="-1" />
+						<g:hiddenField name="mes" value="${mes}" />
+						<g:hiddenField name="ano" value="${ano}" />
 						<g:each in="${itensControleGlicemicoInstanceList}" status="j" var="itensControleGlicemicoInstance">
 								
 								<g:hiddenField name="id" value="${itensControleGlicemicoInstance.id}" />

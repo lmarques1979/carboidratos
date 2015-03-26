@@ -30,6 +30,8 @@
 					
 						<g:sortableColumn property="nome" title="${message(code: 'alimento.nome.label', default: 'Nome')}" />
 					
+						<th>${message(code: 'alimento.imagem.label')}</th>
+						
 						<g:sortableColumn property="medidausual" title="${message(code: 'alimento.medidausual.label', default: 'Medidausual')}" />
 					
 						<g:sortableColumn property="peso" title="${message(code: 'alimento.peso.label', default: 'Peso')}" />
@@ -52,15 +54,23 @@
 						<g:else>
 							<td>${fieldValue(bean: alimentoInstance, field: "nome")}</td>
 						</g:else>
-						<td>${fieldValue(bean: alimentoInstance, field: "medidausual")}</td>
+						
+						<g:if test="${alimentoInstance?.imagem}">
+							<td><asset:image height="${params.alturaimagens}" width="${params.larguraimagens}" src="${alimentoInstance.imagem}" title="${alimentoInstance?.nome}"/></td>
+						</g:if>
+						<g:else>
+							<td></td>
+						</g:else>
+						
+						<td>${alimentoInstance.medidausual}</td>
+						
+						<td>${formatNumber(number:alimentoInstance.peso,maxFractionDigits:2 , minFractionDigits:2 )}</td>
 					
-						<td>${fieldValue(bean: alimentoInstance, field: "peso")}</td>
+						<td>${formatNumber(number:alimentoInstance.caloriaskcal,maxFractionDigits:2 , minFractionDigits:2 )}</td>
 					
-						<td>${fieldValue(bean: alimentoInstance, field: "caloriaskcal")}</td>
+						<td>${formatNumber(number:alimentoInstance.carboidratosg,maxFractionDigits:2 , minFractionDigits:2 )}</td>
 					
-						<td>${fieldValue(bean: alimentoInstance, field: "carboidratosg")}</td>
-					
-						<td>${fieldValue(bean: alimentoInstance, field: "carboidratoskcal")}</td>
+						<td>${formatNumber(number:alimentoInstance.carboidratoskcal,maxFractionDigits:2 , minFractionDigits:2 )}</td>
 					
 					</tr>
 				</g:each>

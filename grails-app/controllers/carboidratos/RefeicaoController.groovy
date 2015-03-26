@@ -37,14 +37,15 @@ class RefeicaoController extends BaseController{
             return
         }
 		
-		refeicaoInstance.usuario=usuarioLogado
+		refeicaoInstance.usuario=usuarioLogado		
 		
-		refeicaoInstance.save flush:true
-		
+		refeicaoInstance.save flush:true	
+
 		if (refeicaoInstance.hasErrors()) {
 			respond refeicaoInstance.errors, view:'create'
 			return
 		}
+		
 		
         request.withFormat {
             form multipartForm {

@@ -43,7 +43,7 @@
 				<li class="fieldcontain">
 					<span id="peso-label" class="property-label"><g:message code="alimento.peso.label" default="Peso" /></span>
 					
-						<span class="property-value" aria-labelledby="peso-label"><g:fieldValue bean="${alimentoInstance}" field="peso"/></span>
+						<span class="property-value" aria-labelledby="peso-label"><g:formatNumber number="${alimentoInstance.peso}" format="####.##" /></span>
 					
 				</li>
 				</g:if>
@@ -52,7 +52,7 @@
 				<li class="fieldcontain">
 					<span id="caloriaskcal-label" class="property-label"><g:message code="alimento.caloriaskcal.label" default="Caloriaskcal" /></span>
 					
-						<span class="property-value" aria-labelledby="caloriaskcal-label"><g:fieldValue bean="${alimentoInstance}" field="caloriaskcal"/></span>
+						<span class="property-value" aria-labelledby="caloriaskcal-label"><g:formatNumber number="${alimentoInstance.caloriaskcal}" format="####.##" /></span>
 					
 				</li>
 				</g:if>
@@ -61,7 +61,7 @@
 				<li class="fieldcontain">
 					<span id="carboidratosg-label" class="property-label"><g:message code="alimento.carboidratosg.label" default="Carboidratosg" /></span>
 					
-						<span class="property-value" aria-labelledby="carboidratosg-label"><g:fieldValue bean="${alimentoInstance}" field="carboidratosg"/></span>
+						<span class="property-value" aria-labelledby="carboidratosg-label"><g:formatNumber number="${alimentoInstance.carboidratosg}" format="####.##" /></span>
 					
 				</li>
 				</g:if>
@@ -70,7 +70,7 @@
 				<li class="fieldcontain">
 					<span id="carboidratoskcal-label" class="property-label"><g:message code="alimento.carboidratoskcal.label" default="Carboidratoskcal" /></span>
 					
-						<span class="property-value" aria-labelledby="carboidratoskcal-label"><g:fieldValue bean="${alimentoInstance}" field="carboidratoskcal"/></span>
+						<span class="property-value" aria-labelledby="carboidratoskcal-label"><g:formatNumber number="${alimentoInstance.carboidratoskcal}" format="####.##" /></span>
 					
 				</li>
 				</g:if>
@@ -79,7 +79,11 @@
 				<li class="fieldcontain">
 					<span id="imagem-label" class="property-label"><g:message code="alimento.imagem.label" default="Imagem" /></span>
 					
-						<span class="property-value" aria-labelledby="imagem-label"><g:fieldValue bean="${alimentoInstance}" field="imagem"/></span>
+						<span class="property-value" aria-labelledby="imagem-label">
+
+							<asset:image height="${params.alturaimagens}" width="${params.larguraimagens}" src="${alimentoInstance.imagem}" title="${alimentoInstance?.nome}"/>
+							
+						</span>
 					
 				</li>
 				</g:if>

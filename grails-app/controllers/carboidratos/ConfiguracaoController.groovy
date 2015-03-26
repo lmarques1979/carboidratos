@@ -10,9 +10,15 @@ class ConfiguracaoController extends BaseController{
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	@Secured("isAuthenticated() or authentication.name=='admin'")
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Configuracao.list(params), model:[configuracaoInstanceCount: Configuracao.count()]
+		
+		def resultado = Configuracao.createCriteria().list() {
+			eq("usuario" ,usuarioLogado)
+		}
+		
+        respond resultado, model:[configuracaoInstanceCount: resultado.size]
     }
 
     def show(Configuracao configuracaoInstance) {
@@ -31,14 +37,15 @@ class ConfiguracaoController extends BaseController{
         }
 		
 		configuracaoInstance.usuario=usuarioLogado
-       configuracaoInstance.save flush:true
-	   
-	   if (configuracaoInstance.hasErrors()) {
-		   respond configuracaoInstance.errors, view:'create'
-		   return
-	   }
-
-        request.withFormat {
+		
+		configuracaoInstance.save flush:true
+		
+		if (configuracaoInstance.hasErrors()) {
+			respond configuracaoInstance.errors, view:'create'
+			return
+		}
+	    
+		request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'configuracao.label', default: 'Configuracao'), configuracaoInstance.id])
                 redirect configuracaoInstance

@@ -24,8 +24,7 @@
 		<g:message code="alimento.peso.label" default="Peso" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="peso" required="" value="${alimentoInstance?.peso}"/>
-
+	<g:textField name="peso" size="4" value="${formatNumber(number:alimentoInstance?.peso,maxFractionDigits:2 , minFractionDigits:2)}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: alimentoInstance, field: 'caloriaskcal', 'error')} ">
@@ -33,8 +32,7 @@
 		<g:message code="alimento.caloriaskcal.label" default="Caloriaskcal" />
 		
 	</label>
-	<g:textField name="caloriaskcal" value="${alimentoInstance?.caloriaskcal}"/>
-
+	<g:textField name="caloriaskcal" size="4" value="${formatNumber(number:alimentoInstance?.caloriaskcal,maxFractionDigits:2 , minFractionDigits:2)}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: alimentoInstance, field: 'carboidratosg', 'error')} ">
@@ -42,8 +40,7 @@
 		<g:message code="alimento.carboidratosg.label" default="Carboidratosg" />
 		
 	</label>
-	<g:textField name="carboidratosg" value="${alimentoInstance?.carboidratosg}"/>
-
+	<g:textField name="carboidratosg" size="4" value="${formatNumber(number:alimentoInstance?.carboidratosg,maxFractionDigits:2 , minFractionDigits:2)}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: alimentoInstance, field: 'carboidratoskcal', 'error')} ">
@@ -51,8 +48,7 @@
 		<g:message code="alimento.carboidratoskcal.label" default="Carboidratoskcal" />
 		
 	</label>
-	<g:textField name="carboidratoskcal" value="${alimentoInstance?.carboidratoskcal}"/>
-
+	<g:textField name="carboidratoskcal" size="4" value="${formatNumber(number:alimentoInstance?.carboidratoskcal,maxFractionDigits:2 , minFractionDigits:2)}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: alimentoInstance, field: 'imagem', 'error')} ">

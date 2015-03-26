@@ -9,7 +9,61 @@ import grails.transaction.Transactional
 class ItensControleGlicemicoController extends BaseController{
 
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
-
+	def pdfRenderingService
+	
+	def enviarpdfemail(){
+		
+		def resultado = ItensControleGlicemico.createCriteria().list() {
+			createAlias("controleglicemico", "controleglicemico")
+			createAlias("refeicao", "refeicao")
+			eq("controleglicemico.mes" , params.int('mes'))
+			eq("controleglicemico.ano" ,params.int('ano'))
+			eq("controleglicemico.usuario" ,usuarioLogado)
+			order("controleglicemico.dia", "asc")
+			order("controleglicemico.mes", "asc")
+			order("controleglicemico.ano", "asc")
+			order("refeicao.ordemrefeicao", "asc")
+		}
+		
+		def nome_arquivo = params.mes + "_" +  params.ano + "_" + (new Date()).getTime() + ".pdf"
+		
+		ByteArrayOutputStream bytes = pdfRenderingService.render(template: "/itensControleGlicemico/gerarpdf",  model: [ItensControleGlicemicoInstanceList:resultado , mes: params.mes,ano:params.ano])
+		def anexo = bytes.toByteArray()
+		
+		def assunto = message(code:'assuntoemailcontagem.label' , args: [params.mes , params.ano] )
+		def mensagem = message(code:'verificaranexo.label')
+		def destinatario = usuarioLogado.email
+		
+		//Envio E-mail
+		sendMail {
+			multipart true
+			to destinatario
+			subject assunto
+			html mensagem
+			attachBytes nome_arquivo,"application/pdf",anexo
+		}
+		
+		flash.message = message(code: 'pdfenviado.label' , args: [destinatario])
+		redirect action:"index", params:[mes: params.mes,ano:params.ano]
+	}
+	
+	def imprimir(){
+		
+		def resultado = ItensControleGlicemico.createCriteria().list() {
+			createAlias("controleglicemico", "controleglicemico")
+			createAlias("refeicao", "refeicao")
+			eq("controleglicemico.mes" , params.int('mes'))
+			eq("controleglicemico.ano" ,params.int('ano'))
+			eq("controleglicemico.usuario" ,usuarioLogado)
+			order("controleglicemico.dia", "asc")
+			order("controleglicemico.mes", "asc")
+			order("controleglicemico.ano", "asc")
+			order("refeicao.ordemrefeicao", "asc")
+			
+		}
+		
+		respond resultado, model:[ItensControleGlicemicoInstanceCount: resultado.size , mes:params.int('mes') , ano:params.int('ano')]
+	}
     def index(Integer max) {
         Calendar cal = Calendar.getInstance()
 		def mescorrente=cal.MONTH + 1
@@ -193,10 +247,10 @@ class ItensControleGlicemicoController extends BaseController{
 					redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
 					return
 				}*/
+				flash.message = message(code: 'default.created.message', args: [message(code: 'controleGlicemico.label', default: 'ControleGlicemico')])
 				
 		}
 		
-		flash.message = message(code: 'default.created.message', args: [message(code: 'controleGlicemico.label', default: 'ControleGlicemico')])
 		redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
 	}
 

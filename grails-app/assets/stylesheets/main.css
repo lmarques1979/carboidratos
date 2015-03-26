@@ -892,3 +892,37 @@ a.usuariologado:link, a.usuariologado:visited , a.usuariologado:hover, a.usuario
 	margin:0;
 	padding:0
 }
+
+body.bodyimpressao{
+	background:#FFF;
+	color:#000;
+	margin: 0px auto;
+	max-width:90%;
+	font-size:13px;
+	overflow-x:hidden;
+	box-shadow:0px 0px 0px #fff;
+}
+
+table.impressao {
+	background:#fff;
+	width:100%;
+	border:1px solid #000;
+	border-collapse: collapse;
+	margin-bottom: 1em;
+}
+
+table.impressao thead tr th {
+	text-align:center;
+	background:#fff;
+	border:1px solid #000;
+	color:#000;
+	font-size:12px;
+}
+
+table.impressao tbody tr td {
+	text-align:center;
+	background:#fff;
+	border:0px solid #000;
+	color:#000;
+	font-size:12px;
+}

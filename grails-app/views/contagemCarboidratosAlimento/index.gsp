@@ -9,7 +9,7 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'contagemCarboidratosAlimento.label', default: 'ContagemCarboidratosAlimento')}" />
-		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<title><g:message code="contagem.list.label" /></title>
 	</head>
 	<body>
 		<a href="#list-contagemCarboidratosAlimento" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -57,9 +57,9 @@
 								
 								<th><g:message code="contagem.refeicao.label"/></th>
 							
-								<th><g:message code="contagem.alimento.label"/>
+								<th><g:message code="contagem.alimento.label"/></th>
 							
-								<th><g:message code="contagem.qtdalimento.label"/>
+								<th><g:message code="contagem.qtdalimento.label"/></th>
 							
 								<th><g:message code="contagem.alimentoforalista.label"/></th>
 							
@@ -100,6 +100,21 @@
 					</table>
 			</g:form>
 			
+			<div class="menuacoes">
+				
+					<g:link controller="ContagemCarboidratosAlimento" target="_blank" action="imprimir" params="${[mes:mes, ano:ano]}">
+						<asset:image src="skin/print.png" title="${message(code: 'imprimir.label')}"/>
+					</g:link>
+					
+					<g:link controller="ContagemCarboidratosAlimento" action="enviarpdfemail" params="${[mes:mes, ano:ano]}">
+						<asset:image src="skin/email.png" title="${message(code: 'email.label')}"/>
+					</g:link>
+					
+					<!--<asset:image id="grafico" src="skin/grafico.png" title="${message(code: 'horas.grafico.label')}"/>
+					-->
+								
+			</div><div class="clearer"></div>
+				
 			<g:form class="formtable" url="[resource:itensContagemCarboidratosInstance, action:'update']" > 
 					<table>
 					<thead>
@@ -115,9 +130,9 @@
 								
 								<th></th>
 							
-								<th><g:message code="contagem.alimento.label"/>
+								<th><g:message code="contagem.alimento.label"/></th>
 							
-								<th><g:message code="contagem.qtdalimento.label"/>
+								<th><g:message code="contagem.qtdalimento.label"/></th>
 							
 								<th><g:message code="contagem.alimentoforalista.label"/></th>
 							
@@ -133,6 +148,8 @@
 						<g:set var="diaanterior" value="-1" />
 						<g:set var="refeicaoanterior" value="-1" />
 						<g:set var="totalrefeicao" value="0" />
+						<g:hiddenField name="mes" value="${mes}" />
+						<g:hiddenField name="ano" value="${ano}" />
 						<g:each in="${contagemCarboidratosAlimentoInstanceList}" status="i" var="contagemCarboidratosAlimentoInstance">
 									
 							<g:hiddenField name="id" value="${contagemCarboidratosAlimentoInstance.id}"/>

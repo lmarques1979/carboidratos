@@ -15,7 +15,7 @@ class BaseController{
 				eq("usuario" , usuarioLogado) 
 			}
 			resultado.each() {
-				params.alturaimagens 		= it.alturaimagens ? it.alturaimagens : "120"
+				params.alturaimagens 		= it.alturaimagens ? it.alturaimagens : "125"
 				params.larguraimagens 		= it.larguraimagens ? it.larguraimagens : "125"
 				params.alturaimagensthumbs 	= it.alturaimagensthumbs ? it.alturaimagensthumbs : "20"
 				params.larguraimagensthumbs	= it.larguraimagensthumbs ? it.larguraimagensthumbs : "25"

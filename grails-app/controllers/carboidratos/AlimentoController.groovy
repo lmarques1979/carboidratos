@@ -10,7 +10,8 @@ import grails.transaction.Transactional
 class AlimentoController extends BaseController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
-
+	def FileUploadService
+	
 	@Secured('permitAll')
     def index(Integer max) {
 		
@@ -31,6 +32,7 @@ class AlimentoController extends BaseController {
     }
 
     def show(Alimento alimentoInstance) {
+		configuracaoParams
         respond alimentoInstance
     }
 
@@ -44,12 +46,19 @@ class AlimentoController extends BaseController {
             notFound()
             return
         }
-
+		
+		def f = request.getFile('arquivo')
+		
+		if (!f.empty) {
+			def midia = FileUploadService.fileUpload(f , 'carboidratoslmdcm' , 'assets/')
+			alimentoInstance.imagem = midia
+		}
+		
         if (alimentoInstance.hasErrors()) {
-            respond alimentoInstance.errors, view:'create'
-            return
-        }
-
+			respond alimentoInstance.errors, view:'create'
+			return
+		}
+		
         alimentoInstance.save flush:true
 
         request.withFormat {
@@ -72,11 +81,18 @@ class AlimentoController extends BaseController {
             return
         }
 
-        if (alimentoInstance.hasErrors()) {
-            respond alimentoInstance.errors, view:'edit'
-            return
-        }
-
+		def f = request.getFile('arquivo')
+		
+		if (!f.empty) {
+			def midia = FileUploadService.fileUpload(f , 'carboidratoslmdcm' , 'assets/')
+			alimentoInstance.imagem = midia
+		}
+		
+		if (alimentoInstance.hasErrors()) {
+			respond alimentoInstance.errors, view:'edit'
+			return
+		}
+		
         alimentoInstance.save flush:true
 
         request.withFormat {
