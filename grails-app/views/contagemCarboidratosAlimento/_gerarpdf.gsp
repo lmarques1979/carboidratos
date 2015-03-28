@@ -4,7 +4,8 @@
 <sec:ifLoggedIn>
 	<g:set var="usuarioInstance" value="${Usuario.get(sec.loggedInUserInfo(field: 'id'))}" />
 </sec:ifLoggedIn>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
 		<g:set var="entityName" value="${message(code: 'contagemCarboidratosAlimento.label', default: 'ContagemCarboidratosAlimento')}" />
@@ -48,10 +49,14 @@
 		</style>
 	</head>
 	<body class="bodyimpressao">
-		<table class="impressao">
+	
+	    <table class="impressao">
 					<thead>
 							<tr>
-								<th colspan="7"><g:message code="contagem.alterar.message"/><g:message code="headerimpressaocontamgem.message" args="${[params.mes, params.ano , usuarioInstance.buscaNome(usuarioInstance)]}"/></th>
+								<th colspan="7">
+									<g:message code="contagem.alterar.message"/>
+								  	<g:message code="headerimpressaocontamgem.message" args="${[mes, ano , usuarioInstance.buscaNome(usuarioInstance)]}"/>
+								</th>
 							</tr>
 							<tr>
 								<th><g:message code="contagem.dia.label"/></th>
@@ -67,7 +72,7 @@
 						<g:set var="diaanterior" value="-1" />
 						<g:set var="refeicaoanterior" value="-1" />
 						<g:set var="totalrefeicao" value="0" />
-						<g:each in="${contagemCarboidratosAlimentoInstanceList}" status="i" var="contagemCarboidratosAlimentoInstance">
+						<g:each in="${resultado}" status="i" var="contagemCarboidratosAlimentoInstance">
 							<g:set var="diaatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia}"/>
 							<g:set var="refeicaoatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.id}"/>
 							<g:if test="${diaanterior!=diaatual}">

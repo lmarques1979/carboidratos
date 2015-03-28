@@ -32,7 +32,7 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 		
 		def nome_arquivo = params.mes + "_" +  params.ano + "_" + (new Date()).getTime() + ".pdf"
 		
-		ByteArrayOutputStream bytes = pdfRenderingService.render(template: "/contagemCarboidratosAlimento/gerarpdf",  model: [ContagemCarboidratosAlimentoInstanceList:resultado , mes: params.mes,ano:params.ano])
+		ByteArrayOutputStream bytes = pdfRenderingService.render(template: "/contagemCarboidratosAlimento/gerarpdf",  model: [resultado:resultado , mes: params.mes,ano:params.ano])
 		def anexo = bytes.toByteArray()
 		
 		def assunto = message(code:'assuntoemailcontagem.label' , args: [params.mes , params.ano] )  
