@@ -30,9 +30,25 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 			order("alimento.nome" , "asc")
 		}
 		
+		def agrupamento = ContagemCarboidratosAlimento.executeQuery("select sum(cca.qtdalimento*a.carboidratosg), "+
+			"c.dia ,"+
+			"c.mes ,"+
+			"c.ano, "+
+			"c.usuario.id, "+
+			"c.refeicao.id "+
+			"from ContagemCarboidratosAlimento cca , "+
+			"Alimento a, "+
+			"ContagemCarboidratos c "+
+			"where cca.contagemcarboidratos=c.id and "+
+			"cca.alimento=a.id and " +
+			"c.mes=:mes " +
+			"and c.ano=:ano and "+
+			"c.usuario=:usuario " +
+			"group by c.dia,c.mes,c.ano,c.usuario,c.refeicao.id",[mes:params.int('mes'),ano:params.int('ano'),usuario:usuarioLogado])
+		
 		def nome_arquivo = params.mes + "_" +  params.ano + "_" + (new Date()).getTime() + ".pdf"
 		
-		ByteArrayOutputStream bytes = pdfRenderingService.render(template: "/contagemCarboidratosAlimento/gerarpdf",  model: [resultado:resultado , mes: params.mes,ano:params.ano])
+		ByteArrayOutputStream bytes = pdfRenderingService.render(template: "/contagemCarboidratosAlimento/gerarpdf",  model: [resultado:resultado , mes: params.mes,ano:params.ano,agrupamento:agrupamento])
 		def anexo = bytes.toByteArray()
 		
 		def assunto = message(code:'assuntoemailcontagem.label' , args: [params.mes , params.ano] )  
@@ -49,7 +65,7 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 		}
 		
 		flash.message = message(code: 'pdfenviado.label' , args: [destinatario])
-		redirect action:"index", params:[mes: params.mes,ano:params.ano]
+		redirect action:"index", params:[mes: params.mes,ano:params.ano ]
 	}
 	
 	def imprimir(){
@@ -66,7 +82,24 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 			order("refeicao.ordemrefeicao", "asc")
 			order("alimento.nome" , "asc")
 		}
-		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount: resultado.size , mes:params.int('mes') , ano:params.int('ano')]
+		
+		def agrupamento = ContagemCarboidratosAlimento.executeQuery("select sum(cca.qtdalimento*a.carboidratosg), "+
+			"c.dia ,"+
+			"c.mes ,"+
+			"c.ano, "+
+			"c.usuario.id, "+
+			"c.refeicao.id "+
+			"from ContagemCarboidratosAlimento cca , "+
+			"Alimento a, "+
+			"ContagemCarboidratos c "+
+			"where cca.contagemcarboidratos=c.id and "+
+			"cca.alimento=a.id and " +
+			"c.mes=:mes " +
+			"and c.ano=:ano and "+
+			"c.usuario=:usuario " +
+			"group by c.dia,c.mes,c.ano,c.usuario,c.refeicao.id",[mes:params.int('mes'),ano:params.int('ano'),usuario:usuarioLogado])
+		
+		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount:resultado.size,agrupamento:agrupamento,mes:params.int('mes'),ano:params.int('ano')]
 	}
     def index(Integer max) {
        
@@ -100,24 +133,23 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 			order("alimento.nome" , "asc")
 		}
 		
-		/*def agrupamento = ItensContagemCarboidratos.executeQuery("select sum(i.qtdalimento*a.carboidratosg), "+
-																 "c.mes ,"+
+		def agrupamento = ContagemCarboidratosAlimento.executeQuery("select sum(cca.qtdalimento*a.carboidratosg), "+
+																"c.dia ,"+
+																"c.mes ,"+
 																"c.ano, "+
 																"c.usuario.id, "+
-																"rc.refeicao.id "+
-																"from ItensContagemCarboidratos i , "+
+																"c.refeicao.id "+
+																"from ContagemCarboidratosAlimento cca , "+
 																"Alimento a, "+
-																"RefeicoesContagemCarboidratos rc, "+
 																"ContagemCarboidratos c "+
-																"where i.refeicoescontagemcarboidratos=rc.id and "+
-																"i.alimento=a.id and " +
-																"rc.contagemcarboidratos=c.id and "+
+																"where cca.contagemcarboidratos=c.id and "+
+																"cca.alimento=a.id and " +
 																"c.mes=:mes " +
 																"and c.ano=:ano and "+
 																"c.usuario=:usuario " +
-																"group by c.mes , c.ano, c.usuario,rc.refeicao",[mes:mes,ano:ano,usuario:usuarioLogado])*/
+																"group by c.dia,c.mes,c.ano,c.usuario,c.refeicao.id",[mes:mes,ano:ano,usuario:usuarioLogado])
 		
-		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount: resultado.size , mes:mes , ano:ano]
+		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount:resultado.size,agrupamento:agrupamento,mes:mes,ano:ano]
 		
     }
 

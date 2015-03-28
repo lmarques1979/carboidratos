@@ -3,7 +3,8 @@
 <sec:ifLoggedIn>
 	<g:set var="usuarioInstance" value="${Usuario.get(sec.loggedInUserInfo(field: 'id'))}" />
 </sec:ifLoggedIn>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
 		<g:set var="entityName" value="${message(code: 'controleGlicemico.label', default: 'ControleGlicemico')}" />
@@ -53,7 +54,7 @@
 							<tr>
 								<th colspan="11">
 									<g:message code="controle.list.label" />
-									<g:message code="headerimpressaocontamgem.message" args="${[params.mes, params.ano, usuarioInstance.buscaNome(usuarioInstance)]}" />
+									<g:message code="headerimpressaocontamgem.message" args="${[mes, ano, usuarioInstance.buscaNome(usuarioInstance)]}" />
 								
 								</th>
 							</tr>
@@ -74,7 +75,7 @@
 						<tbody>
 						
 						<g:set var="diaanterior" value="-1" />
-						<g:each in="${itensControleGlicemicoInstanceList}" status="j" var="itensControleGlicemicoInstance">
+						<g:each in="${resultado}" status="j" var="itensControleGlicemicoInstance">
 								
 								<g:set var="diaatual" value="${itensControleGlicemicoInstance.controleglicemico.dia}" />
 								<g:if test="${diaanterior!=diaatual}">

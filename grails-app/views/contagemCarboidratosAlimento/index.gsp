@@ -12,6 +12,7 @@
 		<title><g:message code="contagem.list.label" /></title>
 	</head>
 	<body>
+	
 		<a href="#list-contagemCarboidratosAlimento" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
 		<div id="list-contagemCarboidratosAlimento" class="content scaffold-list" role="main">
@@ -157,12 +158,12 @@
 							<g:set var="refeicaoatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.id}"/>
 							
 							<g:if test="${diaanterior!=diaatual}">
-								
 								<tr class="nohover">
 									<td><span>${contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia}</span></td>
 									<td>
 										<g:link params="[dia:diaatual,mes:mes,ano:ano]" onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" action="delete" controller="ContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}"/></g:link></li>
 									</td>
+									<td colspan="8"></td>
 								</tr>
 							</g:if>		
 							<g:if test="${refeicaoanterior!=refeicaoatual}">
@@ -175,6 +176,19 @@
 										<g:link onclick="return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');" id="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.id}" action="deleterefeicaodia" controller="ContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}"/></g:link></li>
 									</td>
 									
+									<g:each in="${agrupamento}" status="k" var="agrupamentoInstance">
+								    
+								    	<g:if test="${agrupamentoInstance[1]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia &&
+													  agrupamentoInstance[2]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.mes &&
+												  	  agrupamentoInstance[3]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.ano &&
+													  agrupamentoInstance[4]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.usuario.id &&
+													  agrupamentoInstance[5]==refeicaoatual
+												   }">
+								    	<td colspan="6" class="totalrefeicao">${message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number',format:'####.###')])}</td>
+								    	</g:if>
+								    	
+								    </g:each>
+	    
 								</tr>
 								
 							</g:if>		
@@ -217,7 +231,6 @@
 							</tr>
 							<g:set var="diaanterior" value="${diaatual}"/>
 							<g:set var="refeicaoanterior" value="${refeicaoatual}"/>
-							
 							
 						</g:each>
 						</tbody>

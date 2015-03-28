@@ -464,7 +464,7 @@ tr>td:last-child, tr>th:last-child {
 
 td, th {
 	line-height: 1.5em;
-	padding: 0.5em 0.6em; 
+	padding: 0.2em 0.6em; 
 	
 	text-align:center;
 	vertical-align: top;
@@ -919,10 +919,31 @@ table.impressao thead tr th {
 	font-size:12px;
 }
 
+
 table.impressao tbody tr td {
 	text-align:center;
 	background:#fff;
 	border:0px solid #000;
 	color:#000;
 	font-size:12px;
+}
+
+.totalrefeicao{
+	text-align:left;
+	font-weight:bold;
+	color:#ff0000;
+}
+
+.nohover img{
+	padding-top: 2px;
+}
+
+.separador {
+    width:100%; /* coloque aqui a largura da linha */
+    border-top: 1px solid #000;
+   
+}
+
+table.impressao td.totalrefeicao {
+	text-align:left;
 }
