@@ -92,7 +92,7 @@
 								<td colspan="2"></td>
 								<td>
 									<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
-											${contagemCarboidratosAlimentoInstance.alimento.nome}
+											${contagemCarboidratosAlimentoInstance.alimento.nome + ' ' + contagemCarboidratosAlimentoInstance.alimento.medidausual + ' de ' + contagemCarboidratosAlimentoInstance.alimento.peso + 'g : ' + contagemCarboidratosAlimentoInstance.alimento.carboidratosg + 'g Carboidrato(s)'}
 									</g:if>
 									<g:else>
 											${message(code:'alimentonaocadastrado.label') }
