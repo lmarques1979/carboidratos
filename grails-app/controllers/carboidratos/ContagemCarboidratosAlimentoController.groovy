@@ -215,8 +215,8 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 		}	
 		
 		contagemCarboidratosAlimentoInstance.contagemcarboidratos=ContagemCarboidratosInstance
-		contagemCarboidratosAlimentoInstance.qtdalimento=params.int('qtdalimento')
-		contagemCarboidratosAlimentoInstance.qtdcarboidrato=params.int('qtdcarboidrato')
+		contagemCarboidratosAlimentoInstance.qtdalimento=params.float('qtdalimento')
+		contagemCarboidratosAlimentoInstance.qtdcarboidrato=params.float('qtdcarboidrato')
 		contagemCarboidratosAlimentoInstance.alimentoforalista=params.alimentoforalista
 		contagemCarboidratosAlimentoInstance.alimento=alimento
 		
@@ -252,13 +252,13 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 				contagemCarboidratosAlimentoInstance=ContagemCarboidratosAlimento.get(idcontagem[index].toInteger())
 				
 				if (idcontagem.size() > 1){
-					qtdalimento 		= (params.qtdalimento[index] ? params.qtdalimento[index].toInteger() : null)
-					qtdcarboidrato 		= (params.qtdcarboidrato[index] ? params.qtdcarboidrato[index].toInteger() : null)
+					qtdalimento 		= (params.qtdalimento[index] ? Float.parseFloat(params.qtdalimento[index]) : null)
+					qtdcarboidrato 		= (params.qtdcarboidrato[index] ? Float.parseFloat(params.qtdcarboidrato[index]) : null)
 					alimentoforalista 	= (params.alimentoforalista[index] ? params.alimentoforalista[index] : null)
 					alimentoid 			= (params.alimento.id[index] ? params.alimento.id[index].toInteger() : null)
 				}else{
-					qtdalimento 		= (params.qtdalimento ? params.qtdalimento.toInteger() : null)
-					qtdcarboidrato 		= (params.qtdcarboidrato ? params.qtdcarboidrato.toInteger() : null)
+					qtdalimento 		= (params.qtdalimento ? params.float('qtdalimento') : null)
+					qtdcarboidrato 		= (params.qtdcarboidrato ? params.float('qtdcarboidrato') : null)
 					alimentoforalista 	= (params.alimentoforalista ? params.alimentoforalista : null)
 					alimentoid 			= params.alimento.id.toInteger()
 				}
