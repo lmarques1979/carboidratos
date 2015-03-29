@@ -7,7 +7,7 @@ class UrlMappings {
             }
         }
 
-       "/"(controller: 'login' ,action:'auth')
+       "/"(controller: 'index' ,action:'index')
 		//"/"(view:"/index")
         "500"(controller: 'error' ,action:'internalerror')
 		"403"(controller: 'error', action: 'denied')

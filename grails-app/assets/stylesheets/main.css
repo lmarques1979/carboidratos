@@ -515,7 +515,7 @@ th.desc a {
 }
 
 .odd {
-	background: #f7f7f7;
+	background: #f3f3f3;
 }
 
 .even {
@@ -878,7 +878,7 @@ a.usuariologado:link, a.usuariologado:visited , a.usuariologado:hover, a.usuario
 	display:block;
 	float:right;
 	top:-20px;
-	right:31px;
+	right:21px;
 }
 
 .logousuario img{
@@ -919,19 +919,23 @@ table.impressao thead tr th {
 	font-size:12px;
 }
 
-
 table.impressao tbody tr td {
 	text-align:center;
-	background:#fff;
 	border:0px solid #000;
 	color:#000;
 	font-size:12px;
 }
 
+
+table.impressao td.totalrefeicao {
+	text-align:left;
+	color:#184D85;
+}
+
 .totalrefeicao{
 	text-align:left;
 	font-weight:bold;
-	color:#ff0000;
+	color:#184D85;
 }
 
 .nohover img{
@@ -944,6 +948,44 @@ table.impressao tbody tr td {
    
 }
 
-table.impressao td.totalrefeicao {
-	text-align:left;
+.listadia {
+	background: #eae8e8;
+}
+
+.listadia:hover{
+	background: #eae8e8;
+	color:#000;
+}
+
+.paginainicial{
+	display:block;
+	margin:5px auto;
+	width:80%;
+	border:0px solid #000;
+}
+
+.paginainicial h1{
+	text-align:center;
+	font-weight:bold;
+	font-size:15px;
+	color:#184D85;
+}
+
+.listainicial {
+	width:70%;
+	margin:0 auto;
+	padding-top:15px;
+}
+
+.listainicial ol{
+	font-size:14px;
+	color:#4d4d4d;
+}
+
+.listainicial ol li{
+	padding-bottom:15px;
+}
+
+.paginainicial legend{
+	font-size:16px;
 }

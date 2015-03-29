@@ -44,9 +44,9 @@
 								<g:set var="diaatual" value="${itensControleGlicemicoInstance.controleglicemico.dia}" />
 								
 								<g:if test="${diaanterior!=diaatual}">
-									<tr class="nohover">
+									<tr class="listadia">
 										<td><span>${itensControleGlicemicoInstance.controleglicemico.dia}</span></td>
-										
+										<td colspan="10"></td>
 									</tr>
 								</g:if>
 								<tr class="nohover">

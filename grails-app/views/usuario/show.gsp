@@ -71,7 +71,11 @@
 					<li class="fieldcontain">
 						<span id="imagem-label" class="property-label"><g:message code="usuario.imagem.label" default="Imagem" /></span>
 						
-							<span class="property-value" aria-labelledby="imagem-label"><g:fieldValue bean="${usuarioInstance}" field="imagem"/></span>
+							<span class="property-value" aria-labelledby="imagem-label">
+							
+								<asset:image height="60" width="60" src="${usuarioInstance.imagem}" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
+							
+							</span>
 						
 					</li>
 					</g:if>

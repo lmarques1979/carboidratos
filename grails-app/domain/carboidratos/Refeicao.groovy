@@ -12,6 +12,7 @@ class Refeicao {
 	Date dateCreated
 	Date lastUpdated
 	
+	static hasMany=[contagem:ContagemCarboidratos , controle:ItensControleGlicemico]
     static constraints = {
 		descricao(nullable: false, blank: false)
 		ordemrefeicao(nullable: false, blank: false)
@@ -21,6 +22,8 @@ class Refeicao {
 	static mapping = {
 		sort ordemrefeicao:"asc" // or "asc" 
 		autoTimestamp true
+		contagem cascade: 'all-delete-orphan'
+		controle cascade: 'all-delete-orphan'
 	}
 	
 	static def refeicaoUsuario(def usuariologado){

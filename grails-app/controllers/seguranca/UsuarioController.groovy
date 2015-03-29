@@ -150,7 +150,7 @@ class UsuarioController extends BaseController{
 		def f = request.getFile('arquivo')
 		
 		if (!f.empty) {
-			def midia = FileUploadService.fileUpload(f , 'dicionariolmdcm' , 'assets/')
+			def midia = FileUploadService.fileUpload(f , 'carboidratoslmdcm' , 'assets/')
 			usuarioInstance.imagem = midia
 		}
 

@@ -49,9 +49,9 @@
 							<g:set var="refeicaoatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.id}"/>
 							
 							<g:if test="${diaanterior!=diaatual}">
-								
-								<tr class="nohover">
+								<tr class="listadia">
 									<td><span>${contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia}</span></td>
+									<td colspan="6"></td>
 								</tr>
 							</g:if>		
 							<g:if test="${refeicaoanterior!=refeicaoatual}">

@@ -45,6 +45,10 @@
 				font-size:12px;
 			}
 			
+			.listadia {
+				background:#eae8e8;
+			}
+			
 		</style>
 	</head>
 	<body class="bodyimpressao" onload="window.print()">

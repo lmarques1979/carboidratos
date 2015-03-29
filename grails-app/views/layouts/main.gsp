@@ -35,7 +35,7 @@
 			
 			<div id="menu">
 				<ul>
-						
+					<li><g:link class="${params.controller=='index' && params.action=='index' ? 'active' : '' }" controller="Index" action="index"><g:message code="paginalprincipal.label"/></g:link></li>
 					<sec:ifNotLoggedIn>
 						<li><g:link class="${params.controller=='alimento' && params.action=='index' ? 'active' : '' }" controller="Alimento" action="index"><g:message code="listaalimentos.label"/></g:link></li>
 						<li><g:link class="${params.controller=='usuario' && params.action=='create' ? 'active' : '' }" controller="Usuario" action="create"><g:message code="cadastrousuario.label"/></g:link></li>
@@ -63,7 +63,7 @@
 					<div class="logousuario">
 						<g:if test="${usuarioInstance.imagem}">
 							<g:link controller="usuario" action="show" id="${usuarioInstance.id}">
-								<asset:image height="40" width="40" src="${usuarioInstance.imagem}" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
+								<asset:image height="60" width="60" src="${usuarioInstance.imagem}" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
 							</g:link>
 						</g:if>	
 						<g:else>

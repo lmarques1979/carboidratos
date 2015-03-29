@@ -158,7 +158,7 @@
 							<g:set var="refeicaoatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.id}"/>
 							
 							<g:if test="${diaanterior!=diaatual}">
-								<tr class="nohover">
+								<tr class="listadia">
 									<td><span>${contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia}</span></td>
 									<td>
 										<g:link params="[dia:diaatual,mes:mes,ano:ano]" onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" action="delete" controller="ContagemCarboidratos"><asset:image class="excluir" src="skin/remove.png" title="${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}"/></g:link></li>

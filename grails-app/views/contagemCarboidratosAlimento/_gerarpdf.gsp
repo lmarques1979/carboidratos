@@ -51,6 +51,10 @@
 				color:#ff0000;
 			}
 			
+			.listadia {
+				background:#eae8e8;
+			}
+			
 		</style>
 	</head>
 	<body class="bodyimpressao">
@@ -81,8 +85,9 @@
 							<g:set var="diaatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia}"/>
 							<g:set var="refeicaoatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.id}"/>
 							<g:if test="${diaanterior!=diaatual}">
-								<tr class="nohover">
+								<tr class="listadia">
 									<td><span>${contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia}</span></td>
+									<td colspan="6"></td>
 								</tr>
 							</g:if>		
 							<g:if test="${refeicaoanterior!=refeicaoatual}">
