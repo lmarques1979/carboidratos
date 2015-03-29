@@ -2,8 +2,8 @@ package carboidratos
 
 class ContagemCarboidratosAlimento {
 
-	Integer qtdalimento
-	Integer qtdcarboidrato
+	Float qtdalimento
+	Float qtdcarboidrato
 	String alimentoforalista
 	Alimento alimento
 	ContagemCarboidratos contagemcarboidratos
@@ -12,7 +12,7 @@ class ContagemCarboidratosAlimento {
 	
 	static constraints = {
 		qtdalimento(nullable: false , blank: false)
-		qtdcarboidrato(nullable: true)
+		qtdcarboidrato(nullable:true)
 		alimentoforalista(nullable: true , blank: true)
 		alimento(nullable:true)
 		contagemcarboidratos(nullable:false)

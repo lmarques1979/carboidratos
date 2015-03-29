@@ -30,21 +30,24 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 			order("alimento.nome" , "asc")
 		}
 		
-		def agrupamento = ContagemCarboidratosAlimento.executeQuery("select sum(cca.qtdalimento*a.carboidratosg), "+
-			"c.dia ,"+
-			"c.mes ,"+
+		def agrupamento = ContagemCarboidratosAlimento.executeQuery(
+			"SELECT CASE "+
+			"WHEN cca.alimento.id IS NULL THEN "+
+			"sum(cca.qtdalimento*cca.qtdcarboidrato) "+
+			"ELSE "+
+			"sum(cca.qtdalimento*a.carboidratosg) "+
+			"END, "+
+			"c.dia , "+
+			"c.mes , "+
 			"c.ano, "+
 			"c.usuario.id, "+
 			"c.refeicao.id "+
-			"from ContagemCarboidratosAlimento cca , "+
-			"Alimento a, "+
-			"ContagemCarboidratos c "+
-			"where cca.contagemcarboidratos=c.id and "+
-			"cca.alimento=a.id and " +
-			"c.mes=:mes " +
-			"and c.ano=:ano and "+
-			"c.usuario=:usuario " +
-			"group by c.dia,c.mes,c.ano,c.usuario,c.refeicao.id",[mes:params.int('mes'),ano:params.int('ano'),usuario:usuarioLogado])
+			"from ContagemCarboidratosAlimento as cca LEFT JOIN cca.alimento as a "+
+			"JOIN cca.contagemcarboidratos as c "+
+			"where c.mes=:mes and "+
+			"c.ano=:ano and "+
+			"c.usuario=:usuario "+
+			"group by c.dia,c.mes,c.ano,c.usuario.id,c.refeicao.id",[mes:params.int('mes'),ano:params.int('ano'),usuario:usuarioLogado])
 		
 		def nome_arquivo = params.mes + "_" +  params.ano + "_" + (new Date()).getTime() + ".pdf"
 		
@@ -69,6 +72,7 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 	}
 	
 	def imprimir(){
+		
 		def resultado = ContagemCarboidratosAlimento.createCriteria().list() {
 			createAlias("contagemcarboidratos", "contagemcarboidratos")
 			createAlias("contagemcarboidratos.refeicao", "refeicao")
@@ -83,21 +87,24 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 			order("alimento.nome" , "asc")
 		}
 		
-		def agrupamento = ContagemCarboidratosAlimento.executeQuery("select sum(cca.qtdalimento*a.carboidratosg), "+
-			"c.dia ,"+
-			"c.mes ,"+
+		def agrupamento = ContagemCarboidratosAlimento.executeQuery(
+			"SELECT CASE "+
+			"WHEN cca.alimento.id IS NULL THEN "+
+			"sum(cca.qtdalimento*cca.qtdcarboidrato) "+
+			"ELSE "+
+			"sum(cca.qtdalimento*a.carboidratosg) "+
+			"END, "+
+			"c.dia , "+
+			"c.mes , "+
 			"c.ano, "+
 			"c.usuario.id, "+
 			"c.refeicao.id "+
-			"from ContagemCarboidratosAlimento cca , "+
-			"Alimento a, "+
-			"ContagemCarboidratos c "+
-			"where cca.contagemcarboidratos=c.id and "+
-			"cca.alimento=a.id and " +
-			"c.mes=:mes " +
-			"and c.ano=:ano and "+
-			"c.usuario=:usuario " +
-			"group by c.dia,c.mes,c.ano,c.usuario,c.refeicao.id",[mes:params.int('mes'),ano:params.int('ano'),usuario:usuarioLogado])
+			"from ContagemCarboidratosAlimento as cca LEFT JOIN cca.alimento as a "+
+			"JOIN cca.contagemcarboidratos as c "+
+			"where c.mes=:mes and "+
+			"c.ano=:ano and "+
+			"c.usuario=:usuario "+
+			"group by c.dia,c.mes,c.ano,c.usuario.id,c.refeicao.id",[mes:params.int('mes'),ano:params.int('ano'),usuario:usuarioLogado])
 		
 		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount:resultado.size,agrupamento:agrupamento,mes:params.int('mes'),ano:params.int('ano')]
 	}
@@ -133,21 +140,24 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 			order("alimento.nome" , "asc")
 		}
 		
-		def agrupamento = ContagemCarboidratosAlimento.executeQuery("select sum(cca.qtdalimento*a.carboidratosg), "+
-																"c.dia ,"+
-																"c.mes ,"+
-																"c.ano, "+
-																"c.usuario.id, "+
-																"c.refeicao.id "+
-																"from ContagemCarboidratosAlimento cca , "+
-																"Alimento a, "+
-																"ContagemCarboidratos c "+
-																"where cca.contagemcarboidratos=c.id and "+
-																"cca.alimento=a.id and " +
-																"c.mes=:mes " +
-																"and c.ano=:ano and "+
-																"c.usuario=:usuario " +
-																"group by c.dia,c.mes,c.ano,c.usuario,c.refeicao.id",[mes:mes,ano:ano,usuario:usuarioLogado])
+		def agrupamento = ContagemCarboidratosAlimento.executeQuery(
+			"SELECT CASE "+
+			"WHEN cca.alimento.id IS NULL THEN "+
+			"sum(cca.qtdalimento*cca.qtdcarboidrato) "+
+			"ELSE "+
+			"sum(cca.qtdalimento*a.carboidratosg) "+
+			"END, "+
+			"c.dia , "+
+			"c.mes , "+
+			"c.ano, "+
+			"c.usuario.id, "+
+			"c.refeicao.id "+
+			"from ContagemCarboidratosAlimento as cca LEFT JOIN cca.alimento as a "+
+			"JOIN cca.contagemcarboidratos as c "+
+			"where c.mes=:mes and "+
+			"c.ano=:ano and "+
+			"c.usuario=:usuario "+
+			"group by c.dia,c.mes,c.ano,c.usuario.id,c.refeicao.id",[mes:mes,ano:ano,usuario:usuarioLogado])
 		
 		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount:resultado.size,agrupamento:agrupamento,mes:mes,ano:ano]
 		

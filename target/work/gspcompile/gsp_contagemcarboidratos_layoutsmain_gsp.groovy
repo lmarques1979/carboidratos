@@ -69,22 +69,27 @@ invokeTag('image','asset',31,['class':("internacionalizacao"),'src':("bandeiras/
 invokeTag('link','g',31,['id':(params.id),'action':(params.action ? params.action : 'index'),'controller':(params.controller ? params.controller : 'index'),'params':([lang: 'es'])],2)
 printHtmlPart(11)
 createTagBody(2, {->
+invokeTag('message','g',38,['code':("paginalprincipal.label")],-1)
+})
+invokeTag('link','g',38,['class':(params.controller=='index' && params.action=='index' ? 'active' : ''),'controller':("Index"),'action':("index")],2)
 printHtmlPart(12)
+createTagBody(2, {->
+printHtmlPart(13)
 createTagBody(3, {->
 invokeTag('message','g',40,['code':("listaalimentos.label")],-1)
 })
 invokeTag('link','g',40,['class':(params.controller=='alimento' && params.action=='index' ? 'active' : ''),'controller':("Alimento"),'action':("index")],3)
-printHtmlPart(13)
+printHtmlPart(14)
 createTagBody(3, {->
 invokeTag('message','g',41,['code':("cadastrousuario.label")],-1)
 })
 invokeTag('link','g',41,['class':(params.controller=='usuario' && params.action=='create' ? 'active' : ''),'controller':("Usuario"),'action':("create")],3)
-printHtmlPart(13)
+printHtmlPart(14)
 createTagBody(3, {->
 invokeTag('message','g',42,['code':("login.label")],-1)
 })
 invokeTag('link','g',42,['class':(params.controller=='login' && params.action=='auth' ? 'active' : ''),'controller':("login"),'action':("auth")],3)
-printHtmlPart(14)
+printHtmlPart(12)
 })
 invokeTag('ifNotLoggedIn','sec',43,[:],2)
 printHtmlPart(9)
@@ -141,12 +146,12 @@ invokeTag('message','g',56,['code':("contagem.label")],-1)
 invokeTag('link','g',56,['class':(params.controller=='contagemCarboidratosAlimento' && params.action=='index'? 'active' : ''),'controller':("ContagemCarboidratosAlimento"),'action':("index")],4)
 printHtmlPart(18)
 }
-printHtmlPart(12)
+printHtmlPart(13)
 createTagBody(3, {->
 invokeTag('message','g',58,['code':("logout.label")],-1)
 })
 invokeTag('link','g',58,['controller':("Logout"),'action':("index")],3)
-printHtmlPart(14)
+printHtmlPart(12)
 })
 invokeTag('ifLoggedIn','sec',59,[:],2)
 printHtmlPart(19)
@@ -191,7 +196,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1427576377000L
+public static final long LAST_MODIFIED = 1427639974000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

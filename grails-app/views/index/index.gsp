@@ -10,7 +10,7 @@
 		  	
 				<div class="paginainicial">
 				   
-				   <fieldset class="form">
+				   <fieldset>
 						<legend><g:message code="titulopaginainicial.label"/></legend>
 						<div class="listainicial">
 						 	<ol type="1">

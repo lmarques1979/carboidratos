@@ -6,10 +6,10 @@ class Alimento {
 
 	String nome
 	String medidausual
-	float  peso
-	float  caloriaskcal
-	float  carboidratosg
-	float  carboidratoskcal
+	Float  peso
+	Float  caloriaskcal
+	Float  carboidratosg
+	Float  carboidratoskcal
 	String imagem
 	Date dateCreated
 	Date lastUpdated

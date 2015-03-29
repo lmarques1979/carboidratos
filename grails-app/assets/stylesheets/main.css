@@ -231,6 +231,7 @@ fieldset {
 	zoom: 1;
 	border:1px solid #7f7f7f;
 	margin-top:1.5em;
+	border-radius:0px;
 }
 
 .property-list .fieldcontain {
@@ -986,6 +987,11 @@ table.impressao td.totalrefeicao {
 	padding-bottom:15px;
 }
 
+.paginainicial fieldset{
+	border-radius:0px;
+}
+
 .paginainicial legend{
 	font-size:16px;
+	border-radius: 5px 5px 5px 5px;
 }
