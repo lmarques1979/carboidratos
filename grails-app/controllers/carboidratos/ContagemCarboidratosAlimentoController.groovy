@@ -228,6 +228,7 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 			}
 			flash.error=erros 
 		}   
+		flash.message = message(code: 'default.created.message', args: [message(code: 'contagem.label', default: 'ControleGlicemico'), contagemCarboidratosAlimentoInstance.id])
 		redirect action:"index", params:[refeicaoid: params.int('refeicao.id'), mes:params.int('mes'),ano:params.int('ano') ]
 		
     }
