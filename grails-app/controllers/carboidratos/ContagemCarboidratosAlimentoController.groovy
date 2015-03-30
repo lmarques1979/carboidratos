@@ -200,7 +200,11 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 				ContagemCarboidratosInstance.save flush:true
 				
 				if (ContagemCarboidratosInstance.hasErrors()) {
-					respond ContagemCarboidratosInstance.errors, view:'index'
+					ContagemCarboidratosInstance.errors.allErrors.each {
+							erros.add(it)
+					}
+					flash.error=erros
+					redirect action:"index", params:[refeicaoid: params.int('refeicao.id'), mes:params.int('mes'),ano:params.int('ano') ]
 					return
 				}
 		}		
@@ -227,6 +231,8 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 					erros.add(it)  
 			}
 			flash.error=erros 
+			redirect action:"index", params:[refeicaoid: params.int('refeicao.id'), mes:params.int('mes'),ano:params.int('ano') ]
+			return
 		}   
 		flash.message = message(code: 'default.created.message', args: [message(code: 'contagem.label', default: 'ControleGlicemico'), contagemCarboidratosAlimentoInstance.id])
 		redirect action:"index", params:[refeicaoid: params.int('refeicao.id'), mes:params.int('mes'),ano:params.int('ano') ]
