@@ -47,7 +47,7 @@ $(document).on('change', '#refeicaoins', function(e) {
     	success:function(data, textStatus, jqXHR)
 	    {
     		($("#formins").find('#qtdcarboidratos')).val('');
-    		var totaldia = data.total.toFixed(2);
+    		var totaldia = data.total.toFixed(1);
     		($("#formins").find('#qtdcarboidratos')).val(totaldia);	
 		        
 	    },
@@ -75,7 +75,7 @@ jQuery(function($) {
 	    	success:function(data, textStatus, jqXHR)
 		    {
 	    		($("#formins").find('#qtdcarboidratos')).val('');
-	    		var totaldia = data.total.toFixed(2);
+	    		var totaldia = data.total.toFixed(1);
 	    		($("#formins").find('#qtdcarboidratos')).val(totaldia);	
 			        
 		    },

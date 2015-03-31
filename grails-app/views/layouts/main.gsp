@@ -63,8 +63,9 @@
 							<li><g:link class="${params.controller=='configuracao' ? 'active' : '' }" controller="Configuracao" action="index"><g:message code="configuracao.label"/></g:link></li>
 							<li><g:link class="${params.controller=='refeicao' ? 'active' : '' }" controller="Refeicao" action="index"><g:message code="refeicao.label"/></g:link></li>
 							<li><g:link class="${params.controller=='alimento' ? 'active' : '' }" controller="Alimento" action="index"><g:message code="listaalimentos.label"/></g:link></li>
-							<li><g:link class="${params.controller=='itensControleGlicemico' ? 'active' : '' }" controller="ItensControleGlicemico" action="index"><g:message code="controle.label"/></g:link></li>
 							<li><g:link class="${params.controller=='contagemCarboidratosAlimento' && params.action=='index'? 'active' : '' }" controller="ContagemCarboidratosAlimento" action="index"><g:message code="contagem.label"/></g:link></li>
+							<li><g:link class="${params.controller=='itensControleGlicemico' ? 'active' : '' }" controller="ItensControleGlicemico" action="index"><g:message code="controle.label"/></g:link></li>
+							
 						</g:else>
 						<li><g:link controller="Logout" action="index"><g:message code="logout.label"/></g:link></li>
 					</sec:ifLoggedIn>
