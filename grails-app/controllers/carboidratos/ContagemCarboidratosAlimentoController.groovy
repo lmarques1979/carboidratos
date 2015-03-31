@@ -115,7 +115,7 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 		def mescorrente=cal.MONTH + 1
 		def anocorrente=cal.get(Calendar.YEAR)
 		def diacorrente=cal.get(Calendar.DAY_OF_MONTH)
-		def mes , ano, dia
+		def mes , ano, dia 
 		
 		if(params.dia!="" && params.dia!=null){
 			dia = params.int('dia')
@@ -169,6 +169,8 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 			"c.ano=:ano and "+
 			"c.usuario=:usuario "+
 			"group by c.dia,c.mes,c.ano,c.usuario.id,c.refeicao.id",[dia:dia,mes:mes,ano:ano,usuario:usuarioLogado])
+		
+		
 		
 		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount:resultado.size,agrupamento:agrupamento,dia:dia,mes:mes,ano:ano]
 		

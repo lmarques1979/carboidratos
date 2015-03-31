@@ -3,6 +3,12 @@
 <sec:ifLoggedIn>
 	<g:set var="usuarioInstance" value="${Usuario.get(sec.loggedInUserInfo(field: 'id'))}" />
 </sec:ifLoggedIn>
+<g:if test="${params.ano}">
+	<g:set var="ano" value="${params.int('ano')}" />
+</g:if>
+<g:else>
+	<g:set var="ano" value="${formatDate(format:"yyyy" , date:new Date()).toInteger()}" />
+</g:else>
 <g:if test="${params.mes}">
 	<g:set var="mes" value="${params.int('mes')}" />
 </g:if>
@@ -124,7 +130,7 @@
 								
 			</div><div class="clearer"></div>
 			
-			<g:render template="linksdia"/>
+			<g:render template="/links/linksdia"/>
 			
 			<g:form class="formtable" url="[resource:itensControleGlicemicoInstance, action:'update']" > 
 				
