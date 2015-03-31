@@ -1004,14 +1004,15 @@ table.impressao td.totalrefeicao {
 	text-align:center;
 }
 
-.linksdia a:link,a:hover,a:active,a:visited{
+.linksdia a.dia:link,a.dia:hover,a.dia:active,a.dia:visited{
 	text-decoration:none;
 	padding: 0 0.6em;
 	color:#184D85;
 }
 
-.linksdia a.atual{
+.linksdia a.atual:link,a.atual:hover,a.atual:active,a.atual:visited {
 	font-size:16px;
 	font-weight:bold;
 	color:#6ABB45;
+	text-decoration:none;
 }
