@@ -29,3 +29,59 @@ $(document).on('change', '.alimento', function(e) {
     }
             
 });
+
+$(document).on('change', '#refeicaoins', function(e) {
+	
+    e.preventDefault;  
+    var refeicaoid= this.value;
+    var form=$("#formins");
+    var dia=($("#formins").find('.dia')).val(); 
+    var mes=($("#formins").find('#mes')).val(); 
+    var ano=($("#formins").find('#ano')).val(); 
+    
+    $.ajax({
+    	type:"POST",
+    	url:"/contagemcarboidratos/itensControleGlicemico/buscatotalrefeicao/",
+    	data:{dia:dia, mes:mes, ano:ano, refeicaoid:refeicaoid},
+    	dataType: "json",
+    	success:function(data, textStatus, jqXHR)
+	    {
+    		($("#formins").find('#qtdcarboidratos')).val('');
+    		var totaldia = data.total.toFixed(2);
+    		($("#formins").find('#qtdcarboidratos')).val(totaldia);	
+		        
+	    },
+	    error: function(jqXHR, textStatus, errorThrown)
+        {
+	        	
+        }
+    });
+ });
+
+
+jQuery(function($) {  
+		
+		var form=$("#formins");
+	    var dia=($("#formins").find('.dia')).val(); 
+	    var mes=($("#formins").find('#mes')).val(); 
+	    var ano=($("#formins").find('#ano')).val(); 
+	    var refeicaoid=($("#formins").find('#refeicaoins')).val();;
+	    
+	    $.ajax({
+	    	type:"POST",
+	    	url:"/contagemcarboidratos/itensControleGlicemico/buscatotalrefeicao/",
+	    	data:{dia:dia, mes:mes, ano:ano, refeicaoid:refeicaoid},
+	    	dataType: "json",
+	    	success:function(data, textStatus, jqXHR)
+		    {
+	    		($("#formins").find('#qtdcarboidratos')).val('');
+	    		var totaldia = data.total.toFixed(2);
+	    		($("#formins").find('#qtdcarboidratos')).val(totaldia);	
+			        
+		    },
+		    error: function(jqXHR, textStatus, errorThrown)
+	        {
+		        	
+	        }
+	    });
+})(jQuery);

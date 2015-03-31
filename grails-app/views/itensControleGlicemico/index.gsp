@@ -60,9 +60,10 @@
 				</g:form>				
 			</div><div class="clearer"></div>
 				
-			<g:form class="formtable" url="[resource:itensControleGlicemicoInstance, action:'save']" > 
-				<g:hiddenField name="mes" value="${mes}" />
-				<g:hiddenField name="ano" value="${ano}" />
+			<g:form id="formins" class="formtable" url="[resource:itensControleGlicemicoInstance, action:'save']" > 
+				
+				<g:hiddenField id="mes" name="mes" value="${mes}" />
+				<g:hiddenField id="ano" name="ano" value="${ano}" />
 			
 				<table>
 					<thead>
@@ -91,12 +92,12 @@
 							
 								<td><g:field class="dia" size="5" max="31" min="1" name="dia" value="${formatDate(format:"dd" , date:new Date())}" type="number" required=""/></td>
 								<td>
-									<g:select id="refeicao" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}"  optionValue="descricao" optionKey="id"/>
+									<g:select id="refeicaoins" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}"  optionValue="descricao" optionKey="id"/>
 								</td>
 								<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" /></td>
 								<td><g:field class="qtd" size="4" name="valorglicemiapre" type="number" /></td>
 								<td><g:field class="qtd" size="4" name="qtdinsulinarapidapre" type="number" /></td>
-								<td><g:field class="qtd" size="4" name="qtdcarboidrato" type="number" step="0.1"/></td>
+								<td><g:field class="qtd" size="4" id="qtdcarboidratos" name="qtdcarboidrato" type="number" step="0.1"/></td>
 								<td><g:field class="qtd" size="4" name="valorglicemiapos" type="number" /></td>
 								<td><g:field class="qtd" size="4" name="qtdinsulinarapidapos" type="number" /></td>
 								<td><g:textField name="observacao" class="obs"/></td>
@@ -177,7 +178,7 @@
 									
 									<td colspan="2"></td>
 									<td>
-										<g:select id="refeicao" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}" value="${itensControleGlicemicoInstance.refeicao.id}" optionValue="descricao" optionKey="id"/>
+										<g:select id="refeicaoalt" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}" value="${itensControleGlicemicoInstance.refeicao.id}" optionValue="descricao" optionKey="id"/>
 									</td>
 									<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" value="${itensControleGlicemicoInstance.qtdinsulinelenta}"/></td>
 									<td><g:field class="qtd" size="4" name="valorglicemiapre" type="number" value="${itensControleGlicemicoInstance.valorglicemiapre}"/></td>

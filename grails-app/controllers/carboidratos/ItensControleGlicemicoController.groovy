@@ -11,6 +11,36 @@ class ItensControleGlicemicoController extends BaseController{
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 	def pdfRenderingService
 	
+	def buscatotalrefeicao(){
+		
+		def dia=params.int('dia')
+		def mes=params.int('mes')
+		def ano=params.int('ano')
+		def refeicao=Refeicao.get(params.int('refeicaoid'))
+		def usuario=usuarioLogado
+		
+		def agrupamento = ContagemCarboidratosAlimento.executeQuery(
+			"SELECT CASE "+
+			"WHEN cca.alimento.id IS NULL THEN "+
+			"sum(cca.qtdalimento*cca.qtdcarboidrato) "+
+			"ELSE "+
+			"sum(cca.qtdalimento*a.carboidratosg) "+
+			"END "+
+			"from ContagemCarboidratosAlimento as cca LEFT JOIN cca.alimento as a "+
+			"JOIN cca.contagemcarboidratos as c "+
+			"where c.dia=:dia and "+
+			"c.mes=:mes and "+
+			"c.ano=:ano and "+
+			"c.usuario=:usuario and  "+
+			"c.refeicao=:refeicaoid ",[dia:dia,mes:mes,ano:ano,usuario:usuario,refeicaoid:refeicao])
+		
+		if(agrupamento.size() > 0 ){
+			render(status:200,contentType: "application/json"){
+				[total:agrupamento[0]]
+			}
+		}			
+	}
+	
 	def enviarpdfemail(){
 		
 		def resultado = ItensControleGlicemico.createCriteria().list() {
