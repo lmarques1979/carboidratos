@@ -108,13 +108,20 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 		
 		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount:resultado.size,agrupamento:agrupamento,mes:params.int('mes'),ano:params.int('ano')]
 	}
+	
     def index(Integer max) {
        
 		Calendar cal = Calendar.getInstance()
 		def mescorrente=cal.MONTH + 1
 		def anocorrente=cal.get(Calendar.YEAR)
-		def mes , ano
+		def diacorrente=cal.get(Calendar.DAY_OF_MONTH)
+		def mes , ano, dia
 		
+		if(params.dia!="" && params.dia!=null){
+			dia = params.int('dia')
+		}else{
+			dia = diacorrente
+		}
 		if(params.mes!="" && params.mes!=null){
 			mes = params.int('mes')
 		}else{
@@ -130,6 +137,9 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 			createAlias("contagemcarboidratos", "contagemcarboidratos")
 			createAlias("contagemcarboidratos.refeicao", "refeicao")
 			createAlias("alimento", "alimento",CriteriaSpecification.LEFT_JOIN)
+			if(dia!=0){
+				eq("contagemcarboidratos.dia" , dia)
+			}
 			eq("contagemcarboidratos.mes" , mes)
 			eq("contagemcarboidratos.ano" ,ano)
 			eq("contagemcarboidratos.usuario" ,usuarioLogado)
@@ -154,12 +164,13 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 			"c.refeicao.id "+
 			"from ContagemCarboidratosAlimento as cca LEFT JOIN cca.alimento as a "+
 			"JOIN cca.contagemcarboidratos as c "+
-			"where c.mes=:mes and "+
+			"where (c.dia=:dia or :dia=0) and "+
+			"c.mes=:mes and "+
 			"c.ano=:ano and "+
 			"c.usuario=:usuario "+
-			"group by c.dia,c.mes,c.ano,c.usuario.id,c.refeicao.id",[mes:mes,ano:ano,usuario:usuarioLogado])
+			"group by c.dia,c.mes,c.ano,c.usuario.id,c.refeicao.id",[dia:dia,mes:mes,ano:ano,usuario:usuarioLogado])
 		
-		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount:resultado.size,agrupamento:agrupamento,mes:mes,ano:ano]
+		respond resultado, model:[ContagemCarboidratosAlimentoInstanceCount:resultado.size,agrupamento:agrupamento,dia:dia,mes:mes,ano:ano]
 		
     }
 

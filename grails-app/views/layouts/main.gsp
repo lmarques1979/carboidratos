@@ -29,7 +29,18 @@
 					<g:link id="${params.id}" action="${params.action ? params.action : 'index'}" controller="${params.controller ? params.controller : 'index'}" params="[lang: 'pt_BR']"><asset:image class="internacionalizacao" src="bandeiras/24/Brazil.png" title="${message(code:'portuguesbrasil.label')}"/></g:link>
 					<g:link id="${params.id}" action="${params.action ? params.action : 'index'}" controller="${params.controller ? params.controller : 'index'}" params="[lang: 'en']"><asset:image class="internacionalizacao" src="bandeiras/24/britain.png" title="${message(code:'english.label')}"/></g:link>	
 					<g:link id="${params.id}" action="${params.action ? params.action : 'index'}" controller="${params.controller ? params.controller : 'index'}" params="[lang: 'es']"><asset:image class="internacionalizacao" src="bandeiras/24/spain.png" title="${message(code:'spain.label')}"/></g:link>
-				</div>				
+				</div>
+				
+				<sec:ifLoggedIn>
+					<div class="logousuario">
+						<g:if test="${usuarioInstance}">
+							<g:link controller="usuario" action="show" id="${usuarioInstance.id}">
+								${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}
+							</g:link>
+						</g:if>	
+						
+					</div>
+				</sec:ifLoggedIn>		
 				
 			</div>
 			
@@ -59,20 +70,6 @@
 					</sec:ifLoggedIn>
 				</ul>
 				
-				<sec:ifLoggedIn>
-					<div class="logousuario">
-						<g:if test="${usuarioInstance.imagem}">
-							<g:link controller="usuario" action="show" id="${usuarioInstance.id}">
-								<asset:image height="60" width="60" src="${usuarioInstance.imagem}" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
-							</g:link>
-						</g:if>	
-						<g:else>
-							<g:link class="usuario" controller="Usuario" action="show" id="${sec.loggedInUserInfo(field:"id")}">
-								<asset:image height="40" width="40" src="noimage.jpg" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
-							</g:link>
-						</g:else>
-					</div>
-				</sec:ifLoggedIn>
 			</div>
 		</div>
 		<g:layoutBody/>

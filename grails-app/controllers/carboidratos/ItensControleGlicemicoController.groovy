@@ -68,8 +68,14 @@ class ItensControleGlicemicoController extends BaseController{
         Calendar cal = Calendar.getInstance()
 		def mescorrente=cal.MONTH + 1
 		def anocorrente=cal.get(Calendar.YEAR)
-		def mes , ano
+		def diacorrente=cal.get(Calendar.DAY_OF_MONTH)
+		def mes , ano, dia
 		
+		if(params.dia!="" && params.dia!=null){
+			dia = params.int('dia')
+		}else{
+			dia = diacorrente
+		}
 		if(params.mes!="" && params.mes!=null){
 			mes = params.int('mes')
 		}else{
@@ -84,6 +90,9 @@ class ItensControleGlicemicoController extends BaseController{
 		def resultado = ItensControleGlicemico.createCriteria().list() {
 			createAlias("controleglicemico", "controleglicemico")
 			createAlias("refeicao", "refeicao")
+			if(dia!=0){
+				eq("controleglicemico.dia" , dia)
+			}
 			eq("controleglicemico.mes" , mes)
 			eq("controleglicemico.ano" ,ano)
 			eq("controleglicemico.usuario" ,usuarioLogado)
@@ -94,7 +103,7 @@ class ItensControleGlicemicoController extends BaseController{
 			
 		}
 		
-		respond resultado, model:[ItensControleGlicemicoInstanceCount: resultado.size , mes:mes , ano:ano]
+		respond resultado, model:[ItensControleGlicemicoInstanceCount: resultado.size , dia:dia, mes:mes , ano:ano]
     }
 
     def show(ItensControleGlicemico itensControleGlicemicoInstance) {

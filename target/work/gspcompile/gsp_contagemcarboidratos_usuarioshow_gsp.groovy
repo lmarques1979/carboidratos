@@ -110,7 +110,7 @@ if(true && (usuarioInstance?.imagem)) {
 printHtmlPart(28)
 invokeTag('message','g',72,['code':("usuario.imagem.label"),'default':("Imagem")],-1)
 printHtmlPart(29)
-invokeTag('image','asset',76,['height':("60"),'width':("60"),'src':(usuarioInstance.imagem),'title':(usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] ')],-1)
+invokeTag('image','asset',76,['class':("img"),'src':(usuarioInstance.imagem),'title':(usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] ')],-1)
 printHtmlPart(30)
 }
 printHtmlPart(21)
@@ -169,7 +169,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1427576111000L
+public static final long LAST_MODIFIED = 1427731206000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

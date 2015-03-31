@@ -73,7 +73,7 @@
 						
 							<span class="property-value" aria-labelledby="imagem-label">
 							
-								<asset:image height="60" width="60" src="${usuarioInstance.imagem}" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
+								<asset:image class="img" src="${usuarioInstance.imagem}" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}"/>
 							
 							</span>
 						

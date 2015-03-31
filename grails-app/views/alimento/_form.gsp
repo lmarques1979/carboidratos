@@ -1,5 +1,4 @@
 <%@ page import="carboidratos.Alimento" %>
-
 <legend><g:message code="alimento.label"/></legend>
 <div class="fieldcontain ${hasErrors(bean: alimentoInstance, field: 'nome', 'error')} required">
 	<label for="nome">

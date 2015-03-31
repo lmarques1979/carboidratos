@@ -3,7 +3,7 @@
 	
 	body {
 		width:100%;
-		font-size:9px;
+		font-size:8px;
 	}
 	
 	img.internacionalizacao{
@@ -107,4 +107,41 @@
 		height:15px;
 		background-size:14px 14px;
 	}
+	
+	.paginainicial{
+		width:100%;
+		border:0px solid #000;
+	}
+	
+	form {
+    	width:100%;
+	}
+	
+	.logousuario img.imgusuario{
+		width:24px;
+		height:24px;
+		position: relative;
+		top: 2.6em;
+		right: -2.5em;
+	}
+	
+	.nav a.home, .nav a.list, .nav a.create {
+		background-position: 0.7em center;
+		background-repeat: no-repeat;
+		background-size:1.5em 1.5em;
+		text-indent:15px;
+	}
+	
+	.property-list {
+		width:90%; 
+	}
+	
+	.menuacoes a img{
+		margin-right:5px;
+		margin-bottom:15px;
+		border:0;
+		width:16px;
+		height:16px;
+	}
+	
 }
