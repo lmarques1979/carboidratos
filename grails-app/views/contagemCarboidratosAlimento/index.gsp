@@ -100,11 +100,11 @@
 									<g:select class="alimento" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${carboidratos.Alimento.list()}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
 								</td>
 								
-								<td><g:field min="0" class="qtd" size="4" name="qtdalimento" type="number" /></td>
+								<td><g:field min="0" class="qtd" size="4" name="qtdalimento" type="number" step="0.1"/></td>
 								
 								<td><g:textField id="alimentoforalista" name="alimentoforalista" class="obs"/></td>
 							
-								<td><g:field min="0" id="carboidratos" class="qtd" size="4" name="qtdcarboidrato" type="number" /></td>
+								<td><g:field min="0" id="carboidratos" class="qtd" size="4" name="qtdcarboidrato" type="number" step="0.1"/></td>
 							
 							</tr>
 						</tbody>
@@ -221,18 +221,18 @@
 								
 								<td>
 									<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
-										<g:select value="${contagemCarboidratosAlimentoInstance.alimento.id}" class="total" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${carboidratos.Alimento.list()}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
+										<g:select value="${contagemCarboidratosAlimentoInstance.alimento.id}" class="alimento" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${carboidratos.Alimento.list()}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
 									</g:if>
 									<g:else>
-										<g:select class="total" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${carboidratos.Alimento.list()}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
+										<g:select class="alimento" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${carboidratos.Alimento.list()}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
 									</g:else>
 								</td>
 															
-								<td><g:field min="0" value="${contagemCarboidratosAlimentoInstance.qtdalimento}" class="qtd" size="4" name="qtdalimento" type="number" /></td>
+								<td><g:field min="0" value="${contagemCarboidratosAlimentoInstance.qtdalimento}" class="qtd" size="4" name="qtdalimento" type="number" step="0.1"/></td>
 								
-								<td><g:textField value="${contagemCarboidratosAlimentoInstance.alimentoforalista}" id="alimentoforalista" name="alimentoforalista" class="obs"/></td>
+								<td><g:textField readonly="${contagemCarboidratosAlimentoInstance.alimento ? true : false}" value="${contagemCarboidratosAlimentoInstance.alimentoforalista}" id="alimentoforalista" name="alimentoforalista" class="obs"/></td>
 							
-								<td><g:field min="0" id="carboidratos" value="${contagemCarboidratosAlimentoInstance.qtdcarboidrato}" class="qtd" size="4" name="qtdcarboidrato" type="number" /></td>
+								<td><g:field min="0" readonly="${contagemCarboidratosAlimentoInstance.alimento ? true:false}" id="carboidratos" value="${contagemCarboidratosAlimentoInstance.qtdcarboidrato}" class="qtd" size="4" name="qtdcarboidrato" type="number" step="0.1"/></td>
 							
 								<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
 									<td class="centro">

@@ -10,7 +10,7 @@ class ItensControleGlicemico {
 	Integer qtdinsulinelenta
 	Integer valorglicemiapre
 	Integer qtdinsulinarapidapre
-	Integer qtdcarboidrato
+	Float qtdcarboidrato
 	Integer valorglicemiapos
 	Integer qtdinsulinarapidapos
 	ControleGlicemico controleglicemico

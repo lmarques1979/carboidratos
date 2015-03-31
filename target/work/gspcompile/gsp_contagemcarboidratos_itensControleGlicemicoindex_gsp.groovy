@@ -165,7 +165,7 @@ invokeTag('field','g',97,['class':("qtd"),'size':("4"),'name':("valorglicemiapre
 printHtmlPart(31)
 invokeTag('field','g',98,['class':("qtd"),'size':("4"),'name':("qtdinsulinarapidapre"),'type':("number")],-1)
 printHtmlPart(31)
-invokeTag('field','g',99,['class':("qtd"),'size':("4"),'name':("qtdcarboidrato"),'type':("number")],-1)
+invokeTag('field','g',99,['class':("qtd"),'size':("4"),'name':("qtdcarboidrato"),'type':("number"),'step':("0.1")],-1)
 printHtmlPart(31)
 invokeTag('field','g',100,['class':("qtd"),'size':("4"),'name':("valorglicemiapos"),'type':("number")],-1)
 printHtmlPart(31)
@@ -251,7 +251,7 @@ invokeTag('field','g',183,['class':("qtd"),'size':("4"),'name':("valorglicemiapr
 printHtmlPart(49)
 invokeTag('field','g',184,['class':("qtd"),'size':("4"),'name':("qtdinsulinarapidapre"),'type':("number"),'value':(itensControleGlicemicoInstance.qtdinsulinarapidapre)],-1)
 printHtmlPart(49)
-invokeTag('field','g',185,['class':("qtd"),'size':("4"),'name':("qtdcarboidrato"),'type':("number"),'value':(itensControleGlicemicoInstance.qtdcarboidrato)],-1)
+invokeTag('field','g',185,['class':("qtd"),'size':("4"),'name':("qtdcarboidrato"),'type':("number"),'step':("0.1"),'value':(itensControleGlicemicoInstance.qtdcarboidrato)],-1)
 printHtmlPart(49)
 invokeTag('field','g',186,['class':("qtd"),'size':("4"),'name':("valorglicemiapos"),'type':("number"),'value':(itensControleGlicemicoInstance.valorglicemiapos)],-1)
 printHtmlPart(49)
@@ -286,7 +286,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1427810393000L
+public static final long LAST_MODIFIED = 1427815498000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

@@ -96,7 +96,7 @@
 								<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" /></td>
 								<td><g:field class="qtd" size="4" name="valorglicemiapre" type="number" /></td>
 								<td><g:field class="qtd" size="4" name="qtdinsulinarapidapre" type="number" /></td>
-								<td><g:field class="qtd" size="4" name="qtdcarboidrato" type="number" /></td>
+								<td><g:field class="qtd" size="4" name="qtdcarboidrato" type="number" step="0.1"/></td>
 								<td><g:field class="qtd" size="4" name="valorglicemiapos" type="number" /></td>
 								<td><g:field class="qtd" size="4" name="qtdinsulinarapidapos" type="number" /></td>
 								<td><g:textField name="observacao" class="obs"/></td>
@@ -182,7 +182,7 @@
 									<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" value="${itensControleGlicemicoInstance.qtdinsulinelenta}"/></td>
 									<td><g:field class="qtd" size="4" name="valorglicemiapre" type="number" value="${itensControleGlicemicoInstance.valorglicemiapre}"/></td>
 									<td><g:field class="qtd" size="4" name="qtdinsulinarapidapre" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapre}"/></td>
-									<td><g:field class="qtd" size="4" name="qtdcarboidrato" type="number" value="${itensControleGlicemicoInstance.qtdcarboidrato}"/></td>
+									<td><g:field class="qtd" size="4" name="qtdcarboidrato" type="number" step="0.1" value="${itensControleGlicemicoInstance.qtdcarboidrato}"/></td>
 									<td><g:field class="qtd" size="4" name="valorglicemiapos" type="number" value="${itensControleGlicemicoInstance.valorglicemiapos}"/></td>
 									<td><g:field class="qtd" size="4" name="qtdinsulinarapidapos" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapos}"/></td>
 									<td><g:textField name="observacao" class="obs" value="${itensControleGlicemicoInstance.observacao}"/></td>
