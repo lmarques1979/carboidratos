@@ -53,12 +53,12 @@
 									
 									<td></td>
 									<td>
-										${itensControleGlicemicoInstance.refeicao.descricao}
+										${itensControleGlicemicoInstance.controleglicemico.refeicao.descricao}
 									</td>
 									<td>${itensControleGlicemicoInstance.qtdinsulinelenta}</td>
 									<td>${itensControleGlicemicoInstance.valorglicemiapre}</td>
 									<td>${itensControleGlicemicoInstance.qtdinsulinarapidapre}</td>
-									<td>${itensControleGlicemicoInstance.qtdcarboidrato}</td>
+									<td><g:formatNumber number="${itensControleGlicemicoInstance.qtdcarboidrato}" type="number" maxFractionDigits="2" /></td>
 									<td>${itensControleGlicemicoInstance.valorglicemiapos}</td>
 									<td>${itensControleGlicemicoInstance.qtdinsulinarapidapos}</td>
 									<td>${itensControleGlicemicoInstance.observacao}</td>

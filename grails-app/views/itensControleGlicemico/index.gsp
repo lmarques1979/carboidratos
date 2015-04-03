@@ -27,6 +27,11 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'controleGlicemico.label', default: 'ControleGlicemico')}" />
 		<title><g:message code="controle.list.label" /></title>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			   carregaContagem();
+			});
+		</script>
 	</head>
 	<body>
 	
@@ -68,7 +73,7 @@
 				<table>
 					<thead>
 							<tr>
-								<th colspan="9"><g:message code="controle.new.label" /></th>
+								<th colspan="11"><g:message code="controle.new.label" /></th>
 							</tr>
 							<tr>
 							
@@ -76,9 +81,11 @@
 								<th><g:message code="controle.refeicao.label" /></th>
 								<th><g:message code="controle.qtdinsulinelenta.label" /></th>
 								<th><g:message code="controle.valorglicemiapre.label" /></th>
+								<th></th>
 								<th><g:message code="controle.qtdinsulinarapidapre.label" /></th>
 								<th><g:message code="controle.qtdcarboidrato.label" /></th>
 								<th><g:message code="controle.valorglicemiapos.label" /></th>
+								<th></th>
 								<th><g:message code="controle.qtdinsulinarapidapos.label" /></th>
 								<th><g:message code="controle.observacao.label"/></th>
 								
@@ -92,20 +99,26 @@
 							
 								<td><g:field class="dia" size="5" max="31" min="1" name="dia" value="${formatDate(format:"dd" , date:new Date())}" type="number" required=""/></td>
 								<td>
-									<g:select id="refeicaoins" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}"  optionValue="descricao" optionKey="id"/>
+									<g:select id="refeicaoins" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}"  optionValue="descricao" optionKey="id" value="${params.refeicaoid}"/>
 								</td>
 								<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" /></td>
-								<td><g:field class="qtd" size="4" name="valorglicemiapre" type="number" /></td>
-								<td><g:field class="qtd" size="4" name="qtdinsulinarapidapre" type="number" /></td>
-								<td><g:field class="qtd" size="4" id="qtdcarboidratos" name="qtdcarboidrato" type="number" step="0.1"/></td>
-								<td><g:field class="qtd" size="4" name="valorglicemiapos" type="number" /></td>
-								<td><g:field class="qtd" size="4" name="qtdinsulinarapidapos" type="number" /></td>
+								<td><g:field class="qtd" size="4" id="valorglicemiapre" name="valorglicemiapre" type="number" /></td>
+								<td>
+									    <asset:image id="calculapre" class="excluir" src="skin/calcular.png" title="${message(code:'calcularvalorinsulinapre.confirm.message')}"/>
+								</td>
+								<td><g:field class="qtd" size="4" id="qtdinsulinarapidapre" name="qtdinsulinarapidapre" type="number" /></td>
+								<td><g:field class="qtd" size="4" id="qtdcarboidratos" name="qtdcarboidrato" type="number" step="0.01"/></td>
+								<td><g:field class="qtd" size="4" id="valorglicemiapos" name="valorglicemiapos" type="number" /></td>
+								<td>
+										<asset:image id="calculapos" class="excluir" src="skin/calcular.png" title="${message(code:'calcularvalorinsulinapos.confirm.message')}"/>
+								</td>
+								<td><g:field class="qtd" size="4" id="qtdinsulinarapidapos" name="qtdinsulinarapidapos" type="number" /></td>
 								<td><g:textField name="observacao" class="obs"/></td>
 							
 							</tr>
-							
+													
 							<tr class="nohover">
-								<td colspan="9">
+								<td colspan="11">
 									<fieldset class="buttons">
 										<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 									</fieldset>
@@ -133,18 +146,19 @@
 			
 			<g:render template="/links/linksdia"/>
 			
-			<g:form class="formtable" url="[resource:itensControleGlicemicoInstance, action:'update']" > 
+			<g:form id="formalt" class="formtable" url="[resource:itensControleGlicemicoInstance, action:'update']" > 
 				
 					<table>
 					<thead>
 							<tr>
-								<th colspan="11"><g:message code="controle.list.label" /></th>
+								<th colspan="13"><g:message code="controle.list.label" /></th>
 							</tr>
 							<tr>
 							
 								<th><g:message code="controle.dia.label"/></th>
 								<th></th>
 								<th><g:message code="controle.refeicao.label" /></th>
+								
 								<th><g:message code="controle.qtdinsulinelenta.label" /></th>
 								<th><g:message code="controle.valorglicemiapre.label" /></th>
 								<th><g:message code="controle.qtdinsulinarapidapre.label" /></th>
@@ -158,38 +172,44 @@
 						<tbody>
 						
 						<g:set var="diaanterior" value="-1" />
-						<g:hiddenField name="mes" value="${mes}" />
-						<g:hiddenField name="ano" value="${ano}" />
+						<g:hiddenField id="mesalt" name="mes" value="${mes}" />
+						<g:hiddenField id="anoalt" name="ano" value="${ano}" />
 						<g:each in="${itensControleGlicemicoInstanceList}" status="j" var="itensControleGlicemicoInstance">
 								
 								<g:hiddenField name="id" value="${itensControleGlicemicoInstance.id}" />
-								<g:set var="diaatual" value="${itensControleGlicemicoInstance.controleglicemico.dia}" />
+								<g:set id="diaatual" var="diaatual" value="${itensControleGlicemicoInstance.controleglicemico.dia}" />
 								
 								<g:if test="${diaanterior!=diaatual}">
 									<tr class="listadia">
-										<td><span>${itensControleGlicemicoInstance.controleglicemico.dia}</span></td>
+										<td>
+											<span>${itensControleGlicemicoInstance.controleglicemico.dia}</span></td>
 										<td>
 											<g:link onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.controleglicemico.id}" action="delete" controller="ControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
 										</td>
-										<td colspan="9"></td>
+										<td colspan="11"></td>
 									</tr>
 								</g:if>
 								<tr class="nohover">
 									
-									<td colspan="2"></td>
+									<td colspan="2">
+										<g:hiddenField id="diaatual" name="diaatual" value="${diaatual}" />
+									</td>
 									<td>
-										<g:select id="refeicaoalt" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}" value="${itensControleGlicemicoInstance.refeicao.id}" optionValue="descricao" optionKey="id"/>
+										<g:select id="refeicaoalt" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}" value="${itensControleGlicemicoInstance.controleglicemico.refeicao.id}" optionValue="descricao" optionKey="id"/>
 									</td>
 									<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" value="${itensControleGlicemicoInstance.qtdinsulinelenta}"/></td>
-									<td><g:field class="qtd" size="4" name="valorglicemiapre" type="number" value="${itensControleGlicemicoInstance.valorglicemiapre}"/></td>
-									<td><g:field class="qtd" size="4" name="qtdinsulinarapidapre" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapre}"/></td>
-									<td><g:field class="qtd" size="4" name="qtdcarboidrato" type="number" step="0.1" value="${itensControleGlicemicoInstance.qtdcarboidrato}"/></td>
-									<td><g:field class="qtd" size="4" name="valorglicemiapos" type="number" value="${itensControleGlicemicoInstance.valorglicemiapos}"/></td>
-									<td><g:field class="qtd" size="4" name="qtdinsulinarapidapos" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapos}"/></td>
+									<td><g:field class="qtd" size="4" id="valorglicemiaprealt" name="valorglicemiapre" type="number" value="${itensControleGlicemicoInstance.valorglicemiapre}"/></td>
+									
+									<td><g:field class="qtd" size="4" id="qtdinsulinarapidaprealt" name="qtdinsulinarapidapre" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapre}"/></td>
+									<td><g:field class="qtd" size="4" id="qtdcarboidratoalt" name="qtdcarboidrato" type="number" step="0.01" value="${itensControleGlicemicoInstance.qtdcarboidrato}"/></td>
+									<td><g:field class="qtd" size="4" id="valorglicemiaposalt" name="valorglicemiapos" type="number" value="${itensControleGlicemicoInstance.valorglicemiapos}"/></td>
+									
+									<td><g:field class="qtd" size="4" id="qtdinsulinarapidaposalt" name="qtdinsulinarapidapos" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapos}"/></td>
 									<td><g:textField name="observacao" class="obs" value="${itensControleGlicemicoInstance.observacao}"/></td>
 									<td>
 										<g:link onclick="return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.id}" action="delete" controller="ItensControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
-									</td>							
+									</td>
+																
 								</tr>
 								<g:set var="diaanterior" value="${diaatual}" />
 						</g:each>
@@ -198,7 +218,7 @@
 					
 					<tbody>	
 							<tr class="nohover">
-								<td colspan="11">
+								<td colspan="13">
 									<fieldset class="buttons">
 										<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 									</fieldset>

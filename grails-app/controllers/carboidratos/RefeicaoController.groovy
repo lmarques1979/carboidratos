@@ -16,9 +16,8 @@ class RefeicaoController extends BaseController{
 		
 		def resultado = Refeicao.createCriteria().list(params) {
 			eq("usuario" , usuarioLogado)
-			order("ordemrefeicao", "asc")
-						
 		}
+		
         respond resultado, model:[refeicaoInstanceCount: resultado.totalCount]
     }
 

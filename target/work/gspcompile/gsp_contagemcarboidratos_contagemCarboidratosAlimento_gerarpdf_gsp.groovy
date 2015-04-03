@@ -35,41 +35,41 @@ invokeTag('captureTitle','sitemesh',11,[:],3)
 invokeTag('wrapTitleTag','sitemesh',11,[:],2)
 printHtmlPart(4)
 })
-invokeTag('captureHead','sitemesh',59,[:],1)
+invokeTag('captureHead','sitemesh',63,[:],1)
 printHtmlPart(1)
 createTagBody(1, {->
 printHtmlPart(5)
-invokeTag('message','g',66,['code':("contagem.alterar.message")],-1)
+invokeTag('message','g',70,['code':("contagem.alterar.message")],-1)
 printHtmlPart(6)
-invokeTag('message','g',67,['code':("headerimpressaocontamgem.message"),'args':([mes, ano , usuarioInstance.buscaNome(usuarioInstance)])],-1)
+invokeTag('message','g',71,['code':("headerimpressaocontamgem.message"),'args':([mes, ano , usuarioInstance.buscaNome(usuarioInstance)])],-1)
 printHtmlPart(7)
-invokeTag('message','g',71,['code':("contagem.dia.label")],-1)
+invokeTag('message','g',75,['code':("contagem.dia.label")],-1)
 printHtmlPart(8)
-invokeTag('message','g',72,['code':("contagem.refeicao.label")],-1)
+invokeTag('message','g',76,['code':("contagem.refeicao.label")],-1)
 printHtmlPart(8)
-invokeTag('message','g',73,['code':("contagem.alimento.label")],-1)
+invokeTag('message','g',77,['code':("contagem.alimento.label")],-1)
 printHtmlPart(8)
-invokeTag('message','g',74,['code':("contagem.qtdalimento.label")],-1)
+invokeTag('message','g',78,['code':("contagem.qtdalimento.label")],-1)
 printHtmlPart(8)
-invokeTag('message','g',75,['code':("contagem.alimentoforalista.label")],-1)
+invokeTag('message','g',79,['code':("contagem.alimentoforalista.label")],-1)
 printHtmlPart(8)
-invokeTag('message','g',76,['code':("contagem.qtdcarboidrato.label")],-1)
+invokeTag('message','g',80,['code':("contagem.qtdcarboidrato.label")],-1)
 printHtmlPart(8)
-invokeTag('message','g',77,['code':("contagem.totalchorefeicao.label")],-1)
+invokeTag('message','g',81,['code':("contagem.totalchorefeicao.label")],-1)
 printHtmlPart(9)
-invokeTag('set','g',81,['var':("diaanterior"),'value':("-1")],-1)
+invokeTag('set','g',85,['var':("diaanterior"),'value':("-1")],-1)
 printHtmlPart(10)
-invokeTag('set','g',82,['var':("refeicaoanterior"),'value':("-1")],-1)
+invokeTag('set','g',86,['var':("refeicaoanterior"),'value':("-1")],-1)
 printHtmlPart(10)
-invokeTag('set','g',83,['var':("totalrefeicao"),'value':("0")],-1)
+invokeTag('set','g',87,['var':("totalrefeicao"),'value':("0")],-1)
 printHtmlPart(10)
 loop:{
 int i = 0
 for( contagemCarboidratosAlimentoInstance in (resultado) ) {
 printHtmlPart(11)
-invokeTag('set','g',85,['var':("diaatual"),'value':(contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia)],-1)
+invokeTag('set','g',89,['var':("diaatual"),'value':(contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia)],-1)
 printHtmlPart(11)
-invokeTag('set','g',86,['var':("refeicaoatual"),'value':(contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.id)],-1)
+invokeTag('set','g',90,['var':("refeicaoatual"),'value':(contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.id)],-1)
 printHtmlPart(11)
 if(true && (diaanterior!=diaatual)) {
 printHtmlPart(12)
@@ -91,7 +91,7 @@ if(true && (agrupamentoInstance[1]==contagemCarboidratosAlimentoInstance.contage
 													  agrupamentoInstance[4]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.usuario.id &&
 													  agrupamentoInstance[5]==refeicaoatual)) {
 printHtmlPart(18)
-expressionOut.print(message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number',format:'####.###')]))
+expressionOut.print(message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number',maxFractionDigits:'2')]))
 printHtmlPart(19)
 }
 printHtmlPart(20)
@@ -120,29 +120,29 @@ expressionOut.print(contagemCarboidratosAlimentoInstance.qtdcarboidrato)
 printHtmlPart(27)
 if(true && (contagemCarboidratosAlimentoInstance.alimento)) {
 printHtmlPart(28)
-invokeTag('set','g',129,['var':("totaldia"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento*contagemCarboidratosAlimentoInstance.alimento.carboidratosg)],-1)
+invokeTag('set','g',134,['var':("totaldia"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento*contagemCarboidratosAlimentoInstance.alimento.carboidratosg)],-1)
 printHtmlPart(29)
-invokeTag('formatNumber','g',130,['number':(totaldia),'type':("number"),'format':("####.###")],-1)
+invokeTag('formatNumber','g',135,['number':(totaldia),'type':("number"),'maxFractionDigits':("2")],-1)
 printHtmlPart(30)
 }
 else {
 printHtmlPart(28)
-invokeTag('set','g',135,['var':("totaldia"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento* (contagemCarboidratosAlimentoInstance.qtdcarboidrato ? contagemCarboidratosAlimentoInstance.qtdcarboidrato : 0))],-1)
+invokeTag('set','g',140,['var':("totaldia"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento* (contagemCarboidratosAlimentoInstance.qtdcarboidrato ? contagemCarboidratosAlimentoInstance.qtdcarboidrato : 0))],-1)
 printHtmlPart(29)
-invokeTag('formatNumber','g',136,['number':(totaldia),'type':("number"),'format':("####.###")],-1)
+invokeTag('formatNumber','g',141,['number':(totaldia),'type':("number"),'maxFractionDigits':("2")],-1)
 printHtmlPart(30)
 }
 printHtmlPart(31)
-invokeTag('set','g',140,['var':("diaanterior"),'value':(diaatual)],-1)
+invokeTag('set','g',145,['var':("diaanterior"),'value':(diaatual)],-1)
 printHtmlPart(11)
-invokeTag('set','g',141,['var':("refeicaoanterior"),'value':(refeicaoatual)],-1)
+invokeTag('set','g',146,['var':("refeicaoanterior"),'value':(refeicaoatual)],-1)
 printHtmlPart(10)
 i++
 }
 }
 printHtmlPart(32)
 })
-invokeTag('captureBody','sitemesh',145,['class':("bodyimpressao")],1)
+invokeTag('captureBody','sitemesh',150,['class':("bodyimpressao")],1)
 printHtmlPart(33)
 }
 public static final Map JSP_TAGS = new HashMap()
@@ -150,7 +150,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1427583751000L
+public static final long LAST_MODIFIED = 1427918993000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

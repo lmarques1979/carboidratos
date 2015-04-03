@@ -14,7 +14,6 @@ class ItensControleGlicemico {
 	Integer valorglicemiapos
 	Integer qtdinsulinarapidapos
 	ControleGlicemico controleglicemico
-	Refeicao refeicao
 	String observacao
 	Date dateCreated
 	Date lastUpdated
@@ -26,8 +25,7 @@ class ItensControleGlicemico {
 		qtdcarboidrato(nullable: true, blank: true)
 		valorglicemiapos(nullable: true, blank: true)
 		qtdinsulinarapidapos(nullable: true, blank: true)
-		controleglicemico(nullable:false)
-		refeicao(nullable:false)
+		controleglicemico(nullable:false , unique:true)
 		observacao(nullable: true, blank: true)
     }
 	

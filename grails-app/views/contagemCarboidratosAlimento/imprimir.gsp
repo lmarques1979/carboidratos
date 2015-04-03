@@ -68,7 +68,7 @@
 													  agrupamentoInstance[4]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.usuario.id &&
 													  agrupamentoInstance[5]==refeicaoatual
 												   }">
-								    	<td colspan="6" class="totalrefeicao">${message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number',format:'####.###')])}</td>
+								    	<td colspan="6" class="totalrefeicao">${message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number',maxFractionDigits:'2')])}</td>
 								    	</g:if>
 								    	
 								    </g:each>
@@ -80,7 +80,7 @@
 							
 								<td colspan="2"></td>
 								
-								<td>
+								<td class="esquerda">
 									<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
 											${contagemCarboidratosAlimentoInstance.alimento.nome + ' ' + contagemCarboidratosAlimentoInstance.alimento.medidausual + ' de ' + contagemCarboidratosAlimentoInstance.alimento.peso + 'g : ' + contagemCarboidratosAlimentoInstance.alimento.carboidratosg + 'g Carboidrato(s)'}
 									</g:if>
@@ -98,13 +98,13 @@
 								<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
 									<td class="centro">
 										<g:set var="totaldia" value="${contagemCarboidratosAlimentoInstance.qtdalimento*contagemCarboidratosAlimentoInstance.alimento.carboidratosg}" />
-										<g:formatNumber number="${totaldia}" type="number" format="####.###" />
+										<g:formatNumber number="${totaldia}" type="number" maxFractionDigits="2" />
 									</td>
 								</g:if>
 								<g:else>
 									<td class="centro">
 										<g:set var="totaldia" value="${contagemCarboidratosAlimentoInstance.qtdalimento* (contagemCarboidratosAlimentoInstance.qtdcarboidrato ? contagemCarboidratosAlimentoInstance.qtdcarboidrato : 0)}" />
-										<g:formatNumber number="${totaldia}" type="number" format="####.###" />
+										<g:formatNumber number="${totaldia}" type="number" maxFractionDigits="2" />
 									</td>
 								</g:else>	
 													

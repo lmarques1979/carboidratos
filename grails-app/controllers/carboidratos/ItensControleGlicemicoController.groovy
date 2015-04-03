@@ -11,6 +11,41 @@ class ItensControleGlicemicoController extends BaseController{
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 	def pdfRenderingService
 	
+	def carregaCalculoIns(){
+		
+		//Busco dados configuracao
+		configuracaoParams
+		def dia=params.int('dia')
+		def mes=params.int('mes')
+		def ano=params.int('ano')
+		def valorpre=params.int('valorglicemiapre')
+		def valorpos=params.int('valorglicemiapos')
+		def tipo=params.int('tipo')
+		def metaglicose=params.int('metaglicose')
+		def sensibilidadeinsulina=params.int('sensibilidadeinsulina')
+		def sensibilidadecarboidrato=params.int('sensibilidadecarboidrato')
+		def qtdcarboidratos=params.float('qtdcarboidratos')
+		def qtdinsulinarepositorio=params.int('qtdinsulinarepositorio')
+		def refeicao=Refeicao.get(params.int('refeicaoid'))
+		def usuario=usuarioLogado
+		def totalpre, totalpos
+		if(tipo==0){
+			
+			if(qtdcarboidratos==null){
+				totalpre= (valorpre-metaglicose)/sensibilidadeinsulina 
+			}else{
+				totalpre= ((valorpre-metaglicose)/sensibilidadeinsulina) + (qtdcarboidratos/sensibilidadecarboidrato)
+			}
+		}
+		if(tipo==1){
+			totalpos= ((valorpos-metaglicose)/sensibilidadeinsulina) - qtdinsulinarepositorio
+		}
+		render(status:200,contentType: "application/json"){
+				[totalpre:totalpre , totalpos:totalpos]
+		}
+		
+	}
+	
 	def buscatotalrefeicao(){
 		
 		def dia=params.int('dia')
@@ -45,7 +80,7 @@ class ItensControleGlicemicoController extends BaseController{
 		
 		def resultado = ItensControleGlicemico.createCriteria().list() {
 			createAlias("controleglicemico", "controleglicemico")
-			createAlias("refeicao", "refeicao")
+			createAlias("controleglicemico.refeicao", "refeicao")
 			eq("controleglicemico.mes" , params.int('mes'))
 			eq("controleglicemico.ano" ,params.int('ano'))
 			eq("controleglicemico.usuario" ,usuarioLogado)
@@ -81,7 +116,7 @@ class ItensControleGlicemicoController extends BaseController{
 		
 		def resultado = ItensControleGlicemico.createCriteria().list() {
 			createAlias("controleglicemico", "controleglicemico")
-			createAlias("refeicao", "refeicao")
+			createAlias("controleglicemico.refeicao", "refeicao")
 			eq("controleglicemico.mes" , params.int('mes'))
 			eq("controleglicemico.ano" ,params.int('ano'))
 			eq("controleglicemico.usuario" ,usuarioLogado)
@@ -96,7 +131,7 @@ class ItensControleGlicemicoController extends BaseController{
 	}
     def index(Integer max) {
         Calendar cal = Calendar.getInstance()
-		def mescorrente=cal.MONTH + 1
+		def mescorrente=cal.get(Calendar.MONTH) + 1
 		def anocorrente=cal.get(Calendar.YEAR)
 		def diacorrente=cal.get(Calendar.DAY_OF_MONTH)
 		def mes , ano, dia
@@ -119,7 +154,7 @@ class ItensControleGlicemicoController extends BaseController{
 		
 		def resultado = ItensControleGlicemico.createCriteria().list() {
 			createAlias("controleglicemico", "controleglicemico")
-			createAlias("refeicao", "refeicao")
+			createAlias("controleglicemico.refeicao", "refeicao")
 			if(dia!=0){
 				eq("controleglicemico.dia" , dia)
 			}
@@ -153,8 +188,8 @@ class ItensControleGlicemicoController extends BaseController{
 		}
 		
 		def controleGlicemicoInstance
-		
-		def resultado= ControleGlicemico.executeQuery("select c.id from ControleGlicemico as c where c.dia=:dia and c.mes=:mes and c.ano=:ano and c.usuario=:usuario", [dia: params.int('dia') , mes: params.int('mes') , ano: params.int('ano') , usuario:usuarioLogado])
+		def erros=[]
+		def resultado= ControleGlicemico.executeQuery("select c.id from ControleGlicemico as c where c.dia=:dia and c.mes=:mes and c.ano=:ano and c.usuario=:usuario and c.refeicao=:refeicao", [dia: params.int('dia') , mes: params.int('mes') , ano: params.int('ano') , usuario:usuarioLogado ,refeicao:Refeicao.get(params.int('refeicao.id'))])
 		
 		if (resultado.size()>0){
 			resultado.each{ it ->
@@ -168,13 +203,19 @@ class ItensControleGlicemicoController extends BaseController{
 			controleGlicemicoInstance.mes=params.int('mes')
 			controleGlicemicoInstance.ano=params.int('ano')
 			controleGlicemicoInstance.usuario=usuarioLogado
+			controleGlicemicoInstance.refeicao=Refeicao.get(params.int('refeicao.id'))
+			
 			controleGlicemicoInstance.save flush:true
 			if (controleGlicemicoInstance.hasErrors()) {
-				respond controleGlicemicoInstance.errors, view:'index' 
-				return
+					controleGlicemicoInstance.errors.allErrors.each {
+							erros.add(it)
+					}
+					flash.error=erros
+					redirect action:"index", params:[refeicaoid: params.int('refeicao.id'), mes:params.int('mes'),ano:params.int('ano') ]
+					return
 			}
 		}
-			
+				
 		itensControleGlicemicoInstance.controleglicemico=controleGlicemicoInstance
 		itensControleGlicemicoInstance.qtdinsulinelenta=params.int('qtdinsulinelenta')
 		itensControleGlicemicoInstance.valorglicemiapre=params.int('valorglicemiapre')
@@ -182,13 +223,16 @@ class ItensControleGlicemicoController extends BaseController{
 		itensControleGlicemicoInstance.qtdcarboidrato=params.float('qtdcarboidrato')
 		itensControleGlicemicoInstance.valorglicemiapos=params.int('valorglicemiapos')
 		itensControleGlicemicoInstance.qtdinsulinarapidapos=params.int('qtdinsulinarapidapos')
-		itensControleGlicemicoInstance.refeicao=Refeicao.get(params.int('refeicao.id'))
 		itensControleGlicemicoInstance.observacao=params.observacao
 		itensControleGlicemicoInstance.save flush:true
 
 		if (itensControleGlicemicoInstance.hasErrors()) {
-			respond itensControleGlicemicoInstance.errors, view:'index'
-			return
+				itensControleGlicemicoInstance.errors.allErrors.each {
+						erros.add(it)
+				}
+				flash.error=erros
+				redirect action:"index", params:[refeicaoid: params.int('refeicao.id'), mes:params.int('mes'),ano:params.int('ano') ]
+				return
 		}
 		
 		request.withFormat {
@@ -220,18 +264,6 @@ class ItensControleGlicemicoController extends BaseController{
 				def qtdcarboidrato, valorglicemiapos , qtdinsulinarapidapos , idrefeicao
 				def diatela , obs 
 				
-				/*diaatual=itensControleGlicemicoInstance.controleglicemico.dia				
-				if(diaanterior!=diaatual){
-					if(params.list('dia').size()>1){
-						diatela=params.dia[icontrole].toInteger()
-						icontrole++
-					}else{
-						diatela=params.dia.toInteger()
-					}
-				}else{
-					diatela=diaanterior
-				}*/
-				
 				if (idcontrole.size() > 1){
 					qtdinsulinelenta 		= (params.qtdinsulinelenta[index] ? params.qtdinsulinelenta[index].toInteger() : null)
 					valorglicemiapre 		= (params.valorglicemiapre[index] ? params.valorglicemiapre[index].toInteger() : null)
@@ -239,7 +271,6 @@ class ItensControleGlicemicoController extends BaseController{
 					qtdcarboidrato 			= (params.qtdcarboidrato[index] ? params.qtdcarboidrato[index].toFloat() : null)
 					valorglicemiapos 		= (params.valorglicemiapos[index] ? params.valorglicemiapos[index].toInteger() : null)
 					qtdinsulinarapidapos 	= (params.qtdinsulinarapidapos[index] ? params.qtdinsulinarapidapos[index].toInteger() : null)
-					idrefeicao				= params.refeicao.id[index].toInteger()	
 					obs 					= params.observacao[index]	
 				}else{
 					qtdinsulinelenta 		= (params.qtdinsulinelenta ? params.qtdinsulinelenta.toInteger() : null)
@@ -248,7 +279,6 @@ class ItensControleGlicemicoController extends BaseController{
 					qtdcarboidrato 			= (params.qtdcarboidrato ? params.qtdcarboidrato.toFloat() : null)
 					valorglicemiapos 		= (params.valorglicemiapos ? params.valorglicemiapos.toInteger() : null)
 					qtdinsulinarapidapos 	= (params.qtdinsulinarapidapos ? params.qtdinsulinarapidapos.toInteger() : null)
-					idrefeicao				= params.refeicao.id.toInteger()
 					obs						= params.observacao
 				}
 				itensControleGlicemicoInstance.qtdinsulinelenta=qtdinsulinelenta
@@ -257,7 +287,6 @@ class ItensControleGlicemicoController extends BaseController{
 				itensControleGlicemicoInstance.qtdcarboidrato=qtdcarboidrato
 				itensControleGlicemicoInstance.valorglicemiapos=valorglicemiapos
 				itensControleGlicemicoInstance.qtdinsulinarapidapos=qtdinsulinarapidapos
-				itensControleGlicemicoInstance.refeicao=Refeicao.get(idrefeicao)
 				itensControleGlicemicoInstance.observacao=obs
 				itensControleGlicemicoInstance.save flush:true
 				

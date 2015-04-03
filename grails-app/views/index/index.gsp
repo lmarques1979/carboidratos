@@ -20,7 +20,8 @@
 							  <li><g:message code="contagemcarboidratos.label"/></li>
 							  <li><g:message code="controleglicemico.label"/></li>
 							  <li><g:message code="impressaocontagens.label"/></li>
-							   <li><g:message code="enviopdfemail.label"/></li>
+							  <li><g:message code="enviopdfemail.label"/></li>
+							  <li><g:message code="contacontage.label"/></li>
 							</ol> 
 							
 						</div>

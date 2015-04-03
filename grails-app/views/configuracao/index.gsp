@@ -22,7 +22,7 @@
 			<table>
 			<thead>
 					<tr>
-					
+						
 						<g:sortableColumn property="alturaimagens" title="${message(code: 'configuracao.alturaimagens.label', default: 'Alturaimagens')}" />
 					
 						<g:sortableColumn property="larguraimagens" title="${message(code: 'configuracao.larguraimagens.label', default: 'Larguraimagens')}" />
@@ -33,8 +33,13 @@
 					
 						<g:sortableColumn property="itensporpagina" title="${message(code: 'configuracao.itensporpagina.label', default: 'Itensporpagina')}" />
 					
+						<g:sortableColumn property="metaglicose" title="${message(code: 'configuracao.metaglicose.label', default: 'Alturaimagens')}" />
 						
-					
+						<g:sortableColumn property="sensibilidadeinsulina" title="${message(code: 'configuracao.sensibilidadeinsulina.label', default: 'Alturaimagens')}" />
+						
+						<g:sortableColumn property="sensibilidadecarboidrato" title="${message(code: 'configuracao.sensibilidadecarboidrato.label', default: 'Alturaimagens')}" />
+						
+						<g:sortableColumn property="qtdinsulinarepositorio" title="${message(code: 'configuracao.qtdinsulinarepositorio.label', default: 'Alturaimagens')}" />
 					</tr>
 				</thead>
 				<tbody>
@@ -42,7 +47,7 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${configuracaoInstance.id}">${fieldValue(bean: configuracaoInstance, field: "alturaimagens")}</g:link></td>
-					
+						
 						<td>${fieldValue(bean: configuracaoInstance, field: "larguraimagens")}</td>
 					
 						<td>${fieldValue(bean: configuracaoInstance, field: "alturaimagensthumbs")}</td>
@@ -51,7 +56,13 @@
 					
 						<td>${fieldValue(bean: configuracaoInstance, field: "itensporpagina")}</td>
 					
+						<td>${fieldValue(bean: configuracaoInstance, field: "metaglicose")}</td>
 						
+						<td>${fieldValue(bean: configuracaoInstance, field: "sensibilidadeinsulina")}</td>
+						
+						<td>${fieldValue(bean: configuracaoInstance, field: "sensibilidadecarboidrato")}</td>
+						
+						<td>${fieldValue(bean: configuracaoInstance, field: "qtdinsulinarepositorio")}</td>
 					
 					</tr>
 				</g:each>

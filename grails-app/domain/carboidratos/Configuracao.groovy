@@ -9,6 +9,10 @@ class Configuracao {
 	Integer alturaimagensthumbs
 	Integer larguraimagensthumbs	
 	Integer itensporpagina
+	Integer metaglicose
+	Integer sensibilidadeinsulina
+	Integer sensibilidadecarboidrato
+	Integer qtdinsulinarepositorio
 	Date dateCreated
 	Date lastUpdated
 	Usuario	usuario
@@ -20,6 +24,10 @@ class Configuracao {
 		larguraimagensthumbs(nullable: true, blank: true)
 		itensporpagina(nullable: true, blank: true)
 		usuario(nullable: false, blank: false)
+		metaglicose(nullable: true)
+		sensibilidadeinsulina(nullable: true)
+		sensibilidadecarboidrato(nullable: true)
+		qtdinsulinarepositorio(nullable: true)
 	}
 	
 	static mapping = {

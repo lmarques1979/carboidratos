@@ -11,6 +11,7 @@ class ControleGlicemico implements Serializable{
 	Integer mes
 	Integer ano
 	Usuario usuario
+	Refeicao refeicao
 	Date dateCreated
 	Date lastUpdated
 	
@@ -19,9 +20,11 @@ class ControleGlicemico implements Serializable{
 		 dia(nullable: false , blank: false)
 		 mes(nullable: false , blank: false)
 		 ano(nullable: false, blank: false)
-		 dia(unique: ['usuario','mes', 'ano'])
-				
-    }
+		 usuario(nullable: false, blank: false)
+		 refeicao(nullable: false, blank: false)
+		 dia(unique: ['usuario','mes', 'ano','refeicao'])
+		
+	}
 	
 	static mapping = {
 		sort dia: "asc" // or "asc"

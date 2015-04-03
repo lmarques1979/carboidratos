@@ -16,7 +16,7 @@
 				color:#000;
 				margin: 0px auto;
 				max-width:90%;
-				font-size:13px;
+				font-size:12px;
 				overflow-x:hidden;
 				box-shadow:0px 0px 0px #fff;
 			}
@@ -53,6 +53,10 @@
 			
 			.listadia {
 				background:#eae8e8;
+			}
+			
+			table.impressao tbody tr td.esquerda{
+				text-align:left;
 			}
 			
 		</style>
@@ -105,7 +109,7 @@
 													  agrupamentoInstance[4]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.usuario.id &&
 													  agrupamentoInstance[5]==refeicaoatual
 												   }">
-								    	<td colspan="5" class="totalrefeicao">${message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number',format:'####.###')])}</td>
+								    	<td colspan="5" class="totalrefeicao">${message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number',maxFractionDigits:'2')])}</td>
 								    	</g:if>
 								    	
 								    </g:each>
@@ -113,7 +117,8 @@
 							</g:if>		
 							<tr>
 								<td colspan="2"></td>
-								<td>
+								
+								<td class="esquerda">
 									<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
 											${contagemCarboidratosAlimentoInstance.alimento.nome + ' ' + contagemCarboidratosAlimentoInstance.alimento.medidausual + ' de ' + contagemCarboidratosAlimentoInstance.alimento.peso + 'g : ' + contagemCarboidratosAlimentoInstance.alimento.carboidratosg + 'g Carboidrato(s)'}
 									</g:if>
@@ -127,13 +132,13 @@
 								<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
 									<td class="centro">
 										<g:set var="totaldia" value="${contagemCarboidratosAlimentoInstance.qtdalimento*contagemCarboidratosAlimentoInstance.alimento.carboidratosg}" />
-										<g:formatNumber number="${totaldia}" type="number" format="####.###" />
+										<g:formatNumber number="${totaldia}" type="number" maxFractionDigits="2" />
 									</td>
 								</g:if>
 								<g:else>
 									<td class="centro">
 										<g:set var="totaldia" value="${contagemCarboidratosAlimentoInstance.qtdalimento* (contagemCarboidratosAlimentoInstance.qtdcarboidrato ? contagemCarboidratosAlimentoInstance.qtdcarboidrato : 0)}" />
-										<g:formatNumber number="${totaldia}" type="number" format="####.###" />
+										<g:formatNumber number="${totaldia}" type="number" maxFractionDigits="2" />
 									</td>
 								</g:else>	
 							</tr>

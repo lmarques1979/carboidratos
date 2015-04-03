@@ -96,7 +96,7 @@ if(true && (agrupamentoInstance[1]==contagemCarboidratosAlimentoInstance.contage
 													  agrupamentoInstance[4]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.usuario.id &&
 													  agrupamentoInstance[5]==refeicaoatual)) {
 printHtmlPart(20)
-expressionOut.print(message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number',format:'####.###')]))
+expressionOut.print(message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number',maxFractionDigits:'2')]))
 printHtmlPart(21)
 }
 printHtmlPart(22)
@@ -127,14 +127,14 @@ if(true && (contagemCarboidratosAlimentoInstance.alimento)) {
 printHtmlPart(31)
 invokeTag('set','g',100,['var':("totaldia"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento*contagemCarboidratosAlimentoInstance.alimento.carboidratosg)],-1)
 printHtmlPart(32)
-invokeTag('formatNumber','g',101,['number':(totaldia),'type':("number"),'format':("####.###")],-1)
+invokeTag('formatNumber','g',101,['number':(totaldia),'type':("number"),'maxFractionDigits':("2")],-1)
 printHtmlPart(33)
 }
 else {
 printHtmlPart(31)
 invokeTag('set','g',106,['var':("totaldia"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento* (contagemCarboidratosAlimentoInstance.qtdcarboidrato ? contagemCarboidratosAlimentoInstance.qtdcarboidrato : 0))],-1)
 printHtmlPart(32)
-invokeTag('formatNumber','g',107,['number':(totaldia),'type':("number"),'format':("####.###")],-1)
+invokeTag('formatNumber','g',107,['number':(totaldia),'type':("number"),'maxFractionDigits':("2")],-1)
 printHtmlPart(33)
 }
 printHtmlPart(34)
@@ -155,7 +155,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1427583799000L
+public static final long LAST_MODIFIED = 1427918917000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

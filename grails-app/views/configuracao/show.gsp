@@ -64,6 +64,42 @@
 					
 				</li>
 				</g:if>
+				
+				<g:if test="${configuracaoInstance?.metaglicose}">
+				<li class="fieldcontain">
+					<span id="metaglicose-label" class="property-label"><g:message code="configuracao.metaglicose.label" default="Itensporpagina" /></span>
+					
+						<span class="property-value" aria-labelledby="metaglicose-label"><g:fieldValue bean="${configuracaoInstance}" field="metaglicose"/></span>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${configuracaoInstance?.sensibilidadeinsulina}">
+				<li class="fieldcontain">
+					<span id="sensibilidadeinsulina-label" class="property-label"><g:message code="configuracao.sensibilidadeinsulina.label" default="Itensporpagina" /></span>
+					
+					<span class="property-value" aria-labelledby="sensibilidadeinsulina-label"><g:fieldValue bean="${configuracaoInstance}" field="sensibilidadeinsulina"/></span>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${configuracaoInstance?.sensibilidadecarboidrato}">
+				<li class="fieldcontain">
+					<span id="sensibilidadecarboidrato-label" class="property-label"><g:message code="configuracao.sensibilidadecarboidrato.label" default="Itensporpagina" /></span>
+					
+					<span class="property-value" aria-labelledby="sensibilidadecarboidrato-label"><g:fieldValue bean="${configuracaoInstance}" field="sensibilidadecarboidrato"/></span>
+					
+				</li>
+				</g:if>
+				
+				<g:if test="${configuracaoInstance?.qtdinsulinarepositorio}">
+				<li class="fieldcontain">
+					<span id="qtdinsulinarepositorio-label" class="property-label"><g:message code="configuracao.qtdinsulinarepositorio.label" default="Itensporpagina" /></span>
+					
+					<span class="property-value" aria-labelledby="qtdinsulinarepositorio-label"><g:fieldValue bean="${configuracaoInstance}" field="qtdinsulinarepositorio"/></span>
+					
+				</li>
+				</g:if>
 							
 			</ol>
 			<g:form url="[resource:configuracaoInstance, action:'delete']" method="DELETE">

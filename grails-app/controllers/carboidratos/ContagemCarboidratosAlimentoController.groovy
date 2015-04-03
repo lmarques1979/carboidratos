@@ -112,7 +112,7 @@ class ContagemCarboidratosAlimentoController extends BaseController{
     def index(Integer max) {
        
 		Calendar cal = Calendar.getInstance()
-		def mescorrente=cal.MONTH + 1
+		def mescorrente=cal.get(Calendar.MONTH) + 1
 		def anocorrente=cal.get(Calendar.YEAR)
 		def diacorrente=cal.get(Calendar.DAY_OF_MONTH)
 		def mes , ano, dia 

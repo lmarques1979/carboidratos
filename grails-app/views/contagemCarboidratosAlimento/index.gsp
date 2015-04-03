@@ -22,7 +22,7 @@
 	<g:set var="dia" value="${formatDate(format:"dd" , date:new Date()).toInteger()}" />
 </g:else>
 
-
+${params }
 <!DOCTYPE html>
 <html>
 	<head>
@@ -206,7 +206,9 @@
 													  agrupamentoInstance[5]==refeicaoatual
 												   }">
 												   
-										<td colspan="6" class="totalrefeicao">${message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number',format:'####.###')])}</td>
+										<td colspan="6" class="totalrefeicao">
+										   ${message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number' , maxFractionDigits:'2')])}
+										</td>
 								    	</g:if>
 								    	
 								    </g:each>
@@ -237,13 +239,13 @@
 								<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
 									<td class="centro">
 										<g:set var="totaldia" value="${contagemCarboidratosAlimentoInstance.qtdalimento*contagemCarboidratosAlimentoInstance.alimento.carboidratosg}" />
-										<g:formatNumber number="${totaldia}" type="number" format="####.###" />
+										<g:formatNumber number="${totaldia}" type="number" maxFractionDigits="2" />
 									</td>
 								</g:if>
 								<g:else>
 									<td class="centro">
 										<g:set var="totaldia" value="${contagemCarboidratosAlimentoInstance.qtdalimento* (contagemCarboidratosAlimentoInstance.qtdcarboidrato ? contagemCarboidratosAlimentoInstance.qtdcarboidrato : 0)}" />
-										<g:formatNumber number="${totaldia}" type="number" format="####.###" />
+										<g:formatNumber number="${totaldia}" type="number" maxFractionDigits="2" /> 
 									</td>
 								</g:else>	
 								

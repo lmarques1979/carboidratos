@@ -1,5 +1,6 @@
 <%@ page import="carboidratos.Configuracao" %>
 <legend><g:message code="configuracao.show.label"/></legend>
+
 <div class="fieldcontain ${hasErrors(bean: configuracaoInstance, field: 'alturaimagens', 'error')} required">
 	<label for="alturaimagens">
 		<g:message code="configuracao.alturaimagens.label" default="Alturaimagens" />
@@ -42,6 +43,30 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="itensporpagina" type="number" value="${configuracaoInstance.itensporpagina}" required=""/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: configuracaoInstance, field: 'metaglicose', 'error')}">
+	<label for="metaglicose">
+		<g:message code="configuracao.metaglicose.label" default="Alturaimagens" />
+	</label>
+	<g:field name="metaglicose" type="number" value="${configuracaoInstance.metaglicose}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: configuracaoInstance, field: 'sensibilidadeinsulina', 'error')}">
+	<label for="sensibilidadeinsulina">
+		<g:message code="configuracao.sensibilidadeinsulina.label" default="Alturaimagens" />
+	</label>
+	<g:field name="sensibilidadeinsulina" type="number" value="${configuracaoInstance.sensibilidadeinsulina}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: configuracaoInstance, field: 'qtdinsulinarepositorio', 'error')}">
+	<label for="sensibilidadeinsulina">
+		<g:message code="configuracao.qtdinsulinarepositorio.label" default="Alturaimagens" />
+	</label>
+	<g:field name="qtdinsulinarepositorio" type="number" value="${configuracaoInstance.qtdinsulinarepositorio}"/>
 
 </div>
 

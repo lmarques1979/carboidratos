@@ -43,7 +43,7 @@ body {
 	background: #ffffff;
 	color: #333333;
 	margin: 0 auto;
-	max-width:90%;
+	max-width:100%;
 	font-size:13px;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
 	-moz-box-shadow: 0 0 0.3em #255b17;
@@ -147,7 +147,7 @@ img.img {
 /* NAVIGATION MENU */
 
 .nav {
-	background-color:#fff;
+	background-color:transparent;
 	padding: 0.5em 0.75em;
 	-moz-box-shadow: 0 0 3px 1px #aaaaaa;
 	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
@@ -174,9 +174,9 @@ img.img {
 	display: block;
 	padding: 0.25em 0.7em;
 	text-decoration: none;
-	   -moz-border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
 	-webkit-border-radius: 0.3em;
-	        border-radius: 0.3em;
+	border-radius: 0.3em;
 }
 
 .nav a:active, .nav a:visited {
@@ -215,7 +215,6 @@ img.img {
 }
 
 /* CREATE/EDIT FORMS AND SHOW PAGES */
-
 .property-list {
 	margin: 0 auto;
 	padding: 0.3em 1.8em 1.25em;
@@ -470,9 +469,9 @@ tr>td:last-child, tr>th:last-child {
 td, th {
 	line-height: 1.5em;
 	padding: 0.2em 0.6em; 
-	
 	text-align:center;
 	vertical-align: top;
+	font-size:0.8em;
 }
 
 th {
@@ -485,25 +484,21 @@ th {
 	line-height: 1.7em;
 	padding:0;
 	border:1px solid #d4d4d4;
-	
 }
 
 thead th {
 	white-space: nowrap;
 }
 
-th a {
-	display: block;
-	text-decoration: none;
+th a:link, a:focus, a:visited, a:active , a:hover{
+	text-decoration:none;
+	color:#666666;
 }
 
-th a:link, th a:visited {
-	color: #666666;
+thead tr th.sortable a{
+	text-decoration:none;
+	color:#666666;
 }
-
-/*th a:hover, th a:focus {
-	color: #333333;
-}*/
 
 th.sortable a {
 	background-position: right;
@@ -523,11 +518,19 @@ th.desc a {
 	background: #f3f3f3;
 }
 
-.even {
-	background: #ffffff;
+.odd a{
+	color:#184D85;
 }
 
-th:hover, tr:hover {
+.even {
+	background:#ffffff;
+}
+
+.even a{
+    color:#184D85;
+}
+
+tr:hover {
 	background:#184D85;
 	color:#fff;
 }
@@ -537,13 +540,9 @@ tr:hover.nohover{
 	color:#000;
 }
 
-tr:hover {
-	background:#184D85;
-	color:#fff;
-}
-
 tr:hover a{
     color:#fff;
+    text-decoration:underline;
 }
 
 /* PAGINATION */
@@ -592,8 +591,8 @@ tr:hover a{
 	background-color:transparent;
 	overflow: hidden;
 	padding: 0.3em;
-	-moz-box-shadow: 0 0 3px 1px #aaaaaa;
-	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
+	/*-moz-box-shadow: 0 0 3px 1px #aaaaaa;
+	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;*/
 	margin: 0.1em 0 0 0;
 	border: none;
 }
@@ -609,10 +608,9 @@ tr:hover a{
 	overflow: visible;
 	padding: 0.25em 0.7em;
 	text-decoration: none;
-
-	   -moz-border-radius: 0.3em;
+    -moz-border-radius: 0.3em;
 	-webkit-border-radius: 0.3em;
-	        border-radius: 0.3em;
+	border-radius: 0.3em;
 }
 
 
@@ -622,9 +620,9 @@ tr:hover a{
 	color: #ffffff;
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-	   -moz-box-shadow: none;
+	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
-	        box-shadow: none;
+	box-shadow: none;
 }
 
 .no-borderradius .buttons input:hover, .no-borderradius .buttons input:focus,
@@ -712,10 +710,11 @@ a.skip {
 	text-align:center;
 }
 
-.nacionalizacao{
-	display:block;
-	position:relative;
-	float:right;
+.nacionalizacao {
+    display: block;
+    position: absolute;
+    right:2px;
+    top:1px;
 }
 
 img.internacionalizacao{
@@ -725,16 +724,6 @@ img.internacionalizacao{
 
 .centro{
 	text-align:center;
-}
-
-a.usuariologado:link, a.usuariologado:visited , a.usuariologado:hover, a.usuariologado:focus, a.usuariologado:active {
-	text-decoration:none;
-	position:relative;
-	float:right;
-	top:0.5em;
-	right: 1.5em;
-	color:#fff;
-	font-size:0.8em;
 }
 
 #buscaalimento{
@@ -880,16 +869,13 @@ a.usuariologado:link, a.usuariologado:visited , a.usuariologado:hover, a.usuario
 	display:none;
 }
 
-.logousuario{
-	position:relative;
-	display:block;
-	float:right;
-	top:0.3em;
-}
-
-.logousuario a:link , a:visited, a:hover, a:active{
-	text-decoration:none;
-	color:#fff;	
+.logousuario a {
+    position: absolute;
+    display: block;
+    top: 1px;
+    color: #FFF;
+    text-decoration: none;
+    margin-left: 3px;
 }
 
 .total{
@@ -931,6 +917,9 @@ table.impressao tbody tr td {
 	font-size:12px;
 }
 
+table.impressao tbody tr td.esquerda{
+	text-align:left;
+}
 
 table.impressao td.totalrefeicao {
 	text-align:left;
@@ -989,6 +978,12 @@ table.impressao td.totalrefeicao {
 
 .listainicial ol li{
 	padding-bottom:15px;
+	font-size: 0.8em;
+}
+
+.listainicial ol li a{
+	color:#184D85;
+	text-decoration:underline;
 }
 
 .paginainicial fieldset{
@@ -1006,7 +1001,7 @@ table.impressao td.totalrefeicao {
 
 .linksdia a.dia:link,a.dia:hover,a.dia:active,a.dia:visited{
 	text-decoration:none;
-	padding: 0 0.6em;
+	padding: 0 0.3em;
 	color:#184D85;
 }
 
@@ -1015,4 +1010,24 @@ table.impressao td.totalrefeicao {
 	font-weight:bold;
 	color:#6ABB45;
 	text-decoration:none;
+}
+
+.left{
+	text-align:left;
+}
+
+.right{
+	text-align:right;
+}
+
+#logo .logo {
+	display:block;
+	position:relative;
+	margin:0 auto;
+	padding: 5px 0;
+	border-radius:15px;
+}
+
+td span.contagem{
+	color:#184D85;
 }
