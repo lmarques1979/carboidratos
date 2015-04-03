@@ -38,7 +38,7 @@
 				<br>
 				
 				<div class="fieldcontain">
-					<g:link class="esqueceu" controller="Usuario" action="esqueceusenha">Esqueceu a Senha?</g:link>
+					<g:link class="esqueceu" controller="Usuario" action="esqueceusenha"><g:message code="esqueceusenha.label"/></g:link> 
 				</div>
 			</fieldset>
 			<g:submitButton id="submit" name="create" value="${message(code: "springSecurity.login.button")}" />

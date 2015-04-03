@@ -58,42 +58,58 @@ printHtmlPart(11)
 invokeTag('sortableColumn','g',32,['property':("larguraimagensthumbs"),'title':(message(code: 'configuracao.larguraimagensthumbs.label', default: 'Larguraimagensthumbs'))],-1)
 printHtmlPart(11)
 invokeTag('sortableColumn','g',34,['property':("itensporpagina"),'title':(message(code: 'configuracao.itensporpagina.label', default: 'Itensporpagina'))],-1)
+printHtmlPart(11)
+invokeTag('sortableColumn','g',36,['property':("metaglicose"),'title':(message(code: 'configuracao.metaglicose.label', default: 'Alturaimagens'))],-1)
 printHtmlPart(12)
+invokeTag('sortableColumn','g',38,['property':("sensibilidadeinsulina"),'title':(message(code: 'configuracao.sensibilidadeinsulina.label', default: 'Alturaimagens'))],-1)
+printHtmlPart(12)
+invokeTag('sortableColumn','g',40,['property':("sensibilidadecarboidrato"),'title':(message(code: 'configuracao.sensibilidadecarboidrato.label', default: 'Alturaimagens'))],-1)
+printHtmlPart(12)
+invokeTag('sortableColumn','g',42,['property':("qtdinsulinarepositorio"),'title':(message(code: 'configuracao.qtdinsulinarepositorio.label', default: 'Alturaimagens'))],-1)
+printHtmlPart(13)
 loop:{
 int i = 0
 for( configuracaoInstance in (configuracaoInstanceList) ) {
-printHtmlPart(13)
-expressionOut.print((i % 2) == 0 ? 'even' : 'odd')
 printHtmlPart(14)
+expressionOut.print((i % 2) == 0 ? 'even' : 'odd')
+printHtmlPart(15)
 createTagBody(3, {->
 expressionOut.print(fieldValue(bean: configuracaoInstance, field: "alturaimagens"))
 })
-invokeTag('link','g',44,['action':("show"),'id':(configuracaoInstance.id)],3)
-printHtmlPart(15)
-expressionOut.print(fieldValue(bean: configuracaoInstance, field: "larguraimagens"))
-printHtmlPart(15)
-expressionOut.print(fieldValue(bean: configuracaoInstance, field: "alturaimagensthumbs"))
-printHtmlPart(15)
-expressionOut.print(fieldValue(bean: configuracaoInstance, field: "larguraimagensthumbs"))
-printHtmlPart(15)
-expressionOut.print(fieldValue(bean: configuracaoInstance, field: "itensporpagina"))
+invokeTag('link','g',49,['action':("show"),'id':(configuracaoInstance.id)],3)
 printHtmlPart(16)
+expressionOut.print(fieldValue(bean: configuracaoInstance, field: "larguraimagens"))
+printHtmlPart(17)
+expressionOut.print(fieldValue(bean: configuracaoInstance, field: "alturaimagensthumbs"))
+printHtmlPart(17)
+expressionOut.print(fieldValue(bean: configuracaoInstance, field: "larguraimagensthumbs"))
+printHtmlPart(17)
+expressionOut.print(fieldValue(bean: configuracaoInstance, field: "itensporpagina"))
+printHtmlPart(17)
+expressionOut.print(fieldValue(bean: configuracaoInstance, field: "metaglicose"))
+printHtmlPart(16)
+expressionOut.print(fieldValue(bean: configuracaoInstance, field: "sensibilidadeinsulina"))
+printHtmlPart(16)
+expressionOut.print(fieldValue(bean: configuracaoInstance, field: "sensibilidadecarboidrato"))
+printHtmlPart(16)
+expressionOut.print(fieldValue(bean: configuracaoInstance, field: "qtdinsulinarepositorio"))
+printHtmlPart(18)
 i++
 }
 }
-printHtmlPart(17)
-invokeTag('paginate','g',61,['total':(configuracaoInstanceCount ?: 0)],-1)
-printHtmlPart(18)
-})
-invokeTag('captureBody','sitemesh',64,[:],1)
 printHtmlPart(19)
+invokeTag('paginate','g',72,['total':(configuracaoInstanceCount ?: 0)],-1)
+printHtmlPart(20)
+})
+invokeTag('captureBody','sitemesh',75,[:],1)
+printHtmlPart(21)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1425919233000L
+public static final long LAST_MODIFIED = 1427972523000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

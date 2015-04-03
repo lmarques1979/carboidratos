@@ -50,19 +50,21 @@ printHtmlPart(6)
 invokeTag('message','g',21,['code':("controleglicemico.label")],-1)
 printHtmlPart(6)
 invokeTag('message','g',22,['code':("impressaocontagens.label")],-1)
-printHtmlPart(7)
+printHtmlPart(6)
 invokeTag('message','g',23,['code':("enviopdfemail.label")],-1)
-printHtmlPart(8)
+printHtmlPart(6)
+invokeTag('message','g',24,['code':("contacontage.label")],-1)
+printHtmlPart(7)
 })
-invokeTag('captureBody','sitemesh',31,[:],1)
-printHtmlPart(9)
+invokeTag('captureBody','sitemesh',32,[:],1)
+printHtmlPart(8)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1427645983000L
+public static final long LAST_MODIFIED = 1428084315000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
