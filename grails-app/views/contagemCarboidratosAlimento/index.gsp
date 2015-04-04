@@ -92,7 +92,7 @@
 						<tbody>
 						<tr>
 							
-								<td><g:field class="dia" size="5" max="31" min="1" name="dia" value="${formatDate(format:"dd" , date:new Date())}" type="number" required=""/></td>
+								<td><g:field class="dia" size="5" max="31" min="1" name="dia" value="${dia}" type="number" required=""/></td>
 								
 								<td>
 									<g:select id="refeicao" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}"  optionValue="descricao" optionKey="id" value="${params.refeicaoid}"/>
@@ -169,12 +169,12 @@
 							
 						</thead>
 						<tbody>
-						<g:set var="diaanterior" value="-1" />
-						<g:set var="refeicaoanterior" value="-1" />
-						<g:set var="totalrefeicao" value="0" />
-						<g:hiddenField name="mes" value="${mes}" />
-						<g:hiddenField name="ano" value="${ano}" />
-									
+						<g:set var="diaanterior" value="-1"/>
+						<g:set var="refeicaoanterior" value="-1"/>
+						<g:set var="totalrefeicao" value="0"/>
+						<g:hiddenField name="mes" value="${mes}"/>
+						<g:hiddenField name="ano" value="${ano}"/>
+						<g:hiddenField name="dia" value="${dia}"/>			
 						<g:each in="${contagemCarboidratosAlimentoInstanceList}" status="i" var="contagemCarboidratosAlimentoInstance">
 									
 							<g:hiddenField name="id" value="${contagemCarboidratosAlimentoInstance.id}"/>
@@ -192,7 +192,9 @@
 							</g:if>		
 							<g:if test="${refeicaoanterior!=refeicaoatual}">
 								<tr class="nohover">
-									<td colspan="2"></td>
+									<td colspan="2">
+										<g:hiddenField name="diaatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia}"/>
+									</td>
 									<td>
 										<span>${contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao}</span>
 									</td>

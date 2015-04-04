@@ -249,44 +249,46 @@ invokeTag('link','g',189,['onclick':("return confirm('${message(code: 'excluirdi
 printHtmlPart(51)
 }
 printHtmlPart(52)
-invokeTag('hiddenField','g',197,['id':("diaatual"),'name':("diaatual"),'value':(diaatual)],-1)
+invokeTag('hiddenField','g',197,['name':("index")],-1)
 printHtmlPart(53)
-invokeTag('hiddenField','g',198,['id':("controleglicemico.id"),'name':("controleglicemico.id"),'value':(itensControleGlicemicoInstance.controleglicemico.id)],-1)
+invokeTag('hiddenField','g',198,['id':("diaatual${j}"),'name':("diaatual"),'value':(diaatual)],-1)
+printHtmlPart(53)
+invokeTag('hiddenField','g',199,['id':("controleglicemico.id"),'name':("controleglicemico.id"),'value':(itensControleGlicemicoInstance.controleglicemico.id)],-1)
 printHtmlPart(54)
-invokeTag('select','g',201,['id':("refeicaoalt"),'name':("refeicao.id"),'from':(refeicaousuariolist),'value':(itensControleGlicemicoInstance.controleglicemico.refeicao.id),'optionValue':("descricao"),'optionKey':("id")],-1)
+invokeTag('select','g',202,['id':("refeicaoalt"),'name':("refeicao.id"),'from':(refeicaousuariolist),'value':(itensControleGlicemicoInstance.controleglicemico.refeicao.id),'optionValue':("descricao"),'optionKey':("id")],-1)
 printHtmlPart(55)
-invokeTag('field','g',203,['class':("qtd"),'size':("4"),'name':("qtdinsulinelenta"),'type':("number"),'value':(itensControleGlicemicoInstance.qtdinsulinelenta)],-1)
+invokeTag('field','g',204,['class':("qtd"),'size':("4"),'name':("qtdinsulinelenta"),'type':("number"),'value':(itensControleGlicemicoInstance.qtdinsulinelenta)],-1)
 printHtmlPart(56)
-invokeTag('field','g',204,['class':("qtd"),'size':("4"),'id':("valorglicemiaprealt"),'name':("valorglicemiapre"),'type':("number"),'value':(itensControleGlicemicoInstance.valorglicemiapre)],-1)
+invokeTag('field','g',206,['class':("valorglicemiaprealt"),'data-index':(j),'size':("4"),'id':("valorglicemiaprealt${j}"),'name':("valorglicemiapre"),'type':("number"),'value':(itensControleGlicemicoInstance.valorglicemiapre)],-1)
 printHtmlPart(57)
-invokeTag('field','g',206,['class':("qtd"),'size':("4"),'id':("qtdinsulinarapidaprealt"),'name':("qtdinsulinarapidapre"),'type':("number"),'value':(itensControleGlicemicoInstance.qtdinsulinarapidapre)],-1)
+invokeTag('field','g',207,['class':("qtd"),'size':("4"),'id':("qtdinsulinarapidaprealt"),'name':("qtdinsulinarapidapre"),'type':("number"),'value':(itensControleGlicemicoInstance.qtdinsulinarapidapre)],-1)
 printHtmlPart(56)
-invokeTag('field','g',207,['class':("qtd"),'size':("4"),'id':("qtdcarboidratoalt"),'name':("qtdcarboidrato"),'type':("number"),'step':("0.01"),'value':(itensControleGlicemicoInstance.qtdcarboidrato)],-1)
+invokeTag('field','g',209,['class':("qtd"),'size':("4"),'id':("qtdcarboidratoalt${j}"),'name':("qtdcarboidrato"),'type':("number"),'step':("0.01"),'value':(itensControleGlicemicoInstance.qtdcarboidrato)],-1)
 printHtmlPart(56)
-invokeTag('field','g',208,['class':("qtd"),'size':("4"),'id':("valorglicemiaposalt"),'name':("valorglicemiapos"),'type':("number"),'value':(itensControleGlicemicoInstance.valorglicemiapos)],-1)
+invokeTag('field','g',211,['class':("valorglicemiaposalt"),'data-index':(j),'size':("4"),'id':("valorglicemiaposalt${j}"),'name':("valorglicemiapos"),'type':("number"),'value':(itensControleGlicemicoInstance.valorglicemiapos)],-1)
 printHtmlPart(57)
-invokeTag('field','g',210,['class':("qtd"),'size':("4"),'id':("qtdinsulinarapidaposalt"),'name':("qtdinsulinarapidapos"),'type':("number"),'value':(itensControleGlicemicoInstance.qtdinsulinarapidapos)],-1)
+invokeTag('field','g',212,['class':("qtd"),'size':("4"),'id':("qtdinsulinarapidaposalt"),'name':("qtdinsulinarapidapos"),'type':("number"),'value':(itensControleGlicemicoInstance.qtdinsulinarapidapos)],-1)
 printHtmlPart(56)
-invokeTag('textField','g',211,['name':("observacao"),'class':("obs"),'value':(itensControleGlicemicoInstance.observacao)],-1)
+invokeTag('textField','g',214,['name':("observacao"),'class':("obs"),'value':(itensControleGlicemicoInstance.observacao)],-1)
 printHtmlPart(58)
 createTagBody(4, {->
-invokeTag('image','asset',213,['class':("excluir"),'src':("skin/remove.png"),'title':(message(code:'remove.label'))],-1)
+invokeTag('image','asset',216,['class':("excluir"),'src':("skin/remove.png"),'title':(message(code:'remove.label'))],-1)
 })
-invokeTag('link','g',213,['onclick':("return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');"),'id':(itensControleGlicemicoInstance.id),'action':("delete"),'controller':("ItensControleGlicemico")],4)
+invokeTag('link','g',216,['onclick':("return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');"),'id':(itensControleGlicemicoInstance.id),'action':("delete"),'controller':("ItensControleGlicemico")],4)
 printHtmlPart(59)
-invokeTag('set','g',217,['var':("diaanterior"),'value':(diaatual)],-1)
+invokeTag('set','g',220,['var':("diaanterior"),'value':(diaatual)],-1)
 printHtmlPart(40)
 j++
 }
 }
 printHtmlPart(60)
-invokeTag('actionSubmit','g',226,['class':("save"),'action':("update"),'value':(message(code: 'default.button.update.label', default: 'Update'))],-1)
+invokeTag('actionSubmit','g',229,['class':("save"),'action':("update"),'value':(message(code: 'default.button.update.label', default: 'Update'))],-1)
 printHtmlPart(61)
 })
-invokeTag('form','g',232,['id':("formalt"),'class':("formtable"),'url':([resource:itensControleGlicemicoInstance, action:'update'])],2)
+invokeTag('form','g',235,['id':("formupd"),'class':("formtable"),'url':([resource:itensControleGlicemicoInstance, action:'update'])],2)
 printHtmlPart(62)
 })
-invokeTag('captureBody','sitemesh',235,[:],1)
+invokeTag('captureBody','sitemesh',238,[:],1)
 printHtmlPart(63)
 }
 public static final Map JSP_TAGS = new HashMap()
@@ -294,7 +296,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1428108191000L
+public static final long LAST_MODIFIED = 1428117144000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

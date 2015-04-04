@@ -148,7 +148,7 @@
 			
 			<g:render template="/links/linksdia"/>
 			
-			<g:form id="formalt" class="formtable" url="[resource:itensControleGlicemicoInstance, action:'update']" > 
+			<g:form id="formupd" class="formtable" url="[resource:itensControleGlicemicoInstance, action:'update']" > 
 				
 					<table>
 					<thead>
@@ -186,31 +186,34 @@
 										<td>
 											<span>${itensControleGlicemicoInstance.controleglicemico.dia}</span></td>
 										<td>
-											<g:link onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.controleglicemico.id}" action="delete" controller="ControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
+											<g:link onclick="return confirm('${message(code: 'excluirdia.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.controleglicemico.id}" action="delete" controller="ControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link>
 										</td>
 										<td colspan="11"></td>
 									</tr>
 								</g:if>
-								<tr class="nohover">
+								<tr class="nohover" id="dadoslinha" >
 									
 									<td colspan="2">
-										<g:hiddenField id="diaatual" name="diaatual" value="${diaatual}" />
+										<g:hiddenField name="index"/>
+										<g:hiddenField id="diaatual${j}" name="diaatual" value="${diaatual}" />
 										<g:hiddenField id="controleglicemico.id" name="controleglicemico.id" value="${itensControleGlicemicoInstance.controleglicemico.id}" />
 									</td>
 									<td>
 										<g:select id="refeicaoalt" name="refeicao.id" from="${refeicaousuariolist}" value="${itensControleGlicemicoInstance.controleglicemico.refeicao.id}" optionValue="descricao" optionKey="id"/>
 									</td>
 									<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" value="${itensControleGlicemicoInstance.qtdinsulinelenta}"/></td>
-									<td><g:field class="qtd" size="4" id="valorglicemiaprealt" name="valorglicemiapre" type="number" value="${itensControleGlicemicoInstance.valorglicemiapre}"/></td>
 									
+									<td><g:field class="valorglicemiaprealt" data-index="${j}" size="4" id="valorglicemiaprealt${j}" name="valorglicemiapre" type="number" value="${itensControleGlicemicoInstance.valorglicemiapre}"/></td>
 									<td><g:field class="qtd" size="4" id="qtdinsulinarapidaprealt" name="qtdinsulinarapidapre" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapre}"/></td>
-									<td><g:field class="qtd" size="4" id="qtdcarboidratoalt" name="qtdcarboidrato" type="number" step="0.01" value="${itensControleGlicemicoInstance.qtdcarboidrato}"/></td>
-									<td><g:field class="qtd" size="4" id="valorglicemiaposalt" name="valorglicemiapos" type="number" value="${itensControleGlicemicoInstance.valorglicemiapos}"/></td>
 									
+									<td><g:field class="qtd" size="4" id="qtdcarboidratoalt${j}" name="qtdcarboidrato" type="number" step="0.01" value="${itensControleGlicemicoInstance.qtdcarboidrato}"/></td>
+									
+									<td><g:field class="valorglicemiaposalt" data-index="${j}" size="4" id="valorglicemiaposalt${j}" name="valorglicemiapos" type="number" value="${itensControleGlicemicoInstance.valorglicemiapos}"/></td>
 									<td><g:field class="qtd" size="4" id="qtdinsulinarapidaposalt" name="qtdinsulinarapidapos" type="number" value="${itensControleGlicemicoInstance.qtdinsulinarapidapos}"/></td>
+									
 									<td><g:textField name="observacao" class="obs" value="${itensControleGlicemicoInstance.observacao}"/></td>
 									<td>
-										<g:link onclick="return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.id}" action="delete" controller="ItensControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link></li>
+										<g:link onclick="return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');" id="${itensControleGlicemicoInstance.id}" action="delete" controller="ItensControleGlicemico"><asset:image class="excluir" src="skin/remove.png" title="${message(code:'remove.label')}"/></g:link>
 									</td>
 																
 								</tr>

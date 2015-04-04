@@ -261,6 +261,7 @@ class ContagemCarboidratosAlimentoController extends BaseController{
        
 		def idcontagem=params.list('id')
 		def erros = []
+		def dia=params.int('dia')
 		
 		for(int index=0 ; index < idcontagem.size() ; index++){
 				
@@ -272,11 +273,13 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 				contagemCarboidratosAlimentoInstance=ContagemCarboidratosAlimento.get(idcontagem[index].toInteger())
 				
 				if (idcontagem.size() > 1){
+					dia					= (params.diaatual[index] ? params.diaatual[index].toInteger() : null)
 					qtdalimento 		= (params.qtdalimento[index] ? Float.parseFloat(params.qtdalimento[index]) : null)
 					qtdcarboidrato 		= (params.qtdcarboidrato[index] ? Float.parseFloat(params.qtdcarboidrato[index]) : null)
 					alimentoforalista 	= (params.alimentoforalista[index] ? params.alimentoforalista[index] : null)
 					alimentoid 			= (params.alimento.id[index] ? params.alimento.id[index].toInteger() : null)
 				}else{
+					dia 				= params.dia.toInteger()
 					qtdalimento 		= (params.qtdalimento ? params.float('qtdalimento') : null)
 					qtdcarboidrato 		= (params.qtdcarboidrato ? params.float('qtdcarboidrato') : null)
 					alimentoforalista 	= (params.alimentoforalista ? params.alimentoforalista : null)
@@ -297,7 +300,7 @@ class ContagemCarboidratosAlimentoController extends BaseController{
 				
 		}
 		
-		redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+		redirect action:"index", params:[dia:dia , mes:params.int('mes'),ano:params.int('ano') ]
     }
 
     @Transactional

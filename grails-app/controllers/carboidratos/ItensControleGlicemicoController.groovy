@@ -31,14 +31,18 @@ class ItensControleGlicemicoController extends BaseController{
 		def totalpre, totalpos
 		if(tipo==0){
 			
-			if(qtdcarboidratos==null){
-				totalpre= (valorpre-metaglicose)/sensibilidadeinsulina 
-			}else{
-				totalpre= ((valorpre-metaglicose)/sensibilidadeinsulina) + (qtdcarboidratos/sensibilidadecarboidrato)
+			if(valorpre!=null){
+				if(qtdcarboidratos==null){
+					totalpre= (valorpre-metaglicose)/sensibilidadeinsulina 
+				}else{
+					totalpre= ((valorpre-metaglicose)/sensibilidadeinsulina) + (qtdcarboidratos/sensibilidadecarboidrato)
+				}
 			}
 		}
 		if(tipo==1){
-			totalpos= ((valorpos-metaglicose)/sensibilidadeinsulina) - qtdinsulinarepositorio
+			if(valorpos!=null){
+				totalpos= ((valorpos-metaglicose)/sensibilidadeinsulina) - qtdinsulinarepositorio
+			}
 		}
 		render(status:200,contentType: "application/json"){
 				[totalpre:totalpre , totalpos:totalpos]
@@ -254,6 +258,7 @@ class ItensControleGlicemicoController extends BaseController{
 		def idcontrole=params.list('id')
 		def mes=params.list('mes')
 		def ano=params.list('ano')
+		def dia 
 		def icontrole=0
 		def erros = []
 		for(int index=0 ; index < idcontrole.size() ; index++){
@@ -263,7 +268,7 @@ class ItensControleGlicemicoController extends BaseController{
 				itensControleGlicemicoInstance = ItensControleGlicemico.get(idcontrole[index].toInteger())
 				def qtdinsulinelenta , valorglicemiapre , qtdinsulinarapidapre
 				def qtdcarboidrato, valorglicemiapos , qtdinsulinarapidapos , idrefeicao
-				def dia , obs , refeicaoid , controleglicemicoid
+				def obs , refeicaoid , controleglicemicoid
 				def refeicaoInstance , controleglicemicoInstance
 				
 				if (idcontrole.size() > 1){
@@ -300,7 +305,7 @@ class ItensControleGlicemicoController extends BaseController{
 						erros.add(it)
 					}
 					flash.error=erros
-					redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+					redirect action:"index", params:[dia:dia , mes:params.int('mes'),ano:params.int('ano') ]
 					return
 				}
 				
@@ -318,13 +323,13 @@ class ItensControleGlicemicoController extends BaseController{
 						erros.add(it)
 					}
 					flash.error=erros
-					redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+					redirect action:"index", params:[dia:dia , mes:params.int('mes'),ano:params.int('ano') ]
 					return
 				}
 				
 		}
 		flash.message = message(code: 'default.created.message', args: [message(code: 'controleGlicemico.label', default: 'ControleGlicemico')])
-		redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+		redirect action:"index", params:[dia:dia, mes:params.int('mes'),ano:params.int('ano') ]
 	}
 
     @Transactional

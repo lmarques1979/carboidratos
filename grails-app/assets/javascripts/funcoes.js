@@ -136,19 +136,19 @@ function carregaContagemIns(tipo) {
     });
 };
 
-function carregaContagemAlt(tipo) {  
+function carregaContagemAlt(tipo , objeto) {  
 	
-	var $cell = $("#formalt").parent();
-	var $row = $cell.parent();
-	    
-	var dia=($row.find('#diaatual')).val(); 
-    var mes=($row.find('#mesalt')).val(); 
-    var ano=($row.find('#ano')).val(); 
-    var valorglicemiapre=($row.find('#valorglicemiaprealt')).val(); 
-    var valorglicemiapos=($row.find('#valorglicemiaposalt')).val(); 
-    var qtdcarboidratos=($row.find('#qtdcarboidratoalt')).val(); 
-    var refeicaoid=($row.find('#refeicaoalt')).val();;
-    
+	var valorid = $(objeto).attr('data-index');
+	var linha=$(objeto).closest("tr");
+	
+	var dia=($(linha).find("#diaatual"+valorid)).val();
+	var valorglicemiapre=($(linha).find("#valorglicemiaprealt"+valorid)).val();
+	var valorglicemiapos=($(linha).find("#valorglicemiaposalt"+valorid)).val();
+	var qtdcarboidratos=($(linha).find("#qtdcarboidratoalt"+valorid)).val(); 
+	var refeicaoid=($(linha).find("#refeicaoalt"+valorid)).val(); 
+	var mes=($("#formupd").find('#mesalt')).val(); 
+    var ano=($("#formupd").find('#anoalt')).val(); 
+   
     $.ajax({
     	type:"POST",
     	url:"/contagemcarboidratos/itensControleGlicemico/carregaCalculoIns",
@@ -157,19 +157,17 @@ function carregaContagemAlt(tipo) {
     	success:function(data, textStatus, jqXHR)
 	    {
     		if(tipo=='0'){
-    			
-    			if(data.totalpre!=null){
-    				($row.find('#qtdinsulinarapidaprealt')).val('');
+    			($(linha).find('#qtdinsulinarapidaprealt')).val('');
+				if(data.totalpre!=null && data.totalpre!=""){
     				var totalpre = data.totalpre.toFixed(0);
-    				($row.find('#qtdinsulinarapidaprealt')).val(totalpre);
+    				($(linha).find('#qtdinsulinarapidaprealt')).val(totalpre);
     			}
     		}  
     		if(tipo=='1'){
-    			
-    			if(data.totalpos!=null){
-	    			($row.find('#qtdinsulinarapidaposalt')).val('');
-		    		var totalpos = data.totalpos.toFixed(0);
-		    		($row.find('#qtdinsulinarapidaposalt')).val(totalpos);
+    			($(linha).find('#qtdinsulinarapidaposalt')).val('');
+    			if(data.totalpos!=null && data.totalpos!=""){
+	    			var totalpos = data.totalpos.toFixed(0);
+		    		($(linha).find('#qtdinsulinarapidaposalt')).val(totalpos);
     			}
     		}  
     	},
@@ -186,14 +184,15 @@ function carregaContagemAlt(tipo) {
     });
 };
 
-$(document).on('change', '#valorglicemiaprealt', function(e) {
+$(document).on('change', '.valorglicemiaprealt', function(e) {
 	e.preventDefault;  
-	carregaContagemAlt(0);
+	
+	carregaContagemAlt(0 , this);
 });
 
-$(document).on('change', '#valorglicemiaposalt', function(e) {
+$(document).on('change', '.valorglicemiaposalt', function(e) {
 	e.preventDefault;  
-	carregaContagemAlt(1);
+	carregaContagemAlt(1 , this);
 });
 
 $(document).on('click', '#calculapre', function(e) {

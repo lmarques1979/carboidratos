@@ -151,7 +151,7 @@ invokeTag('message','g',86,['code':("contagem.alimentoforalista.label")],-1)
 printHtmlPart(29)
 invokeTag('message','g',88,['code':("contagem.qtdcarboidrato.label")],-1)
 printHtmlPart(30)
-invokeTag('field','g',95,['class':("dia"),'size':("5"),'max':("31"),'min':("1"),'name':("dia"),'value':(formatDate(format:"dd" , date:new Date())),'type':("number"),'required':("")],-1)
+invokeTag('field','g',95,['class':("dia"),'size':("5"),'max':("31"),'min':("1"),'name':("dia"),'value':(dia),'type':("number"),'required':("")],-1)
 printHtmlPart(31)
 invokeTag('select','g',98,['id':("refeicao"),'name':("refeicao.id"),'from':(carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)),'optionValue':("descricao"),'optionKey':("id"),'value':(params.refeicaoid)],-1)
 printHtmlPart(32)
@@ -213,6 +213,8 @@ printHtmlPart(39)
 invokeTag('hiddenField','g',175,['name':("mes"),'value':(mes)],-1)
 printHtmlPart(39)
 invokeTag('hiddenField','g',176,['name':("ano"),'value':(ano)],-1)
+printHtmlPart(39)
+invokeTag('hiddenField','g',177,['name':("dia"),'value':(dia)],-1)
 printHtmlPart(48)
 loop:{
 int i = 0
@@ -237,97 +239,99 @@ printHtmlPart(54)
 printHtmlPart(55)
 if(true && (refeicaoanterior!=refeicaoatual)) {
 printHtmlPart(56)
-expressionOut.print(contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao)
+invokeTag('hiddenField','g',196,['name':("diaatual"),'value':(contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia)],-1)
 printHtmlPart(57)
-createTagBody(5, {->
-invokeTag('image','asset',200,['class':("excluir"),'src':("skin/remove.png"),'title':(message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?'))],-1)
-})
-invokeTag('link','g',200,['onclick':("return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');"),'id':(contagemCarboidratosAlimentoInstance.contagemcarboidratos.id),'action':("deleterefeicaodia"),'controller':("ContagemCarboidratos")],5)
+expressionOut.print(contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao)
 printHtmlPart(58)
+createTagBody(5, {->
+invokeTag('image','asset',202,['class':("excluir"),'src':("skin/remove.png"),'title':(message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?'))],-1)
+})
+invokeTag('link','g',202,['onclick':("return confirm('${message(code: 'excluirrefeicao.confirm.message', default: 'Are you sure?')}');"),'id':(contagemCarboidratosAlimentoInstance.contagemcarboidratos.id),'action':("deleterefeicaodia"),'controller':("ContagemCarboidratos")],5)
+printHtmlPart(59)
 loop:{
 int k = 0
 for( agrupamentoInstance in (agrupamento) ) {
-printHtmlPart(59)
+printHtmlPart(60)
 if(true && (agrupamentoInstance[1]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia &&
 													  agrupamentoInstance[2]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.mes &&
 												  	  agrupamentoInstance[3]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.ano &&
 													  agrupamentoInstance[4]==contagemCarboidratosAlimentoInstance.contagemcarboidratos.usuario.id &&
 													  agrupamentoInstance[5]==refeicaoatual)) {
-printHtmlPart(60)
-expressionOut.print(message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number' , maxFractionDigits:'2')]))
 printHtmlPart(61)
-}
+expressionOut.print(message(code: 'totalrefeicao.label' , args: [contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao , formatNumber(number:agrupamentoInstance[0],type:'number' , maxFractionDigits:'2')]))
 printHtmlPart(62)
+}
+printHtmlPart(63)
 k++
 }
 }
-printHtmlPart(63)
-}
 printHtmlPart(64)
-invokeTag('hiddenField','g',226,['name':("diaatual"),'value':(diaatual)],-1)
+}
 printHtmlPart(65)
-invokeTag('hiddenField','g',227,['name':("refeicaoatual"),'value':(refeicaoatual)],-1)
+invokeTag('hiddenField','g',228,['name':("diaatual"),'value':(diaatual)],-1)
+printHtmlPart(66)
+invokeTag('hiddenField','g',229,['name':("refeicaoatual"),'value':(refeicaoatual)],-1)
 printHtmlPart(32)
 if(true && (contagemCarboidratosAlimentoInstance.alimento)) {
-printHtmlPart(66)
-invokeTag('select','g',232,['value':(contagemCarboidratosAlimentoInstance.alimento.id),'class':("alimento"),'noSelection':(['-1': message(code:'alimentonaocadastrado.label')]),'id':("alimento"),'name':("alimento.id"),'from':(carboidratos.Alimento.list()),'optionValue':({ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'}),'optionKey':("id")],-1)
-printHtmlPart(65)
-}
-else {
-printHtmlPart(66)
-invokeTag('select','g',235,['class':("alimento"),'noSelection':(['-1': message(code:'alimentonaocadastrado.label')]),'id':("alimento"),'name':("alimento.id"),'from':(carboidratos.Alimento.list()),'optionValue':({ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'}),'optionKey':("id")],-1)
-printHtmlPart(65)
-}
 printHtmlPart(67)
-invokeTag('field','g',239,['min':("0"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento),'class':("qtd"),'size':("4"),'name':("qtdalimento"),'type':("number"),'step':("0.1")],-1)
-printHtmlPart(34)
-invokeTag('textField','g',241,['readonly':(contagemCarboidratosAlimentoInstance.alimento ? true : false),'value':(contagemCarboidratosAlimentoInstance.alimentoforalista),'id':("alimentoforalista"),'name':("alimentoforalista"),'class':("obs")],-1)
-printHtmlPart(35)
-invokeTag('field','g',243,['min':("0"),'readonly':(contagemCarboidratosAlimentoInstance.alimento ? true:false),'id':("carboidratos"),'value':(contagemCarboidratosAlimentoInstance.qtdcarboidrato),'class':("qtd"),'size':("4"),'name':("qtdcarboidrato"),'type':("number"),'step':("0.1")],-1)
-printHtmlPart(68)
-if(true && (contagemCarboidratosAlimentoInstance.alimento)) {
-printHtmlPart(69)
-invokeTag('set','g',247,['var':("totaldia"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento*contagemCarboidratosAlimentoInstance.alimento.carboidratosg)],-1)
+invokeTag('select','g',234,['value':(contagemCarboidratosAlimentoInstance.alimento.id),'class':("alimento"),'noSelection':(['-1': message(code:'alimentonaocadastrado.label')]),'id':("alimento"),'name':("alimento.id"),'from':(carboidratos.Alimento.list()),'optionValue':({ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'}),'optionKey':("id")],-1)
 printHtmlPart(66)
-invokeTag('formatNumber','g',248,['number':(totaldia),'type':("number"),'maxFractionDigits':("2")],-1)
-printHtmlPart(70)
 }
 else {
-printHtmlPart(69)
-invokeTag('set','g',253,['var':("totaldia"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento* (contagemCarboidratosAlimentoInstance.qtdcarboidrato ? contagemCarboidratosAlimentoInstance.qtdcarboidrato : 0))],-1)
+printHtmlPart(67)
+invokeTag('select','g',237,['class':("alimento"),'noSelection':(['-1': message(code:'alimentonaocadastrado.label')]),'id':("alimento"),'name':("alimento.id"),'from':(carboidratos.Alimento.list()),'optionValue':({ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'}),'optionKey':("id")],-1)
 printHtmlPart(66)
-invokeTag('formatNumber','g',254,['number':(totaldia),'type':("number"),'maxFractionDigits':("2")],-1)
+}
+printHtmlPart(68)
+invokeTag('field','g',241,['min':("0"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento),'class':("qtd"),'size':("4"),'name':("qtdalimento"),'type':("number"),'step':("0.1")],-1)
+printHtmlPart(34)
+invokeTag('textField','g',243,['readonly':(contagemCarboidratosAlimentoInstance.alimento ? true : false),'value':(contagemCarboidratosAlimentoInstance.alimentoforalista),'id':("alimentoforalista"),'name':("alimentoforalista"),'class':("obs")],-1)
+printHtmlPart(35)
+invokeTag('field','g',245,['min':("0"),'readonly':(contagemCarboidratosAlimentoInstance.alimento ? true:false),'id':("carboidratos"),'value':(contagemCarboidratosAlimentoInstance.qtdcarboidrato),'class':("qtd"),'size':("4"),'name':("qtdcarboidrato"),'type':("number"),'step':("0.1")],-1)
+printHtmlPart(69)
+if(true && (contagemCarboidratosAlimentoInstance.alimento)) {
+printHtmlPart(70)
+invokeTag('set','g',249,['var':("totaldia"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento*contagemCarboidratosAlimentoInstance.alimento.carboidratosg)],-1)
+printHtmlPart(67)
+invokeTag('formatNumber','g',250,['number':(totaldia),'type':("number"),'maxFractionDigits':("2")],-1)
 printHtmlPart(71)
 }
+else {
+printHtmlPart(70)
+invokeTag('set','g',255,['var':("totaldia"),'value':(contagemCarboidratosAlimentoInstance.qtdalimento* (contagemCarboidratosAlimentoInstance.qtdcarboidrato ? contagemCarboidratosAlimentoInstance.qtdcarboidrato : 0))],-1)
+printHtmlPart(67)
+invokeTag('formatNumber','g',256,['number':(totaldia),'type':("number"),'maxFractionDigits':("2")],-1)
 printHtmlPart(72)
-createTagBody(4, {->
-invokeTag('image','asset',259,['class':("excluir"),'src':("skin/remove.png"),'title':(message(code:'excluiralimento.confirm.message'))],-1)
-})
-invokeTag('link','g',259,['params':([mes:mes,ano:ano]),'onclick':("return confirm('${message(code: 'excluiralimento.confirm.message', default: 'Are you sure?')}');"),'id':(contagemCarboidratosAlimentoInstance.id),'action':("delete"),'controller':("ContagemCarboidratosAlimento")],4)
+}
 printHtmlPart(73)
-invokeTag('set','g',262,['var':("diaanterior"),'value':(diaatual)],-1)
-printHtmlPart(50)
-invokeTag('set','g',263,['var':("refeicaoanterior"),'value':(refeicaoatual)],-1)
+createTagBody(4, {->
+invokeTag('image','asset',261,['class':("excluir"),'src':("skin/remove.png"),'title':(message(code:'excluiralimento.confirm.message'))],-1)
+})
+invokeTag('link','g',261,['params':([mes:mes,ano:ano]),'onclick':("return confirm('${message(code: 'excluiralimento.confirm.message', default: 'Are you sure?')}');"),'id':(contagemCarboidratosAlimentoInstance.id),'action':("delete"),'controller':("ContagemCarboidratosAlimento")],4)
 printHtmlPart(74)
+invokeTag('set','g',264,['var':("diaanterior"),'value':(diaatual)],-1)
+printHtmlPart(50)
+invokeTag('set','g',265,['var':("refeicaoanterior"),'value':(refeicaoatual)],-1)
+printHtmlPart(75)
 i++
 }
 }
-printHtmlPart(75)
-invokeTag('actionSubmit','g',271,['class':("save"),'action':("update"),'value':(message(code: 'default.button.update.label', default: 'Update'))],-1)
+printHtmlPart(76)
+invokeTag('actionSubmit','g',273,['class':("save"),'action':("update"),'value':(message(code: 'default.button.update.label', default: 'Update'))],-1)
 printHtmlPart(37)
 })
-invokeTag('form','g',277,['class':("formtable"),'url':([resource:itensContagemCarboidratosInstance, action:'update'])],2)
-printHtmlPart(76)
-})
-invokeTag('captureBody','sitemesh',280,[:],1)
+invokeTag('form','g',279,['class':("formtable"),'url':([resource:itensContagemCarboidratosInstance, action:'update'])],2)
 printHtmlPart(77)
+})
+invokeTag('captureBody','sitemesh',282,[:],1)
+printHtmlPart(78)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1428106395000L
+public static final long LAST_MODIFIED = 1428118891000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
