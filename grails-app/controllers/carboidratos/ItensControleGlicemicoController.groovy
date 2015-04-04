@@ -285,7 +285,7 @@ class ItensControleGlicemicoController extends BaseController{
 				}else{
 					controleglicemicoid		= (params.controleglicemico.id ? params.controleglicemico.id.toInteger() : null)
 					dia						= (params.dia ? params.dia.toInteger() : null)
-					refeicaoid				= (params.refeicaoatual ? params.refeicaoatual.toInteger() : null)
+					refeicaoid				= (params.refeicao.id ? params.refeicao.id.toInteger() : null)
 					qtdinsulinelenta 		= (params.qtdinsulinelenta ? params.qtdinsulinelenta.toInteger() : null)
 					valorglicemiapre 		= (params.valorglicemiapre ? params.valorglicemiapre.toInteger() : null)
 					qtdinsulinarapidapre 	= (params.qtdinsulinarapidapre ? params.qtdinsulinarapidapre.toInteger() : null)

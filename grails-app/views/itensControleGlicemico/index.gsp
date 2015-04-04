@@ -75,7 +75,7 @@
 				<table>
 					<thead>
 							<tr>
-								<th colspan="11"><g:message code="controle.new.label" /></th>
+								<th colspan="9"><g:message code="controle.new.label" /></th>
 							</tr>
 							<tr>
 							
@@ -83,11 +83,9 @@
 								<th><g:message code="controle.refeicao.label" /></th>
 								<th><g:message code="controle.qtdinsulinelenta.label" /></th>
 								<th><g:message code="controle.valorglicemiapre.label" /></th>
-								<th></th>
 								<th><g:message code="controle.qtdinsulinarapidapre.label" /></th>
 								<th><g:message code="controle.qtdcarboidrato.label" /></th>
 								<th><g:message code="controle.valorglicemiapos.label" /></th>
-								<th></th>
 								<th><g:message code="controle.qtdinsulinarapidapos.label" /></th>
 								<th><g:message code="controle.observacao.label"/></th>
 								
@@ -105,22 +103,16 @@
 								</td>
 								<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" /></td>
 								<td><g:field class="qtd" size="4" id="valorglicemiapre" name="valorglicemiapre" type="number" /></td>
-								<td>
-									    <asset:image id="calculapre" class="excluir" src="skin/calcular.png" title="${message(code:'calcularvalorinsulinapre.confirm.message')}"/>
-								</td>
 								<td><g:field class="qtd" size="4" id="qtdinsulinarapidapre" name="qtdinsulinarapidapre" type="number" /></td>
 								<td><g:field class="qtd" size="4" id="qtdcarboidratos" name="qtdcarboidrato" type="number" step="0.01"/></td>
 								<td><g:field class="qtd" size="4" id="valorglicemiapos" name="valorglicemiapos" type="number" /></td>
-								<td>
-										<asset:image id="calculapos" class="excluir" src="skin/calcular.png" title="${message(code:'calcularvalorinsulinapos.confirm.message')}"/>
-								</td>
 								<td><g:field class="qtd" size="4" id="qtdinsulinarapidapos" name="qtdinsulinarapidapos" type="number" /></td>
 								<td><g:textField name="observacao" class="obs"/></td>
 							
 							</tr>
 													
 							<tr class="nohover">
-								<td colspan="11">
+								<td colspan="9">
 									<fieldset class="buttons">
 										<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 									</fieldset>

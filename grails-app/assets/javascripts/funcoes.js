@@ -88,16 +88,17 @@ function carregaContagem() {
     });
 };
 
-function carregaContagemIns(tipo) {  
+function carregaContagemIns(tipo, objeto) {  
 	
-	var form=$("#formins");
-    var dia=($("#formins").find('.dia')).val(); 
+	var linha=$(objeto).closest("tr"); 
+	var dia=($(linha).find('.dia')).val(); 
+	var valorglicemiapre=($(linha).find('#valorglicemiapre')).val(); 
+    var valorglicemiapos=($(linha).find('#valorglicemiapos')).val(); 
+    var qtdcarboidratos=($(linha).find('#qtdcarboidratos')).val(); 
+    var refeicaoid=($(linha).find('#refeicaoins')).val();
     var mes=($("#formins").find('#mes')).val(); 
-    var ano=($("#formins").find('#ano')).val(); 
-    var valorglicemiapre=($("#formins").find('#valorglicemiapre')).val(); 
-    var valorglicemiapos=($("#formins").find('#valorglicemiapos')).val(); 
-    var qtdcarboidratos=($("#formins").find('#qtdcarboidratos')).val(); 
-    var refeicaoid=($("#formins").find('#refeicaoins')).val();;
+    var ano=($("#formins").find('#ano')).val();  
+    
     
     $.ajax({
     	type:"POST",
@@ -109,17 +110,17 @@ function carregaContagemIns(tipo) {
     		if(tipo=='0'){
     			
     			if(data.totalpre!=null){
-    				($("#formins").find('#qtdinsulinarapidapre')).val('');
+    				($(linha).find('#qtdinsulinarapidapre')).val('');
     				var totalpre = data.totalpre.toFixed(0);
-    				($("#formins").find('#qtdinsulinarapidapre')).val(totalpre);
+    				($(linha).find('#qtdinsulinarapidapre')).val(totalpre);
     			}
     		}  
     		if(tipo=='1'){
     			
     			if(data.totalpos!=null){
-	    			($("#formins").find('#qtdinsulinarapidapos')).val('');
+	    			($(linha).find('#qtdinsulinarapidapos')).val('');
 		    		var totalpos = data.totalpos.toFixed(0);
-		    		($("#formins").find('#qtdinsulinarapidapos')).val(totalpos);
+		    		($(linha).find('#qtdinsulinarapidapos')).val(totalpos);
     			}
     		}  
     	},
@@ -195,10 +196,12 @@ $(document).on('change', '.valorglicemiaposalt', function(e) {
 	carregaContagemAlt(1 , this);
 });
 
-$(document).on('click', '#calculapre', function(e) {
-	carregaContagemIns(0);
+$(document).on('change', '#valorglicemiapre', function(e) {
+	e.preventDefault;  
+	carregaContagemIns(0 , this);
 });
 
-$(document).on('click', '#calculapos', function(e) {
-	carregaContagemIns(1);
+$(document).on('change', '#valorglicemiapos', function(e) {
+	e.preventDefault;  
+	carregaContagemIns(1 , this);
 });
