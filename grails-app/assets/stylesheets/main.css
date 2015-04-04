@@ -1025,7 +1025,7 @@ table.impressao td.totalrefeicao {
 	position:relative;
 	margin:0 auto;
 	padding: 5px 0;
-	border-radius:15px;
+	width: 40%;
 }
 
 td span.contagem{

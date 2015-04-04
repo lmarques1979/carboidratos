@@ -21,6 +21,8 @@
 <g:else>
 	<g:set var="dia" value="${formatDate(format:"dd" , date:new Date()).toInteger()}" />
 </g:else>
+
+<g:set var="refeicaousuariolist" value="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}" />
 <!DOCTYPE html>
 <html>
 	<head>
@@ -99,7 +101,7 @@
 							
 								<td><g:field class="dia" size="5" max="31" min="1" name="dia" value="${formatDate(format:"dd" , date:new Date())}" type="number" required=""/></td>
 								<td>
-									<g:select id="refeicaoins" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}"  optionValue="descricao" optionKey="id" value="${params.refeicaoid}"/>
+									<g:select id="refeicaoins" name="refeicao.id" from="${refeicaousuariolist}"  optionValue="descricao" optionKey="id" value="${params.refeicaoid}"/>
 								</td>
 								<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" /></td>
 								<td><g:field class="qtd" size="4" id="valorglicemiapre" name="valorglicemiapre" type="number" /></td>
@@ -193,9 +195,10 @@
 									
 									<td colspan="2">
 										<g:hiddenField id="diaatual" name="diaatual" value="${diaatual}" />
+										<g:hiddenField id="controleglicemico.id" name="controleglicemico.id" value="${itensControleGlicemicoInstance.controleglicemico.id}" />
 									</td>
 									<td>
-										<g:select id="refeicaoalt" name="refeicao.id" from="${carboidratos.Refeicao.refeicaoUsuario(usuarioInstance)}" value="${itensControleGlicemicoInstance.controleglicemico.refeicao.id}" optionValue="descricao" optionKey="id"/>
+										<g:select id="refeicaoalt" name="refeicao.id" from="${refeicaousuariolist}" value="${itensControleGlicemicoInstance.controleglicemico.refeicao.id}" optionValue="descricao" optionKey="id"/>
 									</td>
 									<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" value="${itensControleGlicemicoInstance.qtdinsulinelenta}"/></td>
 									<td><g:field class="qtd" size="4" id="valorglicemiaprealt" name="valorglicemiapre" type="number" value="${itensControleGlicemicoInstance.valorglicemiapre}"/></td>
@@ -227,10 +230,7 @@
 					</tbody>
 					</table>
 			</g:form>
-			
-			<div class="pagination">
-				<g:paginate total="${controleGlicemicoInstanceCount ?: 0}" />
-			</div>
+						
 		</div>
 	</body>
 </html>

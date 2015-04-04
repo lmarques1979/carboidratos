@@ -252,8 +252,9 @@ class ItensControleGlicemicoController extends BaseController{
     def update() {
 		
 		def idcontrole=params.list('id')
-		def diaanterior , diaatual , icontrole=0
-		diaanterior=null
+		def mes=params.list('mes')
+		def ano=params.list('ano')
+		def icontrole=0
 		def erros = []
 		for(int index=0 ; index < idcontrole.size() ; index++){
 				
@@ -262,9 +263,13 @@ class ItensControleGlicemicoController extends BaseController{
 				itensControleGlicemicoInstance = ItensControleGlicemico.get(idcontrole[index].toInteger())
 				def qtdinsulinelenta , valorglicemiapre , qtdinsulinarapidapre
 				def qtdcarboidrato, valorglicemiapos , qtdinsulinarapidapos , idrefeicao
-				def diatela , obs 
+				def dia , obs , refeicaoid , controleglicemicoid
+				def refeicaoInstance , controleglicemicoInstance
 				
 				if (idcontrole.size() > 1){
+					controleglicemicoid		= (params.controleglicemico.id[index] ? params.controleglicemico.id[index].toInteger() : null)
+					dia						= (params.diaatual[index] ? params.diaatual[index].toInteger() : null)
+					refeicaoid				= (params.refeicao.id[index] ? params.refeicao.id[index].toInteger() : null)
 					qtdinsulinelenta 		= (params.qtdinsulinelenta[index] ? params.qtdinsulinelenta[index].toInteger() : null)
 					valorglicemiapre 		= (params.valorglicemiapre[index] ? params.valorglicemiapre[index].toInteger() : null)
 					qtdinsulinarapidapre 	= (params.qtdinsulinarapidapre[index] ? params.qtdinsulinarapidapre[index].toInteger() : null)
@@ -273,6 +278,9 @@ class ItensControleGlicemicoController extends BaseController{
 					qtdinsulinarapidapos 	= (params.qtdinsulinarapidapos[index] ? params.qtdinsulinarapidapos[index].toInteger() : null)
 					obs 					= params.observacao[index]	
 				}else{
+					controleglicemicoid		= (params.controleglicemico.id ? params.controleglicemico.id.toInteger() : null)
+					dia						= (params.dia ? params.dia.toInteger() : null)
+					refeicaoid				= (params.refeicaoatual ? params.refeicaoatual.toInteger() : null)
 					qtdinsulinelenta 		= (params.qtdinsulinelenta ? params.qtdinsulinelenta.toInteger() : null)
 					valorglicemiapre 		= (params.valorglicemiapre ? params.valorglicemiapre.toInteger() : null)
 					qtdinsulinarapidapre 	= (params.qtdinsulinarapidapre ? params.qtdinsulinarapidapre.toInteger() : null)
@@ -281,6 +289,21 @@ class ItensControleGlicemicoController extends BaseController{
 					qtdinsulinarapidapos 	= (params.qtdinsulinarapidapos ? params.qtdinsulinarapidapos.toInteger() : null)
 					obs						= params.observacao
 				}
+				
+				controleglicemicoInstance=ControleGlicemico.get(controleglicemicoid)
+				refeicaoInstance=Refeicao.get(refeicaoid)
+				controleglicemicoInstance.refeicao=refeicaoInstance
+				controleglicemicoInstance.save flush:true
+				
+				if (controleglicemicoInstance.hasErrors()) {
+					controleglicemicoInstance.errors.allErrors.each {
+						erros.add(it)
+					}
+					flash.error=erros
+					redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
+					return
+				}
+				
 				itensControleGlicemicoInstance.qtdinsulinelenta=qtdinsulinelenta
 				itensControleGlicemicoInstance.valorglicemiapre=valorglicemiapre
 				itensControleGlicemicoInstance.qtdinsulinarapidapre=qtdinsulinarapidapre
@@ -291,34 +314,16 @@ class ItensControleGlicemicoController extends BaseController{
 				itensControleGlicemicoInstance.save flush:true
 				
 				if (itensControleGlicemicoInstance.hasErrors()) {
-					respond itensControleGlicemicoInstance.errors, view:'index'
-					return
-				}
-				
-				/*diaanterior=diaatual
-				def controleGlicemicoInstance = itensControleGlicemicoInstance.controleglicemico
-				controleGlicemicoInstance.dia=diatela
-			
-				if (controleGlicemicoInstance.validate()) {
-					controleGlicemicoInstance.save flush:true
-					if (controleGlicemicoInstance.hasErrors()) {
-						respond controleGlicemicoInstance.errors, view:'index'
-						return
+					itensControleGlicemicoInstance.errors.allErrors.each {
+						erros.add(it)
 					}
-				}
-				else {
-					
-					controleGlicemicoInstance.errors.allErrors.each {
-						erros.add(it)  
-					}
-					flash.error=erros 
+					flash.error=erros
 					redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
 					return
-				}*/
-				flash.message = message(code: 'default.created.message', args: [message(code: 'controleGlicemico.label', default: 'ControleGlicemico')])
+				}
 				
 		}
-		
+		flash.message = message(code: 'default.created.message', args: [message(code: 'controleGlicemico.label', default: 'ControleGlicemico')])
 		redirect action:"index", params:[mes:params.int('mes'),ano:params.int('ano') ]
 	}
 

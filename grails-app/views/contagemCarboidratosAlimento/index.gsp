@@ -15,6 +15,7 @@
 <g:else>
 	<g:set var="mes" value="${formatDate(format:"MM" , date:new Date()).toInteger()}" />
 </g:else>
+
 <g:if test="${params.dia}">
 	<g:set var="dia" value="${params.int('dia')}" />
 </g:if>
@@ -22,7 +23,8 @@
 	<g:set var="dia" value="${formatDate(format:"dd" , date:new Date()).toInteger()}" />
 </g:else>
 
-${params }
+<g:set var="alimentosList" value="${carboidratos.Alimento.list()}"/>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -97,7 +99,7 @@ ${params }
 								</td>
 								
 								<td>
-									<g:select class="alimento" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${carboidratos.Alimento.list()}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
+									<g:select class="alimento" noSelection="${['-1': message(code:'alimentonaocadastrado.label')]}" id="alimento" name="alimento.id" from="${alimentosList}"  optionValue="${{ it.nome + ' ' + it.medidausual + ' de ' + it.peso + 'g : ' + it.carboidratosg + 'g Carboidrato(s)'} }" optionKey="id"/>
 								</td>
 								
 								<td><g:field min="0" class="qtd" size="4" name="qtdalimento" type="number" step="0.1"/></td>
@@ -172,6 +174,7 @@ ${params }
 						<g:set var="totalrefeicao" value="0" />
 						<g:hiddenField name="mes" value="${mes}" />
 						<g:hiddenField name="ano" value="${ano}" />
+									
 						<g:each in="${contagemCarboidratosAlimentoInstanceList}" status="i" var="contagemCarboidratosAlimentoInstance">
 									
 							<g:hiddenField name="id" value="${contagemCarboidratosAlimentoInstance.id}"/>
@@ -219,7 +222,10 @@ ${params }
 											
 							<tr class="nohover">
 							
-								<td colspan="4"></td>
+								<td colspan="4">
+									<g:hiddenField name="diaatual" value="${diaatual}" />
+									<g:hiddenField name="refeicaoatual" value="${refeicaoatual}" />
+								</td>
 								
 								<td>
 									<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
@@ -270,10 +276,6 @@ ${params }
 					</table>
 			</g:form>
 
-			
-			<div class="pagination">
-				<g:paginate total="${contagemCarboidratosAlimentoInstanceCount ?: 0}" />
-			</div>
 		</div>
 	</body>
 </html>
