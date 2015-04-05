@@ -3,7 +3,7 @@
 	
 	body {
 		width:100%;
-		font-size:8px;
+		font-size:7px;
 	}
 	
 	img.internacionalizacao{
@@ -95,7 +95,7 @@
 	
 		
 	form {
-	   width:85%;
+	   width:100%;
 	}
 
 	input, textarea {
@@ -115,14 +115,6 @@
 	
 	form {
     	width:100%;
-	}
-	
-	.logousuario img.imgusuario{
-		width:24px;
-		height:24px;
-		position: relative;
-		top: 2.6em;
-		right: -2.5em;
 	}
 	
 	.nav a.home, .nav a.list, .nav a.create {

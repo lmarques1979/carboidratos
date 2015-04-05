@@ -2,7 +2,7 @@ function inserirLinha(){
 	  var row = document.getElementById("clone");
 	  var table = document.getElementById("tabelainclusao");
 	  var clone = row.cloneNode(true);
-	  table.appendChild(clone);
+	  table.appendChild(clone);refeicaoins
 	  ($(clone).closest( "tr" ).find('#qtdalimento')).val('');
 	  ($(clone).closest( "tr" ).find('#alimentoforalista')).val('');
 	  ($(clone).closest( "tr" ).find('#carboidratos')).val('');
@@ -38,6 +38,7 @@ $(document).on('change', '#refeicaoins', function(e) {
     var dia=($("#formins").find('.dia')).val(); 
     var mes=($("#formins").find('#mes')).val(); 
     var ano=($("#formins").find('#ano')).val(); 
+    ($("#formins").find('#qtdcarboidratos')).val('');
     
     $.ajax({
     	type:"POST",
@@ -46,8 +47,8 @@ $(document).on('change', '#refeicaoins', function(e) {
     	dataType: "json",
     	success:function(data, textStatus, jqXHR)
 	    {
+    		
     		if( data.total!=null){
-    			($("#formins").find('#qtdcarboidratos')).val('');
     			var totaldia = data.total.toFixed(2);
     			($("#formins").find('#qtdcarboidratos')).val(totaldia);	
     		}    
@@ -65,7 +66,7 @@ function carregaContagem() {
     var dia=($("#formins").find('.dia')).val(); 
     var mes=($("#formins").find('#mes')).val(); 
     var ano=($("#formins").find('#ano')).val(); 
-    var refeicaoid=($("#formins").find('#refeicaoins')).val();;
+    var refeicaoid=($("#formins").find('#refeicaoins')).val();
     
     $.ajax({
     	type:"POST",
