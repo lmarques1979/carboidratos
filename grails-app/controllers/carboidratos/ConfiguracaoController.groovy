@@ -10,10 +10,8 @@ class ConfiguracaoController extends BaseController{
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	@Secured("isAuthenticated() or authentication.name=='admin'")
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-		
+	def index(Integer max) {
+        
 		def resultado = Configuracao.createCriteria().list() {
 			eq("usuario" ,usuarioLogado)
 		}

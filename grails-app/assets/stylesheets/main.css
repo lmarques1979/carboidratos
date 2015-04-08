@@ -1,7 +1,7 @@
 /* FONT STACK */
 body,
 input, select, textarea {
-	font-family: Ubuntu, Verdana, Geneva, sans-serif;
+	font-family: "Open Sans","open_sansregular",sans-serif;
 }
 
 .clearer{
@@ -40,11 +40,12 @@ html * {
 }
 
 body {
-	background: #ffffff;
-	color: #333333;
+	background:#ECF0F1;;
+	color:#777;
 	margin: 0 auto;
 	max-width:100%;
 	font-size:13px;
+	font-family: "Open Sans","open_sansregular",sans-serif;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
 	-moz-box-shadow: 0 0 0.3em #255b17;
 	-webkit-box-shadow: 0 0 0.3em #255b17;
@@ -65,7 +66,7 @@ body {
 }
 
 a:link, a:visited {
-	color:#184D85;
+	color:#777;
 }
 
 a:hover, a:active {
@@ -114,12 +115,8 @@ img.img {
 
 .footer {
 	padding:0;
-	border-bottom: 0px solid #cd592c;
-	background-image: url(../images/backgroundheader.png);
-	background-repeat:no-repeat;
-	background-position:center center;  
-	background-size:100% 100%;
-	color:#fff;
+	background-color:#000;
+	color:#777;
 	clear: both;
 	font-size: 0.8em;
 	margin-top: 1.5em;
@@ -149,10 +146,11 @@ img.img {
 .nav {
 	background-color:transparent;
 	padding: 0.5em 0.75em;
-	-moz-box-shadow: 0 0 3px 1px #aaaaaa;
-	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-	box-shadow: 0 0 3px 1px #aaaaaa;
+	-moz-box-shadow: 0 0 0 0 #aaaaaa;
+	-webkit-box-shadow: 0 0 0 0 #aaaaaa;
+	box-shadow: 0 0 0 0 #aaaaaa;
 	zoom: 1;
+	
 }
 
 .nav ul {
@@ -184,7 +182,7 @@ img.img {
 }
 
 .nav a:focus, .nav a:hover {
-	background-color:#184D85;
+	background-color:#4D89AD;
 	color: #ffffff;
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
@@ -220,7 +218,7 @@ img.img {
 	padding: 0.3em 1.8em 1.25em;
 	position: relative;
 	zoom: 1;
-	border:1px solid #184D85;
+	border:1px solid #777;
 	margin-top:1.5em;
 	border-radius:5px;
 	width:70%;
@@ -232,7 +230,7 @@ fieldset {
 	padding: 0.3em 1.8em 1.25em;
 	position: relative;
 	zoom: 1;
-	border:1px solid #7f7f7f;
+	border:1px solid #777;
 	margin-top:1.5em;
 	border-radius:0px;
 }
@@ -250,7 +248,7 @@ fieldset {
 
 .fieldcontain label,
 .fieldcontain .property-label {
-	color:#184D85;
+	color:#777;
 	text-align: right;
 	width:45%;
 }
@@ -261,6 +259,7 @@ fieldset {
 
 .fieldcontain .property-value{
 	margin:0 0.5em;
+	font-weight:bold;
 }
 label {
 	cursor: pointer;
@@ -272,6 +271,7 @@ input, select, textarea {
 	background-color: #fcfcfc;
 	border: 1px solid #cccccc;
 	font-size: 1em;
+	color:#777;
 }
 
 
@@ -312,7 +312,7 @@ input:focus, select:focus, textarea:focus {
 
 a.esqueceu:link  , a.esqueceu:visited , a.esqueceu:hover, a.esqueceu:active{
 	text-decoration:none;
-	color:#184D85;
+	color:#4D89AD;
 	font-weight:bold;
 	font-size:1em;
 	margin-left: 46%;
@@ -352,7 +352,7 @@ fieldset.embedded legend {
 }
 
 legend{
-	color:#6abb45;
+	color:#4D89AD;
 	font-size:1em;
 	font-weight:bold;
 	
@@ -408,7 +408,7 @@ input[type="reset"],
 input[type="button"]{
 	float:right;
 	margin:0.5em 1.2em;	
-	background-color:#6ABB45;
+	background-color:#4D89AD;
 	color:#fff;
 	border-radius:5px;
 	padding:0.4em 1.5em;
@@ -416,7 +416,7 @@ input[type="button"]{
 
 form{
 	margin:0 auto;
-	width:70%;	
+	width:55%;	
 }
 
 .error input, .error select, .error textarea {
@@ -471,19 +471,20 @@ td, th {
 	padding: 0.2em 0.6em; 
 	text-align:center;
 	vertical-align: top;
-	font-size:0.8em;
+	font-size:1em;
+	color:#777;
 }
 
 th {
-	background-color: #efefef;
-	background-image: -moz-linear-gradient(top, #ffffff, #eaeaea);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #eaeaea));
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#eaeaea');
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eaeaea')";
-	color: #666666;
+	background-color:#ECF0F1;
+	background-image: -moz-linear-gradient(top, #ffffff, #ECF0F1);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #ECF0F1));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#ffffff', EndColorStr = '#ECF0F1');
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#ECF0F1')";
+	color:#777;
 	line-height: 1.7em;
 	padding:0;
-	border:1px solid #d4d4d4;
+	border:1px solid #ECF0F1;
 }
 
 thead th {
@@ -492,12 +493,12 @@ thead th {
 
 th a:link, a:focus, a:visited, a:active , a:hover{
 	text-decoration:none;
-	color:#666666;
+	color:#777;
 }
 
 thead tr th.sortable a{
 	text-decoration:none;
-	color:#666666;
+	color:#777;
 }
 
 th.sortable a {
@@ -515,11 +516,11 @@ th.desc a {
 }
 
 .odd {
-	background: #f3f3f3;
+	background:#ECF0F1;
 }
 
 .odd a{
-	color:#184D85;
+	color:#777;
 }
 
 .even {
@@ -527,17 +528,25 @@ th.desc a {
 }
 
 .even a{
-    color:#184D85;
+    color:#777;
 }
 
 tr:hover {
-	background:#184D85;
-	color:#fff;
+	background:#4D89AD;
+	color:#ECF0F1;
+}
+
+tr:hover td{
+	color:#ECF0F1;
 }
 
 tr:hover.nohover{
 	background:transparent;
 	color:#000;
+}
+
+tr:hover.nohover td{
+	color:#777;
 }
 
 tr:hover a{
@@ -572,7 +581,7 @@ tr:hover a{
 
 .pagination a:hover, .pagination a:focus,
 .pagination .currentStep {
-	background-color:#184D85;
+	background-color:#4D89AD;
 	color: #ffffff;
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
@@ -616,8 +625,8 @@ tr:hover a{
 
 .buttons input:hover, .buttons input:focus,
 .buttons a:hover, .buttons a:focus {
-	background-color:#184D85;
-	color: #ffffff;
+	background-color:#4D89AD;
+	color:#fff;
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
 	-moz-box-shadow: none;
@@ -628,7 +637,7 @@ tr:hover a{
 .no-borderradius .buttons input:hover, .no-borderradius .buttons input:focus,
 .no-borderradius .buttons a:hover, .no-borderradius .buttons a:focus {
 	background-color: transparent;
-	color: #444444;
+	color: #34495E;
 	text-decoration: underline;
 }
 
@@ -663,15 +672,13 @@ a.skip {
 /*Marques*/
 #header{
 	padding:0;
-	border-bottom: 0px solid #cd592c;
-	background-image: url(../images/backgroundheader.png);
-	background-repeat:no-repeat;
-	background-position:center center;  
-	background-size:100% 100%;
+	background-color: #ECF0F1;
 }
 
 #menu{
 	clear:both;	
+	margin:0 auto;
+	text-align:center;
 }
 
 #menu ul{
@@ -685,23 +692,20 @@ a.skip {
 
 #menu ul li a{
 	display:inline-block;
-	background-color:#184d85;
-	font-size:0.9em;
-	color:#ffffff;
+	font-size:1.3em;
+	color:#4D89AD;
   	text-align:center;
   	text-decoration:none;
 	padding:0.3em 1em;
-	border:1px solid #fff;
 	border-bottom:0px solid #fff;
 	margin:0 0.5em;	
-	border-radius:5px 5px 0 0;
 	position:relative;
 }
 
 #menu ul li .active{
-	color:#184d85;
-	background-color:#fff;
+	border-bottom:4px solid #4D89AD;
 	font-weight:bold;
+	
 }
 
 .inner .login_message {
@@ -727,7 +731,10 @@ img.internacionalizacao{
 }
 
 #buscaalimento{
-	margin:0.7em 0;
+	position:relative;
+    display: block;
+    text-align:center;
+    top:1em;
 }
 
 #buscaalimento form{
@@ -740,23 +747,24 @@ img.internacionalizacao{
 }
 
 #buscaalimento input {
-	border-radius:5px 0 0 5px ;
+	border-radius:15px;
+	width: 25em;
 }
 
 #buscaalimento input.botaobuscar {
-	width:24px;
-	height:24px;
+	width:20px;
+	height:20px;
 	background-image: url(../images/search.png);
-	background-size:23px 23px;
 	background-repeat:no-repeat;
-	background-position:center center;  
 	background-color:transparent;
 	border:0;
 	border-radius:0;
 	margin:0;
 	padding:0;
+	cursor:pointer;
 	position:relative;
-	top:-0.15em;
+	left:-25px;
+	top:2px;
 }
 
 #buscaalimento input:focus[type="submit"] {
@@ -766,6 +774,7 @@ img.internacionalizacao{
 	-moz-box-shadow: 0 0 0 #ffffff;
 	-webkit-box-shadow: 0 0 0 #ffffff;
 	box-shadow: 0 0 0 #ffffff;
+
 }
 
 .filtro form{
@@ -845,7 +854,7 @@ img.internacionalizacao{
 
 .filtrocontagem label
 {
-	color:#184D85;
+	color:#4D89AD;
 	text-align:right;
 	width:auto;
 	cursor: pointer;
@@ -873,9 +882,13 @@ img.internacionalizacao{
     position: absolute;
     display: block;
     top: 1px;
-    color: #FFF;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     margin-left: 3px;
+    color: #284183;
+    right:10em;
+    top:0.3em;
+    color:#4D89AD;
 }
 
 .total{
@@ -888,7 +901,7 @@ body.bodyimpressao{
 	background:#FFF;
 	color:#000;
 	margin: 0px auto;
-	max-width:90%;
+	max-width:90%; 
 	font-size:13px;
 	overflow-x:hidden;
 	box-shadow:0px 0px 0px #fff;
@@ -923,13 +936,13 @@ table.impressao tbody tr td.esquerda{
 
 table.impressao td.totalrefeicao {
 	text-align:left;
-	color:#184D85;
+	color:#777;
 }
 
 .totalrefeicao{
 	text-align:left;
 	font-weight:bold;
-	color:#184D85;
+	color:#777;   
 }
 
 .nohover img{
@@ -943,12 +956,16 @@ table.impressao td.totalrefeicao {
 }
 
 .listadia {
-	background: #eae8e8;
+	background:#ECF0F1;
 }
 
-.listadia:hover{
-	background: #eae8e8;
-	color:#000;
+tr.listadia:hover{
+	background:#ECF0F1;
+	color:#777;
+}
+
+tr.listadia:hover td{
+	color:#777;
 }
 
 .paginainicial{
@@ -962,7 +979,7 @@ table.impressao td.totalrefeicao {
 	text-align:center;
 	font-weight:bold;
 	font-size:15px;
-	color:#184D85;
+	color:#4D89AD;
 }
 
 .listainicial {
@@ -982,7 +999,7 @@ table.impressao td.totalrefeicao {
 }
 
 .listainicial ol li a{
-	color:#184D85;
+	color:#4D89AD;
 	text-decoration:underline;
 }
 
@@ -1002,13 +1019,13 @@ table.impressao td.totalrefeicao {
 .linksdia a.dia:link,a.dia:hover,a.dia:active,a.dia:visited{
 	text-decoration:none;
 	padding: 0 0.3em;
-	color:#184D85;
+	color:#777;
 }
 
 .linksdia a.atual:link,a.atual:hover,a.atual:active,a.atual:visited {
-	font-size:16px;
+	font-size:1.7em;
 	font-weight:bold;
-	color:#6ABB45;
+	color:#4D89AD;
 	text-decoration:none;
 }
 
@@ -1021,13 +1038,12 @@ table.impressao td.totalrefeicao {
 }
 
 #logo .logo {
-	display:block;
-	position:relative;
-	margin:0 auto;
-	padding: 5px 0;
-	width: 40%;
+    display: block;
+    position: relative;
+    top: 0.3em;
+    left: 1.5em;
 }
 
 td span.contagem{
-	color:#184D85;
+	color:#4D89AD;
 }
