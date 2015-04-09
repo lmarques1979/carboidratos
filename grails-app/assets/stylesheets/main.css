@@ -863,7 +863,9 @@ img.internacionalizacao{
 }
 
 .filtro{
-	margin:1.5em 0;
+	display:block;
+	margin:1.5em auto;
+	text-align: center;
 }
 
 .ano{
@@ -1046,4 +1048,7 @@ tr.listadia:hover td{
 
 td span.contagem{
 	color:#4D89AD;
+}
+span.filtrodata{
+	font-weight: bold;
 }

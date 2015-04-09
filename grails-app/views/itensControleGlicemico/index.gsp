@@ -62,6 +62,9 @@
 						
 			<div class="filtro"> 
 				<g:form url="[resource:itensControleGlicemicoInstance, action:'index']" >
+					<span class="filtrodata">
+						<g:message code="filtrodata.message"/>
+					</span>
 					<g:select onchange="this.form.submit()" value="${mes}" name="mes" from="${[message(code:'1.label'),message(code:'2.label'),message(code:'3.label'),message(code:'4.label'),message(code:'5.label'),message(code:'6.label'),message(code:'7.label'),message(code:'8.label'),message(code:'9.label'),message(code:'10.label'),message(code:'11.label'),message(code:'12.label')]}" keys="${['1','2','3','4','5','6','7','8','9','10','11','12']}"/>
 					<g:field onchange="this.form.submit()" class="ano" min="2000" name="ano" value="${ano}" type="number"/>
 				</g:form>				
