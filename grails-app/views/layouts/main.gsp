@@ -2,6 +2,7 @@
 <sec:ifLoggedIn>
 	<g:set var="usuarioInstance" value="${Usuario.get(sec.loggedInUserInfo(field: 'id'))}" />
 </sec:ifLoggedIn>
+<g:set var="language" value="${session.'org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE'.toString()}"/>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -21,20 +22,12 @@
 		<g:layoutHead/>
 	</head>
 	<body>
+	
 		<div id="header">
 			
 			<div id="logo">
 				
-				<g:if  test="${params.lang=='en'}">
-					<asset:image class="logo" src="logoen.png"/>
-				</g:if>
-				<g:elseif test="${params.lang=='es'}">
-					<asset:image class="logo" src="logoes.png"/>
-				</g:elseif>
-				<g:else>
-					<asset:image class="logo" src="logo.png"/>
-				</g:else>
-				
+				<asset:image class="logo" src="${language=='en' ? 'logoen.png' : language=='es' ? 'logoes.png' : 'logo.png'}"/>
 				
 				<div class="nacionalizacao">
 					<g:link id="${params.id}" action="${params.action ? params.action : 'index'}" controller="${params.controller ? params.controller : 'index'}" params="[lang: 'pt_BR']"><asset:image class="internacionalizacao" src="bandeiras/24/Brazil.png" title="${message(code:'portuguesbrasil.label')}"/></g:link>
