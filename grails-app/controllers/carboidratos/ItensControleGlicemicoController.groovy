@@ -37,12 +37,14 @@ class ItensControleGlicemicoController extends BaseController{
 				}else{
 					totalpre= ((valorpre-metaglicose)/sensibilidadeinsulina) + (qtdcarboidratos/sensibilidadecarboidrato)
 				}
+				
 			}
 		}
 		if(tipo==1){
 			if(valorpos!=null){
 				totalpos= ((valorpos-metaglicose)/sensibilidadeinsulina) - qtdinsulinarepositorio
 			}
+			
 		}
 		render(status:200,contentType: "application/json"){
 				[totalpre:totalpre , totalpos:totalpos]
