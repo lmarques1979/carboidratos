@@ -25,7 +25,16 @@
 			
 			<div id="logo">
 				
-				<asset:image class="logo" src="logo.png"/>
+				<g:if  test="${params.lang=='en'}">
+					<asset:image class="logo" src="logoen.png"/>
+				</g:if>
+				<g:elseif test="${params.lang=='es'}">
+					<asset:image class="logo" src="logoes.png"/>
+				</g:elseif>
+				<g:else>
+					<asset:image class="logo" src="logo.png"/>
+				</g:else>
+				
 				
 				<div class="nacionalizacao">
 					<g:link id="${params.id}" action="${params.action ? params.action : 'index'}" controller="${params.controller ? params.controller : 'index'}" params="[lang: 'pt_BR']"><asset:image class="internacionalizacao" src="bandeiras/24/Brazil.png" title="${message(code:'portuguesbrasil.label')}"/></g:link>
