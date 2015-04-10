@@ -7,6 +7,10 @@
 		font-size:7px;
 	}
 	
+	img.excluir{
+		width:1.4em;
+		height:1.4em;
+	}
 	
 	.logousuario a img{
 		width:35px;
@@ -128,7 +132,8 @@
 	}
 	
 	#menu ul li a {
-    	font-size: 1em;
+    	font-size:1em;
+    	padding:0.2em;
 	}
 	
 	.formtable td .dia {
