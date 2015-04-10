@@ -83,7 +83,8 @@
 	/* hide all but the first column of list tables */
 	.scaffold-list td:not(:first-child),
 	.scaffold-list th:not(:first-child) {
-		display: none;
+		/*display:none;*/
+		display: normal;
 	}
 
 	.scaffold-list thead th {
@@ -114,10 +115,11 @@
 		margin-left: 0;
 	}
 	
-	input, textarea {
-	    width: 89%;
-	}
 	
+	.formtable td .dia {
+    	width:4em;
+    }
+
 	.paginainicial{
 		width:100%;
 		border:0px solid #000;

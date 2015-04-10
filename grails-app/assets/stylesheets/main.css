@@ -272,6 +272,7 @@ input, select, textarea {
 	border: 1px solid #cccccc;
 	font-size: 1em;
 	color:#777;
+	width:auto;
 }
 
 
@@ -468,11 +469,12 @@ tr>td:last-child, tr>th:last-child {
 
 td, th {
 	line-height: 1.5em;
-	padding: 0.2em 0.6em; 
+	padding: 0.2em; 
 	text-align:center;
 	vertical-align: top;
 	font-size:1em;
 	color:#777;
+	white-space: normal;
 }
 
 th {
@@ -483,12 +485,12 @@ th {
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#ECF0F1')";
 	color:#777;
 	line-height: 1.7em;
-	padding:0;
-	border:1px solid #ECF0F1;
+	border:1px solid #d4d4d4;
 }
 
 thead th {
-	white-space: nowrap;
+	/*white-space: nowrap;*/
+	white-space: normal;
 }
 
 th a:link, a:focus, a:visited, a:active , a:hover{
@@ -505,6 +507,7 @@ th.sortable a {
 	background-position: right;
 	background-repeat: no-repeat;
 	padding-right: 1.1em;
+	white-space: normal;
 }
 
 th.asc a {
@@ -975,7 +978,7 @@ tr.listadia:hover td{
 .paginainicial{
 	display:block;
 	margin:5px auto;
-	width:80%;
+	width:65%;
 	border:0px solid #000;
 }
 

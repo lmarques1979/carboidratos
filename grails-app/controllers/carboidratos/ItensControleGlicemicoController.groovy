@@ -330,7 +330,7 @@ class ItensControleGlicemicoController extends BaseController{
 				}
 				
 		}
-		flash.message = message(code: 'default.created.message', args: [message(code: 'controleGlicemico.label', default: 'ControleGlicemico')])
+		flash.message = message(code: 'default.updated.message', args: [message(code: 'controleGlicemico.label', default: 'ControleGlicemico')])
 		redirect action:"index", params:[dia:dia, mes:params.int('mes'),ano:params.int('ano') ]
 	}
 

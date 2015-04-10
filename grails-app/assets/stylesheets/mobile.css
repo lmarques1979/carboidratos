@@ -64,14 +64,15 @@
 		box-sizing: border-box;
 	}
 
-	select, input[type=checkbox], input[type=radio], input[type=submit], input[type=button], input[type=reset] {
+	select, input {
 		width: auto;
 	}
 
 	/* hide all but the first column of list tables */
 	.scaffold-list td:not(:first-child),
 	.scaffold-list th:not(:first-child) {
-		display: none;
+		/*display: none;*/
+		display:normal;
 	}
 
 	.scaffold-list thead th {
@@ -107,10 +108,7 @@
 	   width:80%;
 	}
 
-	input, textarea {
-	    width: 89%;
-	}
-	
+		
 	.logousuario a {
     	top:1em;
 	}
@@ -131,6 +129,14 @@
     	width: 4em;
 	}
 	
+	.formtable td .dia {
+    	width:4em;
+    }
+    
+    input , textarea{
+    
+    }
+    
 	.paginainicial{
 		width:100%;
 		border:0px solid #000;
