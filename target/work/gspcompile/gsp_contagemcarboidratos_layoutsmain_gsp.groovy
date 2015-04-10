@@ -78,119 +78,119 @@ if(true && (usuarioInstance)) {
 printHtmlPart(14)
 createTagBody(4, {->
 printHtmlPart(15)
-expressionOut.print(usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] ')
+invokeTag('image','asset',44,['class':("logousuario"),'src':(usuarioInstance.imagem ? usuarioInstance.imagem : 'noimage.png'),'title':(usuarioInstance.buscaNome(usuarioInstance))],-1)
 printHtmlPart(14)
 })
-invokeTag('link','g',43,['controller':("usuario"),'action':("show"),'id':(usuarioInstance.id)],4)
-printHtmlPart(16)
+invokeTag('link','g',45,['controller':("usuario"),'action':("show"),'id':(usuarioInstance.id)],4)
+printHtmlPart(10)
 }
-printHtmlPart(17)
+printHtmlPart(16)
 })
-invokeTag('ifLoggedIn','sec',47,[:],2)
+invokeTag('ifLoggedIn','sec',48,[:],2)
+printHtmlPart(17)
+createTagBody(2, {->
+invokeTag('message','g',52,['code':("paginalprincipal.label")],-1)
+})
+invokeTag('link','g',52,['class':(params.controller=='index' && params.action=='index' ? 'active' : ''),'controller':("Index"),'action':("index")],2)
 printHtmlPart(18)
 createTagBody(2, {->
-invokeTag('message','g',53,['code':("paginalprincipal.label")],-1)
-})
-invokeTag('link','g',53,['class':(params.controller=='index' && params.action=='index' ? 'active' : ''),'controller':("Index"),'action':("index")],2)
 printHtmlPart(19)
-createTagBody(2, {->
+createTagBody(3, {->
+invokeTag('message','g',54,['code':("listaalimentos.label")],-1)
+})
+invokeTag('link','g',54,['class':(params.controller=='alimento' && params.action=='index' ? 'active' : ''),'controller':("Alimento"),'action':("index")],3)
 printHtmlPart(20)
 createTagBody(3, {->
-invokeTag('message','g',55,['code':("listaalimentos.label")],-1)
+invokeTag('message','g',55,['code':("cadastrousuario.label")],-1)
 })
-invokeTag('link','g',55,['class':(params.controller=='alimento' && params.action=='index' ? 'active' : ''),'controller':("Alimento"),'action':("index")],3)
-printHtmlPart(21)
+invokeTag('link','g',55,['class':(params.controller=='usuario' && params.action=='create' ? 'active' : ''),'controller':("Usuario"),'action':("create")],3)
+printHtmlPart(20)
 createTagBody(3, {->
-invokeTag('message','g',56,['code':("cadastrousuario.label")],-1)
+invokeTag('message','g',56,['code':("login.label")],-1)
 })
-invokeTag('link','g',56,['class':(params.controller=='usuario' && params.action=='create' ? 'active' : ''),'controller':("Usuario"),'action':("create")],3)
-printHtmlPart(21)
-createTagBody(3, {->
-invokeTag('message','g',57,['code':("login.label")],-1)
+invokeTag('link','g',56,['class':(params.controller=='login' && params.action=='auth' ? 'active' : ''),'controller':("login"),'action':("auth")],3)
+printHtmlPart(18)
 })
-invokeTag('link','g',57,['class':(params.controller=='login' && params.action=='auth' ? 'active' : ''),'controller':("login"),'action':("auth")],3)
-printHtmlPart(19)
-})
-invokeTag('ifNotLoggedIn','sec',58,[:],2)
+invokeTag('ifNotLoggedIn','sec',57,[:],2)
 printHtmlPart(10)
 createTagBody(2, {->
-printHtmlPart(16)
+printHtmlPart(14)
 if(true && (sec.loggedInUserInfo(field: 'username') == 'admin')) {
+printHtmlPart(21)
+createTagBody(4, {->
+invokeTag('message','g',60,['code':("usuario.list.label")],-1)
+})
+invokeTag('link','g',60,['class':(params.controller=='usuario' ? 'active' : ''),'controller':("Usuario"),'action':("index")],4)
 printHtmlPart(22)
 createTagBody(4, {->
-invokeTag('message','g',61,['code':("usuario.list.label")],-1)
+invokeTag('message','g',61,['code':("listaalimentos.label")],-1)
 })
-invokeTag('link','g',61,['class':(params.controller=='usuario' ? 'active' : ''),'controller':("Usuario"),'action':("index")],4)
-printHtmlPart(23)
+invokeTag('link','g',61,['class':(params.controller=='alimento'  && params.action!='create' ? 'active' : ''),'controller':("Alimento"),'action':("index")],4)
+printHtmlPart(22)
 createTagBody(4, {->
-invokeTag('message','g',62,['code':("listaalimentos.label")],-1)
+invokeTag('message','g',62,['code':("cadastroalimento.label")],-1)
 })
-invokeTag('link','g',62,['class':(params.controller=='alimento'  && params.action!='create' ? 'active' : ''),'controller':("Alimento"),'action':("index")],4)
-printHtmlPart(23)
+invokeTag('link','g',62,['class':(params.controller=='alimento'  && params.action=='create' ? 'active' : ''),'controller':("Alimento"),'action':("create")],4)
+printHtmlPart(22)
 createTagBody(4, {->
-invokeTag('message','g',63,['code':("cadastroalimento.label")],-1)
+invokeTag('message','g',63,['code':("configuracoes.label")],-1)
 })
-invokeTag('link','g',63,['class':(params.controller=='alimento'  && params.action=='create' ? 'active' : ''),'controller':("Alimento"),'action':("create")],4)
+invokeTag('link','g',63,['class':(params.controller=='configuracoes' ? 'active' : ''),'controller':("Configuracoes"),'action':("index")],4)
 printHtmlPart(23)
-createTagBody(4, {->
-invokeTag('message','g',64,['code':("configuracoes.label")],-1)
-})
-invokeTag('link','g',64,['class':(params.controller=='configuracoes' ? 'active' : ''),'controller':("Configuracoes"),'action':("index")],4)
-printHtmlPart(24)
 }
 else {
+printHtmlPart(21)
+createTagBody(4, {->
+invokeTag('message','g',66,['code':("configuracao.label")],-1)
+})
+invokeTag('link','g',66,['class':(params.controller=='configuracao' ? 'active' : ''),'controller':("Configuracao"),'action':("index")],4)
 printHtmlPart(22)
 createTagBody(4, {->
-invokeTag('message','g',67,['code':("configuracao.label")],-1)
+invokeTag('message','g',67,['code':("refeicao.label")],-1)
 })
-invokeTag('link','g',67,['class':(params.controller=='configuracao' ? 'active' : ''),'controller':("Configuracao"),'action':("index")],4)
-printHtmlPart(23)
+invokeTag('link','g',67,['class':(params.controller=='refeicao' ? 'active' : ''),'controller':("Refeicao"),'action':("index")],4)
+printHtmlPart(22)
 createTagBody(4, {->
-invokeTag('message','g',68,['code':("refeicao.label")],-1)
+invokeTag('message','g',68,['code':("listaalimentos.label")],-1)
 })
-invokeTag('link','g',68,['class':(params.controller=='refeicao' ? 'active' : ''),'controller':("Refeicao"),'action':("index")],4)
-printHtmlPart(23)
+invokeTag('link','g',68,['class':(params.controller=='alimento' ? 'active' : ''),'controller':("Alimento"),'action':("index")],4)
+printHtmlPart(22)
 createTagBody(4, {->
-invokeTag('message','g',69,['code':("listaalimentos.label")],-1)
+invokeTag('message','g',69,['code':("contagem.label")],-1)
 })
-invokeTag('link','g',69,['class':(params.controller=='alimento' ? 'active' : ''),'controller':("Alimento"),'action':("index")],4)
-printHtmlPart(23)
+invokeTag('link','g',69,['class':(params.controller=='contagemCarboidratosAlimento' && params.action=='index'? 'active' : ''),'controller':("ContagemCarboidratosAlimento"),'action':("index")],4)
+printHtmlPart(22)
 createTagBody(4, {->
-invokeTag('message','g',70,['code':("contagem.label")],-1)
+invokeTag('message','g',70,['code':("controle.label")],-1)
 })
-invokeTag('link','g',70,['class':(params.controller=='contagemCarboidratosAlimento' && params.action=='index'? 'active' : ''),'controller':("ContagemCarboidratosAlimento"),'action':("index")],4)
-printHtmlPart(23)
-createTagBody(4, {->
-invokeTag('message','g',71,['code':("controle.label")],-1)
-})
-invokeTag('link','g',71,['class':(params.controller=='itensControleGlicemico' ? 'active' : ''),'controller':("ItensControleGlicemico"),'action':("index")],4)
-printHtmlPart(25)
+invokeTag('link','g',70,['class':(params.controller=='itensControleGlicemico' ? 'active' : ''),'controller':("ItensControleGlicemico"),'action':("index")],4)
+printHtmlPart(24)
 }
-printHtmlPart(20)
-createTagBody(3, {->
-invokeTag('message','g',74,['code':("logout.label")],-1)
-})
-invokeTag('link','g',74,['controller':("Logout"),'action':("index")],3)
 printHtmlPart(19)
+createTagBody(3, {->
+invokeTag('message','g',73,['code':("logout.label")],-1)
 })
-invokeTag('ifLoggedIn','sec',75,[:],2)
-printHtmlPart(26)
+invokeTag('link','g',73,['controller':("Logout"),'action':("index")],3)
+printHtmlPart(18)
+})
+invokeTag('ifLoggedIn','sec',74,[:],2)
+printHtmlPart(25)
 invokeTag('layoutBody','g',80,[:],-1)
-printHtmlPart(27)
+printHtmlPart(26)
 invokeTag('message','g',81,['code':("footer.label")],-1)
-printHtmlPart(28)
+printHtmlPart(27)
 invokeTag('message','g',82,['code':("spinner.alt"),'default':("Loading&hellip;")],-1)
-printHtmlPart(29)
+printHtmlPart(28)
 })
 invokeTag('captureBody','sitemesh',83,[:],1)
-printHtmlPart(30)
+printHtmlPart(29)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1428596271000L
+public static final long LAST_MODIFIED = 1428700474000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

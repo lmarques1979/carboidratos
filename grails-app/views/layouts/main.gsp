@@ -35,18 +35,17 @@
 					<g:link id="${params.id}" action="${params.action ? params.action : 'index'}" controller="${params.controller ? params.controller : 'index'}" params="[lang: 'es']"><asset:image class="internacionalizacao" src="bandeiras/24/spain.png" title="${message(code:'spain.label')}"/></g:link>
 				</div>
 				
-				<sec:ifLoggedIn>
-					<div class="logousuario">
-						<g:if test="${usuarioInstance}">
-							<g:link controller="usuario" action="show" id="${usuarioInstance.id}">
-								${usuarioInstance.buscaNome(usuarioInstance) + ' [ ' + usuarioInstance.username + ' ] '}
-							</g:link>
-						</g:if>	
-						
-					</div>
-				</sec:ifLoggedIn>		
-				
 			</div>
+			
+			<sec:ifLoggedIn>
+				<div class="logousuario">
+					<g:if test="${usuarioInstance}">
+						<g:link controller="usuario" action="show" id="${usuarioInstance.id}">
+							<asset:image class="logousuario" src="${usuarioInstance.imagem ? usuarioInstance.imagem : 'noimage.png'}" title="${usuarioInstance.buscaNome(usuarioInstance)}"/>
+						</g:link>
+					</g:if>
+				</div>
+			</sec:ifLoggedIn>
 			
 			<div id="menu">
 				<ul>
@@ -74,8 +73,9 @@
 						<li><g:link controller="Logout" action="index"><g:message code="logout.label"/></g:link></li>
 					</sec:ifLoggedIn>
 				</ul>
-				
 			</div>
+			
+				
 		</div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"><g:message code="footer.label"/></div>
