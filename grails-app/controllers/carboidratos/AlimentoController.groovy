@@ -19,7 +19,7 @@ class AlimentoController extends BaseController {
 		if (usuarioLogado){
 			configuracaoParams
 		}else{
-		    params.max = Math.min(max ?: 20, 100)
+		    params.max = Math.min(max ?: 50, 100)
 		}
 		
 		def filtro=params.nome
