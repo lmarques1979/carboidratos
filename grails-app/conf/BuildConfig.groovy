@@ -63,7 +63,7 @@ grails.project.dependency.resolution = {
 
 	plugins {
 		// plugins for the build system only
-		build ":tomcat:8.0.21"
+		build ":tomcat:7.0.54"
 		//Render PDF
 		compile ":rendering:1.0.0"
 		//Amazon S3
