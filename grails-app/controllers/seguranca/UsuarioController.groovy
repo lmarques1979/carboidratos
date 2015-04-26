@@ -6,24 +6,23 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
-@Secured('isAuthenticated()')
+@Secured('permitAll')
 class UsuarioController extends BaseController{
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 	def FileUploadService
 	
+	@Secured('isAuthenticated()')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Usuario.list(params), model:[usuarioInstanceCount: Usuario.count()]
     }
 
-	@Secured('permitAll')
 	def esqueceusenha() {
 		 
 	}
 	
 	@Transactional
-	@Secured('permitAll')
 	def enviarsenha() {
 		
 		def valido=1
@@ -80,8 +79,7 @@ class UsuarioController extends BaseController{
 		}
 	}
 	 
-	@Secured('permitAll')
-    def show(Usuario usuarioInstance) {
+	def show(Usuario usuarioInstance) {
 		
 		def erros=[]
 		if(usuarioInstance!=usuarioLogado && usuarioLogado.username!='admin'){
@@ -93,14 +91,12 @@ class UsuarioController extends BaseController{
         respond usuarioInstance
     }
 
-	@Secured('permitAll')
-    def create() {
+	def create() {
         respond new Usuario(params)
     } 
 
     @Transactional
-	@Secured('permitAll')
-    def save(Usuario usuarioInstance) {
+	def save(Usuario usuarioInstance) {
         if (usuarioInstance == null) {
             notFound()
             return
@@ -129,10 +125,11 @@ class UsuarioController extends BaseController{
         }
     }
 
+	@Secured('isAuthenticated()')
     def edit(Usuario usuarioInstance) {
 		
 		def erros=[]
-		if(usuarioInstance!=usuarioLogado){
+		if(usuarioInstance!=usuarioLogado && usuarioLogado.username!="admin"){
 			erros[0] = message(code: 'usuarionaopermitido.error')
 			flash.erros = erros
 			return
@@ -141,6 +138,7 @@ class UsuarioController extends BaseController{
     }
 
     @Transactional
+	@Secured('isAuthenticated()')
     def update(Usuario usuarioInstance) {
         if (usuarioInstance == null) {
             notFound()
@@ -171,6 +169,7 @@ class UsuarioController extends BaseController{
     }
 
     @Transactional
+	@Secured('isAuthenticated()')
     def delete(Usuario usuarioInstance) {
 
         if (usuarioInstance == null) {

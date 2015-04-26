@@ -78,7 +78,7 @@ if(true && (usuarioInstance)) {
 printHtmlPart(14)
 createTagBody(4, {->
 printHtmlPart(15)
-invokeTag('image','asset',44,['class':("logousuario"),'src':(usuarioInstance.imagem ? usuarioInstance.imagem : 'noimage.png'),'title':(usuarioInstance.buscaNome(usuarioInstance))],-1)
+invokeTag('image','asset',44,['class':("logousuario"),'src':(usuarioInstance.imagem ? usuarioInstance.imagem : 'noimage.png'),'title':(usuarioInstance.buscaNome(usuarioInstance) + ' [' + usuarioInstance.username + ']')],-1)
 printHtmlPart(14)
 })
 invokeTag('link','g',45,['controller':("usuario"),'action':("show"),'id':(usuarioInstance.id)],4)
@@ -190,7 +190,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1428700474000L
+public static final long LAST_MODIFIED = 1430012254000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

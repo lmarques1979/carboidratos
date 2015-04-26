@@ -52,6 +52,13 @@
 	<input type="file" name="arquivo" placeholder="${message(code:'usuario.imagem.label') }"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: usuarioInstance, field: 'enabled', 'error')} ">
+	<label for="enabled">
+		<g:message code="usuario.enabled.label" default="Enabled" />
+	</label>
+	<g:checkBox name="enabled" value="${usuarioInstance?.enabled}" />
+</div>
+
 <!--
 <div class="fieldcontain ${hasErrors(bean: usuarioInstance, field: 'accountExpired', 'error')} ">
 	<label for="accountExpired">
@@ -68,15 +75,6 @@
 		
 	</label><div class="clearer"></div>
 	<g:checkBox name="accountLocked" value="${usuarioInstance?.accountLocked}" />
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: usuarioInstance, field: 'enabled', 'error')} ">
-	<label for="enabled">
-		<g:message code="usuario.enabled.label" default="Enabled" />
-		
-	</label><div class="clearer"></div>
-	<g:checkBox name="enabled" value="${usuarioInstance?.enabled}" />
 
 </div>
 

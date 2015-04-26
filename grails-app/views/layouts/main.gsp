@@ -41,7 +41,7 @@
 				<div class="logousuario">
 					<g:if test="${usuarioInstance}">
 						<g:link controller="usuario" action="show" id="${usuarioInstance.id}">
-							<asset:image class="logousuario" src="${usuarioInstance.imagem ? usuarioInstance.imagem : 'noimage.png'}" title="${usuarioInstance.buscaNome(usuarioInstance)}"/>
+							<asset:image class="logousuario" src="${usuarioInstance.imagem ? usuarioInstance.imagem : 'noimage.png'}" title="${usuarioInstance.buscaNome(usuarioInstance) + ' [' + usuarioInstance.username + ']'}"/>
 						</g:link>
 					</g:if>
 				</div>

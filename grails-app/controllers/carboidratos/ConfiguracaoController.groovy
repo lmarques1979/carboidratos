@@ -4,18 +4,16 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured('isAuthenticated()')
 @Transactional(readOnly = true)
+@Secured('isAuthenticated()')
 class ConfiguracaoController extends BaseController{
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 	def index(Integer max) {
-        
-		def resultado = Configuracao.createCriteria().list() {
+        def resultado = Configuracao.createCriteria().list() {
 			eq("usuario" ,usuarioLogado)
-		}
-		
+		}		
         respond resultado, model:[configuracaoInstanceCount: resultado.size]
     }
 
