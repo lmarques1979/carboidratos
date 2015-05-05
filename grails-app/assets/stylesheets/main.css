@@ -939,6 +939,12 @@ table.impressao tbody tr td {
 	font-size:12px;
 }
 
+table.impressao tbody tr td.tab{
+	text-align:left;
+	padding-left:25px;
+	 
+}
+
 table.impressao tbody tr td.esquerda{
 	text-align:left;
 }

@@ -80,7 +80,7 @@
 							
 								<td colspan="2"></td>
 								
-								<td class="esquerda">
+								<td class="tab">
 									<g:if test="${contagemCarboidratosAlimentoInstance.alimento}">
 											${contagemCarboidratosAlimentoInstance.alimento.nome + ' ' + contagemCarboidratosAlimentoInstance.alimento.medidausual + ' de ' + contagemCarboidratosAlimentoInstance.alimento.peso + 'g : ' + contagemCarboidratosAlimentoInstance.alimento.carboidratosg + 'g Carboidrato(s)'}
 									</g:if>
