@@ -13,7 +13,13 @@ class MyAuthenticationSuccessHandler extends AjaxAwareAuthenticationSuccessHandl
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
 		
-		redirectStrategy.sendRedirect(request, response, '/alimento/index');
+		def username = authentication.getPrincipal().username
+		 
+		if (username=='admin'){
+			redirectStrategy.sendRedirect(request, response, '/usuario/index');
+		}else{
+			redirectStrategy.sendRedirect(request, response, '/contagemCarboidratosAlimento/index');
+		}
 		
 	}
 }
