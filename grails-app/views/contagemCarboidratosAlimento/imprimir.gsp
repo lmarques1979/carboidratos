@@ -55,7 +55,7 @@
 								</tr>
 							</g:if>		
 							<g:if test="${refeicaoanterior!=refeicaoatual}">
-								<tr class="nohover">
+								<tr class="nohover descricaorefeicao">
 									<td></td>
 									<td>
 										<span>${contagemCarboidratosAlimentoInstance.contagemcarboidratos.refeicao.descricao}</span>

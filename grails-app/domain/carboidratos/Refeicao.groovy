@@ -8,6 +8,7 @@ class Refeicao {
 
 	String descricao
 	Integer ordemrefeicao
+	Integer	descontoinsulina=0
 	Usuario usuario
 	Date dateCreated
 	Date lastUpdated
@@ -16,6 +17,7 @@ class Refeicao {
     static constraints = {
 		descricao(nullable: false, blank: false)
 		ordemrefeicao(nullable: false, blank: false)
+		descontoinsulina(nullable: true, blank: true)
 		usuario(nullable: false, blank: false)
 	}
 	

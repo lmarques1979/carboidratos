@@ -194,7 +194,7 @@
 								</tr>
 							</g:if>		
 							<g:if test="${refeicaoanterior!=refeicaoatual}">
-								<tr class="nohover">
+								<tr class="nohover descricaorefeicao">
 									<td colspan="2">
 										<g:hiddenField name="diaatual" value="${contagemCarboidratosAlimentoInstance.contagemcarboidratos.dia}"/>
 									</td>

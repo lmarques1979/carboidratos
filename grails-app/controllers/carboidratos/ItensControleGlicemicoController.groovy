@@ -27,19 +27,21 @@ class ItensControleGlicemicoController extends BaseController{
 		def qtdcarboidratos=params.float('qtdcarboidratos')
 		def qtdinsulinarepositorio=params.int('qtdinsulinarepositorio')
 		def refeicao=Refeicao.get(params.int('refeicaoid'))
+		def descontoinsulina=refeicao.descontoinsulina
 		def usuario=usuarioLogado
 		def totalpre, totalpos
 		if(tipo==0){
 			
 			if(valorpre!=null){
 				if(qtdcarboidratos==null){
-					totalpre= (valorpre-metaglicose)/sensibilidadeinsulina 
+					totalpre= (valorpre-metaglicose)/sensibilidadeinsulina - descontoinsulina
 				}else{
-					totalpre= ((valorpre-metaglicose)/sensibilidadeinsulina) + (qtdcarboidratos/sensibilidadecarboidrato)
+					totalpre= ((valorpre-metaglicose)/sensibilidadeinsulina) + (qtdcarboidratos/sensibilidadecarboidrato) - descontoinsulina
 				}
 				
 			}
 		}
+		
 		if(tipo==1){
 			if(valorpos!=null){
 				totalpos= ((valorpos-metaglicose)/sensibilidadeinsulina) - qtdinsulinarepositorio
@@ -135,6 +137,7 @@ class ItensControleGlicemicoController extends BaseController{
 		
 		respond resultado, model:[ItensControleGlicemicoInstanceCount: resultado.size , mes:params.int('mes') , ano:params.int('ano')]
 	}
+	
     def index(Integer max) {
         Calendar cal = Calendar.getInstance()
 		def mescorrente=cal.get(Calendar.MONTH) + 1

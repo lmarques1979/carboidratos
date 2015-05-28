@@ -38,6 +38,15 @@
 					
 				</li>
 				</g:if>
+				
+				<g:if test="${refeicaoInstance?.descontoinsulina}">
+				<li class="fieldcontain">
+					<span id="ordemrefeicao-label" class="property-label"><g:message code="refeicao.descontoinsulina.label" default="Ordemrefeicao" /></span>
+					
+						<span class="property-value" aria-labelledby="ordemrefeicao-label"><g:fieldValue bean="${refeicaoInstance}" field="descontoinsulina"/></span>
+					
+				</li>
+				</g:if>
 			
 				<g:if test="${refeicaoInstance?.dateCreated}">
 				<li class="fieldcontain">

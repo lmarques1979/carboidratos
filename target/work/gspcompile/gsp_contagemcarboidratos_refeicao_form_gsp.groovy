@@ -26,14 +26,20 @@ printHtmlPart(5)
 invokeTag('message','g',15,['code':("refeicao.ordemrefeicao.label"),'default':("Ordemrefeicao")],-1)
 printHtmlPart(3)
 invokeTag('field','g',18,['name':("ordemrefeicao"),'type':("number"),'value':(refeicaoInstance.ordemrefeicao),'required':("")],-1)
+printHtmlPart(4)
+expressionOut.print(hasErrors(bean: refeicaoInstance, field: 'descontoinsulina', 'error'))
 printHtmlPart(6)
+invokeTag('message','g',24,['code':("refeicao.descontoinsulina.label"),'default':("Desconto Insulina")],-1)
+printHtmlPart(7)
+invokeTag('field','g',26,['name':("descontoinsulina"),'type':("number"),'value':(refeicaoInstance.descontoinsulina)],-1)
+printHtmlPart(8)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1427394332000L
+public static final long LAST_MODIFIED = 1432835589000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

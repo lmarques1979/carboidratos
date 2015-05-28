@@ -922,36 +922,57 @@ table.impressao {
 	border:1px solid #000;
 	border-collapse: collapse;
 	margin-bottom: 1em;
-}
-
-table.impressao thead tr th {
-	text-align:center;
-	background:#fff;
-	border:1px solid #000;
 	color:#000;
-	font-size:12px;
 }
 
-table.impressao tbody tr td {
-	text-align:center;
-	border:0px solid #000;
+table.impressao tr.descricaorefeicao , table.impressao tr.descricaorefeicao td{
+	background:#e5e5e5;
+	color:#284183; 
+	font-weight:normal;
+}
+
+table.impressao tr.descricaorefeicao .totalrefeicao {
+	font-weight:bold;
+}
+
+table.impressao tr.listadia {
+	background:#284183;
+	color:#fff;
+}
+
+table.impressao tr.listadia td {
+	color:#fff;
+}
+
+table.impressao tbody tr, table.impressao tr:hover{
+    color:#000;
+    font-size:1em;
+}
+
+table.impressao th {
 	color:#000;
-	font-size:12px;
 }
 
-table.impressao tbody tr td.tab{
-	text-align:left;
-	padding-left:25px;
-	 
+table.impressao .nohover {
+	background-color:transparent;
 }
 
-table.impressao tbody tr td.esquerda{
-	text-align:left;
+table.impressao tr.descricaorefeicao:hover.nohover td{
+	color:#284183;
 }
 
-table.impressao td.totalrefeicao {
+table.impressao tr:hover.nohover td{
+	color:#000;
+}
+
+table.impressao tr , table.impressao td {
+	background-color:transparent;
+	color:#000;
+	font-weight:normal;
+}
+
+table.impressao tbody td.tab{
 	text-align:left;
-	color:#777;
 }
 
 .totalrefeicao{
@@ -971,16 +992,36 @@ table.impressao td.totalrefeicao {
 }
 
 .listadia {
-	background:#ECF0F1;
+	background:#284183;
+	color:#fff;
 }
 
-tr.listadia:hover{
-	background:#ECF0F1;
-	color:#777;
+tr.listadia:hover , tr.listadia:active{
+	background:#284183;
+	color:#fff;
 }
 
-tr.listadia:hover td{
-	color:#777;
+tr.listadia td , tr.listadia:hover td{
+	color:#FFF;
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+
+.descricaorefeicao{
+	background:#e5e5e5;
+	color:#284183;
+}
+
+tr.descricaorefeicao:hover , tr.descricaorefeicao:active{
+	background:#e5e5e5;
+	color:#284183;
+}
+
+tr.descricaorefeicao td , tr.descricaorefeicao:hover td{
+	color:#284183;
+	font-size:1em;
+	font-weight:bold;
 }
 
 .paginainicial{

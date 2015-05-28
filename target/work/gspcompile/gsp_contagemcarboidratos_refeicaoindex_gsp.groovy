@@ -49,6 +49,8 @@ printHtmlPart(9)
 invokeTag('sortableColumn','g',25,['property':("descricao"),'title':(message(code: 'refeicao.descricao.label', default: 'Descricao'))],-1)
 printHtmlPart(10)
 invokeTag('sortableColumn','g',27,['property':("ordemrefeicao"),'title':(message(code: 'refeicao.ordemrefeicao.label', default: 'Ordemrefeicao'))],-1)
+printHtmlPart(10)
+invokeTag('sortableColumn','g',29,['property':("descontoinsulina"),'title':(message(code: 'refeicao.descontoinsulina.label', default: 'Desconto Insuina'))],-1)
 printHtmlPart(11)
 loop:{
 int i = 0
@@ -62,15 +64,17 @@ expressionOut.print(fieldValue(bean: refeicaoInstance, field: "descricao"))
 invokeTag('link','g',36,['action':("show"),'id':(refeicaoInstance.id)],3)
 printHtmlPart(14)
 expressionOut.print(fieldValue(bean: refeicaoInstance, field: "ordemrefeicao"))
+printHtmlPart(14)
+expressionOut.print(fieldValue(bean: refeicaoInstance, field: "descontoinsulina"))
 printHtmlPart(15)
 i++
 }
 }
 printHtmlPart(16)
-invokeTag('paginate','g',46,['total':(refeicaoInstanceCount ?: 0)],-1)
+invokeTag('paginate','g',47,['total':(refeicaoInstanceCount ?: 0)],-1)
 printHtmlPart(17)
 })
-invokeTag('captureBody','sitemesh',49,[:],1)
+invokeTag('captureBody','sitemesh',50,[:],1)
 printHtmlPart(18)
 }
 public static final Map JSP_TAGS = new HashMap()
@@ -78,7 +82,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1426779445000L
+public static final long LAST_MODIFIED = 1432835950000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'

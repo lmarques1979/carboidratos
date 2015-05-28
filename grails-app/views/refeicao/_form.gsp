@@ -18,3 +18,11 @@
 	<g:field name="ordemrefeicao" type="number" value="${refeicaoInstance.ordemrefeicao}" required=""/>
 
 </div>
+
+<div class="fieldcontain ${hasErrors(bean: refeicaoInstance, field: 'descontoinsulina', 'error')}">
+	<label for="descontoinsulina">
+		<g:message code="refeicao.descontoinsulina.label" default="Desconto Insulina" />
+	</label>
+	<g:field name="descontoinsulina" type="number" value="${refeicaoInstance.descontoinsulina}"/>
+
+</div>

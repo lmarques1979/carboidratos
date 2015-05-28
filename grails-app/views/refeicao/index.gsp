@@ -26,7 +26,7 @@
 					
 						<g:sortableColumn property="ordemrefeicao" title="${message(code: 'refeicao.ordemrefeicao.label', default: 'Ordemrefeicao')}" />
 					
-					
+						<g:sortableColumn property="descontoinsulina" title="${message(code: 'refeicao.descontoinsulina.label', default: 'Desconto Insuina')}" />
 					</tr>
 				</thead>
 				<tbody>
@@ -37,6 +37,7 @@
 					
 						<td>${fieldValue(bean: refeicaoInstance, field: "ordemrefeicao")}</td>
 					
+						<td>${fieldValue(bean: refeicaoInstance, field: "descontoinsulina")}</td>
 						
 					</tr>
 				</g:each>

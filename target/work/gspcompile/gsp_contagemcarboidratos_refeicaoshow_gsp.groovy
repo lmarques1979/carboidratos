@@ -67,45 +67,53 @@ printHtmlPart(16)
 invokeTag('fieldValue','g',37,['bean':(refeicaoInstance),'field':("ordemrefeicao")],-1)
 printHtmlPart(13)
 }
+printHtmlPart(17)
+if(true && (refeicaoInstance?.descontoinsulina)) {
+printHtmlPart(15)
+invokeTag('message','g',44,['code':("refeicao.descontoinsulina.label"),'default':("Ordemrefeicao")],-1)
+printHtmlPart(16)
+invokeTag('fieldValue','g',46,['bean':(refeicaoInstance),'field':("descontoinsulina")],-1)
+printHtmlPart(13)
+}
 printHtmlPart(14)
 if(true && (refeicaoInstance?.dateCreated)) {
-printHtmlPart(17)
-invokeTag('message','g',44,['code':("dateCreated.label"),'default':("Date Created")],-1)
 printHtmlPart(18)
-invokeTag('formatDate','g',46,['format':("dd/MM/yyyy hh:mm"),'date':(refeicaoInstance?.dateCreated)],-1)
+invokeTag('message','g',53,['code':("dateCreated.label"),'default':("Date Created")],-1)
+printHtmlPart(19)
+invokeTag('formatDate','g',55,['format':("dd/MM/yyyy hh:mm"),'date':(refeicaoInstance?.dateCreated)],-1)
 printHtmlPart(13)
 }
 printHtmlPart(14)
 if(true && (refeicaoInstance?.lastUpdated)) {
-printHtmlPart(19)
-invokeTag('message','g',53,['code':("lastUpdated.label"),'default':("Last Updated")],-1)
 printHtmlPart(20)
-invokeTag('formatDate','g',55,['format':("dd/MM/yyyy hh:mm"),'date':(refeicaoInstance?.lastUpdated)],-1)
+invokeTag('message','g',62,['code':("lastUpdated.label"),'default':("Last Updated")],-1)
+printHtmlPart(21)
+invokeTag('formatDate','g',64,['format':("dd/MM/yyyy hh:mm"),'date':(refeicaoInstance?.lastUpdated)],-1)
 printHtmlPart(13)
 }
-printHtmlPart(21)
-createTagBody(2, {->
 printHtmlPart(22)
-createTagBody(3, {->
-invokeTag('message','g',63,['code':("default.button.edit.label"),'default':("Edit")],-1)
-})
-invokeTag('link','g',63,['class':("edit"),'action':("edit"),'resource':(refeicaoInstance)],3)
+createTagBody(2, {->
 printHtmlPart(23)
-invokeTag('actionSubmit','g',64,['class':("delete"),'action':("delete"),'value':(message(code: 'default.button.delete.label', default: 'Delete')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
-printHtmlPart(24)
+createTagBody(3, {->
+invokeTag('message','g',72,['code':("default.button.edit.label"),'default':("Edit")],-1)
 })
-invokeTag('form','g',66,['url':([resource:refeicaoInstance, action:'delete']),'method':("DELETE")],2)
+invokeTag('link','g',72,['class':("edit"),'action':("edit"),'resource':(refeicaoInstance)],3)
+printHtmlPart(24)
+invokeTag('actionSubmit','g',73,['class':("delete"),'action':("delete"),'value':(message(code: 'default.button.delete.label', default: 'Delete')),'onclick':("return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');")],-1)
 printHtmlPart(25)
 })
-invokeTag('captureBody','sitemesh',68,[:],1)
+invokeTag('form','g',75,['url':([resource:refeicaoInstance, action:'delete']),'method':("DELETE")],2)
 printHtmlPart(26)
+})
+invokeTag('captureBody','sitemesh',77,[:],1)
+printHtmlPart(27)
 }
 public static final Map JSP_TAGS = new HashMap()
 protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1426780723000L
+public static final long LAST_MODIFIED = 1432835992000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
