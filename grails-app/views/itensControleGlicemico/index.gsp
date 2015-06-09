@@ -194,7 +194,7 @@
 										<g:hiddenField id="controleglicemico.id" name="controleglicemico.id" value="${itensControleGlicemicoInstance.controleglicemico.id}" />
 									</td>
 									<td>
-										<g:select id="refeicaoalt" name="refeicao.id" from="${refeicaousuariolist}" value="${itensControleGlicemicoInstance.controleglicemico.refeicao.id}" optionValue="descricao" optionKey="id"/>
+										<g:select id="refeicaoalt${j}" data-index="${j}" name="refeicao.id" from="${refeicaousuariolist}" value="${itensControleGlicemicoInstance.controleglicemico.refeicao.id}" optionValue="descricao" optionKey="id"/>
 									</td>
 									<td><g:field class="qtd" size="4" name="qtdinsulinelenta" type="number" value="${itensControleGlicemicoInstance.qtdinsulinelenta}"/></td>
 									

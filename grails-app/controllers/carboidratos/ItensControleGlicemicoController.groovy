@@ -11,7 +11,7 @@ class ItensControleGlicemicoController extends BaseController{
     static allowedMethods = [save: "POST", update: "POST", delete: "GET"]
 	def pdfRenderingService
 	
-	def carregaCalculoIns(){
+	def carregaCalculo(){
 		
 		//Busco dados configuracao
 		configuracaoParams

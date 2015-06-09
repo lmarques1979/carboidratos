@@ -103,7 +103,7 @@ function carregaContagemIns(tipo, objeto) {
     
     $.ajax({
     	type:"POST",
-    	url:"/contagemcarboidratos/itensControleGlicemico/carregaCalculoIns",
+    	url:"/contagemcarboidratos/itensControleGlicemico/carregaCalculo",
     	data:{tipo:tipo , dia:dia, mes:mes, ano:ano, refeicaoid:refeicaoid , valorglicemiapre:valorglicemiapre , valorglicemiapos:valorglicemiapos ,qtdcarboidratos:qtdcarboidratos},
     	dataType: "json",
     	success:function(data, textStatus, jqXHR)
@@ -153,7 +153,7 @@ function carregaContagemAlt(tipo , objeto) {
    
     $.ajax({
     	type:"POST",
-    	url:"/contagemcarboidratos/itensControleGlicemico/carregaCalculoIns",
+    	url:"/contagemcarboidratos/itensControleGlicemico/carregaCalculo",
     	data:{tipo:tipo , dia:dia, mes:mes, ano:ano, refeicaoid:refeicaoid , valorglicemiapre:valorglicemiapre , valorglicemiapos:valorglicemiapos ,qtdcarboidratos:qtdcarboidratos},
     	dataType: "json",
     	success:function(data, textStatus, jqXHR)
