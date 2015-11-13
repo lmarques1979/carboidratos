@@ -253,7 +253,7 @@ invokeTag('hiddenField','g',193,['id':("diaatual${j}"),'name':("diaatual"),'valu
 printHtmlPart(53)
 invokeTag('hiddenField','g',194,['id':("controleglicemico.id"),'name':("controleglicemico.id"),'value':(itensControleGlicemicoInstance.controleglicemico.id)],-1)
 printHtmlPart(54)
-invokeTag('select','g',197,['id':("refeicaoalt"),'name':("refeicao.id"),'from':(refeicaousuariolist),'value':(itensControleGlicemicoInstance.controleglicemico.refeicao.id),'optionValue':("descricao"),'optionKey':("id")],-1)
+invokeTag('select','g',197,['id':("refeicaoalt${j}"),'data-index':(j),'name':("refeicao.id"),'from':(refeicaousuariolist),'value':(itensControleGlicemicoInstance.controleglicemico.refeicao.id),'optionValue':("descricao"),'optionKey':("id")],-1)
 printHtmlPart(55)
 invokeTag('field','g',199,['class':("qtd"),'size':("4"),'name':("qtdinsulinelenta"),'type':("number"),'value':(itensControleGlicemicoInstance.qtdinsulinelenta)],-1)
 printHtmlPart(56)
@@ -294,7 +294,7 @@ protected void init() {
 	this.jspTags = JSP_TAGS
 }
 public static final String CONTENT_TYPE = 'text/html;charset=UTF-8'
-public static final long LAST_MODIFIED = 1429582647000L
+public static final long LAST_MODIFIED = 1433859359000L
 public static final String EXPRESSION_CODEC = 'html'
 public static final String STATIC_CODEC = 'none'
 public static final String OUT_CODEC = 'html'
